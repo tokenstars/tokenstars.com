@@ -1,0 +1,45 @@
+version: "2"
+
+services:
+
+    web:
+        container_name: ace.charity_fpm
+        build: .
+        working_dir: /var/www/vhosts/site/
+        cap_add:
+          - SYS_PTRACE
+        volumes:
+            - ./:/var/www/vhosts/site/
+        links:
+            - mysql:mysql
+        command: "/usr/sbin/php-fpm7.1 -F -O"
+        environment:
+            XDEBUG_CONFIG: remote_host=192.168.99.1
+
+    nginx:
+        container_name: ace.charity_nginx
+        restart: unless-stopped
+        image: nginx
+        expose:
+            - "80"
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/vhosts/site
+            - ./etc/nginx:/etc/nginx
+        links:
+            - web:web
+
+    mysql:
+        container_name: ace.charity_mysql
+        restart: unless-stopped
+        image: mysql:5.7
+        volumes:
+            - ./etc/mysql:/etc/mysql/conf.d
+            - ./storage/mysql:/var/lib/mysql
+        expose:
+            - "3306"
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=1
