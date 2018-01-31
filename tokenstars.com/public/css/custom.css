@@ -1,0 +1,81 @@
+body.bg-new{
+    margin: 0;
+    background-image: url(/images/brand-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    min-height: 100%;
+}
+.cabinet{
+    background-color: transparent;
+}
+
+.cabinet-form {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 30px 15px 15px;
+    margin-top: 15px;
+    border: 3px solid #3d3e4b;
+    padding: 30px 50px;
+    border-radius: 15px;
+    background-color: #282937;
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 510px;
+}
+
+.cabinet-form__field, .cabinet-form__field-anchor {
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    color: #fff;
+}
+
+.cabinet__title {
+    display: block;
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.cabinet-form-footer .button {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-weight: bold;
+    font-size: 19px;
+    color: #fff;
+    text-align: center;
+    background: #fc544e;
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: solid 1px white;
+    border-radius: 5px;
+    border-color: transparent;
+    box-shadow: 0 2px 0 #de433e;
+    font-family: "Exo 2", Arial, Helvetica, sans-serif;
+}
+
+.cabinet-form-footer p{
+    color: #fff;
+}
+
+.cabinet-form p a {
+    color: #1DE9B6;
+}
+
+.cabinet-form p a:hover {
+    color: #00BFA5;
+}
+
+.cabinet-form p{
+    text-align: left;
+    color: #fff;
+}
+
+.cabinet-box{
+    padding-top: 0;
+}
