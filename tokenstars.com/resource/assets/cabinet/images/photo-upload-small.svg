@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewBox="0 0 100 100">
+    <defs>
+        <path id="a" d="M0 0h100v100H0z"/>
+        <mask id="b" width="100" height="100" x="0" y="0" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M-201-1097H899v2788H-201z"/>
+        <g>
+            <use stroke="#3185FC" stroke-dasharray="10,6" stroke-width="4" mask="url(#b)" xlink:href="#a"/>
+            <path fill="#3185FC" fill-rule="nonzero" d="M45.616 24.514l-2.035 4.146H35.85C34.27 28.66 33 29.954 33 31.562v18.244c0 1.608 1.27 2.902 2.849 2.902H65.15c1.578 0 2.849-1.294 2.849-2.902V31.562c0-1.608-1.27-2.902-2.849-2.902H57.42l-2.035-4.146h-9.768zm4.884 6.634c5.146 0 9.36 4.294 9.36 9.536s-4.214 9.537-9.36 9.537c-5.146 0-9.36-4.295-9.36-9.537 0-5.242 4.215-9.536 9.36-9.536zm0 4.146c-2.946 0-5.29 2.389-5.29 5.39 0 3.002 2.344 5.39 5.29 5.39s5.29-2.388 5.29-5.39c0-3.001-2.344-5.39-5.29-5.39z"/>
+            <text font-family="Exo 2" font-size="10">
+                <tspan x="5.505" y="66" fill="#82829A">Please drag a photo </tspan> <tspan x="27.505" y="78" fill="#82829A">or </tspan> <tspan x="39.105" y="78" fill="#3185FC">browse</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
