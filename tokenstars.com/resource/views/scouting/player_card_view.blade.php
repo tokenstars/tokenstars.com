@@ -38,7 +38,7 @@
                     <h2 class="card-title text-uppercase d-flex flex-column mb-0 text-blue-darker player-card__title text-truncate">
                         <span>{{$player->first_name}}</span>
                         <span>{{$player->last_name}}</span>
-                        <small class="h4 mb-0 font-weight-normal player-card__sub-title pt-1">@if($player->is_pro){{'PRO STAR'}}@else{{'Junior'}}@endif</small>
+                        <small class="h4 mb-0 font-weight-normal player-card__sub-title pt-1">@if($player->is_pro){{'PRO STAR'}}@elseif($player->sport_type == 2){{'Poker player'}}@else{{'Junior'}}@endif</small>
                     </h2>
                     <div class="mt-5_5 ml-auto">
                         <div class="icon-group-md">
@@ -69,6 +69,15 @@
                             <span>{{$player->age}}</span>
                         </div>
                     </div>
+                    @if($player->sport_type == 2)
+                    <div class="col-4 player-card-header-item mb-2">
+                        <div class="title text-uppercase text-secondary">Average ROI</div>
+                        <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
+                            <span>{{$player->poker_average_roi}}%</span>
+                        </div>
+                    </div>
+                    @endif
+                    @if($player->sport_type == 1)
                     <div class="col-4 player-card-header-item mb-2">
                         <div class="title text-uppercase text-secondary">Weight</div>
                         <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
@@ -81,6 +90,7 @@
                             <span>{{$player->height}}CM</span>
                         </div>
                     </div>
+                    @endif
                     <div class="w-100"></div>
                     <div class="col-4 player-card-header-item mb-2">
                         <div class="title text-uppercase text-secondary">Residence</div>
@@ -89,12 +99,14 @@
                             <span>{{$player->country->name}}</span>
                         </div>
                     </div>
+                    @if($player->sport_type == 1)
                     <div class="col-4 player-card-header-item mb-2">
                         <div class="title text-uppercase text-secondary">{{$player->rank}} Ranking</div>
                         <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
                             <span>{{$player->itf_current_combined}}</span>
                         </div>
                     </div>
+                    @endif
                     <div class="col-4 player-card-header-item mb-2">
                         <div class="title text-uppercase text-secondary">Scout</div>
                         <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
@@ -107,6 +119,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col-6">
                             <div class="player-card-header-voting d-inline-block text-center">
+                                @if(!empty($voteModel->end_date))
                                 <div class="h3_5 mb-2 player-card-header-voting-time text-truncate font-weight-semibold text-blue-darker">
                                     @php
                                             $dt_end = new DateTime($voteModel->end_date);
@@ -117,13 +130,29 @@
                                     @php
                                         if(!empty($voteModel->ended))
                                         {
-                                            $count_yes = $voteModel->end_ace_yes;
-                                            $count_no = $voteModel->end_ace_no;
+                                            switch ($player->sport_type) {
+                                                case 1:
+                                                    $count_yes = $voteModel->end_ace_yes;
+                                                    $count_no = $voteModel->end_ace_no;
+                                                    break;
+                                                case 2:
+                                                    $count_yes = $voteModel->end_team_yes;
+                                                    $count_no = $voteModel->end_team_no;
+                                                    break;
+                                            }
                                         }
                                         else
                                         {
-                                            $count_yes = $voteModel->start_ace_yes;
-                                            $count_no = $voteModel->start_ace_no;
+                                            switch ($player->sport_type) {
+                                                case 1:
+                                                    $count_yes = $voteModel->start_ace_yes;
+                                                    $count_no = $voteModel->start_ace_no;
+                                                    break;
+                                                case 2:
+                                                    $count_yes = $voteModel->start_team_yes;
+                                                    $count_no = $voteModel->start_team_no;
+                                                    break;
+                                            }
                                         }
 
                                         $total = $count_yes + $count_no;
@@ -139,6 +168,7 @@
                                         }
                                     @endphp
                                 </div>
+                                @endif
                                 <div class="badge badge-status badge-lg text-uppercase text-nowrap player-card-header-voting-status">
                                     <div class="icon badge-icon icon-check mr-1 text-success">
                                         <svg viewBox="0 0 1 1"><use xlink:href="/images/icons.svg#check"></use></svg>
@@ -231,7 +261,11 @@
                 </div>
                 @endif
             </div>
+            @if($player->sport_type == 1)
             <div class="badge badge-token badge-xl badge-token-ace text-uppercase position-absolute text-nowrap player-card__token">Ace</div>
+            @else
+            <div class="badge badge-token badge-xl badge-token-team text-uppercase position-absolute text-nowrap player-card__token">Team</div>
+            @endif
         </header>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -295,13 +329,19 @@
             <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#bio-tab">Bio</a>
             <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#skills-tab">Skills</a>
             <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#stats-tab">Stats</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#promotion-tab">Bounty&Promo <br/>(Soon)</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#services-tab">Fan Club  <br/>(Soon)</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#promotion-tab">Bounty&Promo<br/>(Soon)</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#fan-tab">Fan Club<br/>(Soon)</a>
+            @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"  href="#promotion-tab">Bounty&Promo</a>
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#fan-tab">Fan Club</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#admin-tab">Admin</a>
+            @endif
         </div>
 
         <div class="tab-content">
             <div class="tab-pane px-5 py-5_5 show active" id="overview-tab">
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Overall Statistics</h4>
+                @if($player->sport_type == 1)
                 <table class="table table-bordered table-stat">
                     <colgroup>
                         <col width="140">
@@ -340,6 +380,46 @@
                     </tr>
                     </tbody>
                 </table>
+                @elseif($player->sport_type == 2)
+                    <table class="table table-bordered table-stat text-blue-darker">
+                        <colgroup>
+                            <col width="120">
+                            <col width="170">
+                            <col width="165">
+                            <col width="190">
+                            <col width="155">
+                            <col width="145">
+                        </colgroup>
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Year</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Tournaments</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Average profit</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Average Stake</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">ROI</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Profit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{$player->poker_overall_year}}</td>
+                            <td>{{$player->poker_tournaments_played_year}}</td>
+                            <td>{{$player->poker_average_profit_year}}</td>
+                            <td>{{$player->poker_average_stake_year}}</td>
+                            <td>{{$player->poker_average_roi_year}}%</td>
+                            <td>{{$player->poker_profit_year}}</td>
+                        </tr>
+                        <tr>
+                            <td>All time</td>
+                            <td>{{$player->poker_tournaments_played}}</td>
+                            <td>{{$player->poker_average_profit}}</td>
+                            <td>{{$player->poker_average_stake}}</td>
+                            <td>{{$player->poker_average_roi}}%</td>
+                            <td>{{$player->poker_profit}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                @endif
                 <div class="section-divider-2"></div>
                 @php
                     $latest_match = \App\Models\Scouting\LatestMatch::where('player_tennis_id', $player->id)->first();
@@ -389,6 +469,7 @@
                             @php
                                 $scores = explode('|',trim($latest_match->scores));
                             @endphp
+                            @if(!empty($scores[0]))
                             <span class="d-inline-block px-3">
                                 @php
                                     if(!empty($scores[0]))
@@ -411,6 +492,8 @@
                                     <sup class="match-card-score-sup">{{$scores0_sup2[1]}}</sup>
                                 @endif
                             </span>
+                            @endif
+                            @if(!empty($scores[1]))
                             <span class="d-inline-block px-3">
                                  @php
                                      if(!empty($scores[1]))
@@ -433,6 +516,8 @@
                                     <sup class="match-card-score-sup">{{$scores0_sup2[1]}}</sup>
                                 @endif
                             </span>
+                            @endif
+                            @if(!empty($scores[2]))
                             <span class="d-inline-block px-3">
                                  @php
                                      if(!empty($scores[2]))
@@ -455,6 +540,7 @@
                                     <sup class="match-card-score-sup">{{$scores0_sup2[1]}}</sup>
                                 @endif
                             </span>
+                                @endif
                         </div>
                     </div>
                 </div>
@@ -488,7 +574,7 @@
                 @if(!empty(\App\Models\Scouting\PlayerHistory::where('player_id', $player->id)->orderBy('date', 'DESC')->first()))
                     <div class="dotdotdot dotdotdot_news-list" data-module="dotdotdot" data-ellipsis="" data-height="130">
                         @php
-                            $hist = \App\Models\Scouting\PlayerHistory::where('player_id', $player->id)->get();
+                            $hist = \App\Models\Scouting\PlayerHistory::where('player_id', $player->id)->orderBy('date', 'DESC')->get();
                         @endphp
                         <h4 class="text-uppercase mb-0 font-weight-semibold text-blue-darker">Activity on the platform<small class="typo-lg ml-4"><a class="js-toggle dotdotdot__toggle dotdotdot__toggle_show" href="">@if(count($hist) > 3)<span>Show more &gt;</span><span>Hide</span>@endif</a></small></h4>
                         <ul class="list-unstyled list-base list-base-blue-darker typo-lg py-2 mb-0 dotdotdot__text">
@@ -521,7 +607,7 @@
                 @endphp
                 @if(count($photos) > 0)
                 <div class="dotdotdot dotdotdot_video-photos" data-module="dotdotdot" data-ellipsis="" data-height="11100">
-                    <h4 class="text-uppercase mb-0 font-weight-semibold text-blue-darker">Latest Videos and Photos <small class="typo-lg ml-4"><a class="js-toggle dotdotdot__toggle dotdotdot__toggle_show" href="">@if(count($photos) >2)<span id="more_btn">Show more ></span><span>Hide</span>@endif</a></small></h4>
+                    <h4 class="text-uppercase mb-0 font-weight-semibold text-blue-darker">Latest Photos <small class="typo-lg ml-4"><a class="js-toggle dotdotdot__toggle dotdotdot__toggle_show" href="">@if(count($photos) >2)<span id="more_btn">Show more ></span><span>Hide</span>@endif</a></small></h4>
                     <div class="row pt-3">
                         @foreach($photos as $k=>$photo)
                             @if($k==2)
@@ -549,6 +635,40 @@
                 </div>
                 @endif
 
+
+                @php
+                    $videos = \App\Models\Scouting\PlayerTennisVideoLinks::where('player_tennis_id', $player->id)->get();
+                @endphp
+                @if(count($videos) > 0)
+                    <div class="dotdotdot dotdotdot_video-photos" data-module="dotdotdot" data-ellipsis="" data-height="11100">
+                        <h4 class="text-uppercase mb-0 font-weight-semibold text-blue-darker">Latest videos <small class="typo-lg ml-4"><a class="js-toggle dotdotdot__toggle dotdotdot__toggle_show" href="">@if(count($videos) >2)<span id="more_btn">Show more ></span><span>Hide</span>@endif</a></small></h4>
+                        <div class="row pt-3">
+                            @foreach($videos as $k=>$video)
+                                @if($k==2)
+                                    <span id="more">
+                            @endif
+                                        <div class="col-6 d-flex pr-4">
+                            <div class="card position-relative shadow-none mb-4">
+                                <iframe width="500" height="250" src="{{$video->info}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+
+                        </div>
+                                        @if($k==count($videos)-1)
+                                </span>
+                                @endif
+                            @endforeach
+                        </div>
+                        @if(count($videos) >2)
+                            <div class="text-center mt-4 mb-5_5">
+                                <button class="btn btn-outline-primary text-uppercase px-4 js-toggle dotdotdot__toggle dotdotdot__toggle_hide"  id="hide_btn">
+                                    <span>Show More</span>
+                                    <span>Hide</span>
+                                </button>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
             </div>
             <script>
                 $(document).ready(function(){
@@ -571,18 +691,33 @@
                         <col width="auto">
                     </colgroup>
                     <tbody>
+                    @if(!empty($player->date_of_birth))
                     <tr>
                         <td>Date of Birth</td>
                         <td class="font-weight-semibold">{{$player->date_of_birth}}</td>
                     </tr>
+                    @endif
+                    @if(!empty($player->country->name))
                     <tr>
                         <td>Nationality</td>
                         <td class="font-weight-semibold">{{$player->country->name}}</td>
                     </tr>
+                    @endif
+                    @if($player->sport_type == 1)
+                        @if(!empty($player->age_started_tennis))
                     <tr>
                         <td>Age started tennis</td>
                         <td class="font-weight-semibold">{{$player->age_started_tennis}}</td>
                     </tr>
+                            @endif
+                    @elseif($player->sport_type == 2)
+                        @if(!empty($player->age_started_tennis))
+                        <tr>
+                            <td>Age started poker</td>
+                            <td class="font-weight-semibold">{{$player->age_started_tennis}}</td>
+                        </tr>
+                            @endif
+                    @endif
                     </tbody>
                 </table>
                 @if($player->description != '')
@@ -599,34 +734,87 @@
                         <col width="auto">
                     </colgroup>
                     <tbody>
+                    @if($player->sport_type == 1)
+                        @if($player->racquet_brand != '')
                     <tr>
                         <td>Racquet brand</td>
                         <td class="font-weight-semibold">{{$player->racquet_brand}}</td>
                     </tr>
+                    @endif
+                    @if($player->string_brand != '')
                     <tr>
                         <td>String brand</td>
                         <td class="font-weight-semibold">{{$player->string_brand}}</td>
                     </tr>
+                    @endif
+                    @if($player->clothing_brand != '')
                     <tr>
                         <td>Clothing brand</td>
                         <td class="font-weight-semibold">{{$player->clothing_brand}}</td>
                     </tr>
+                    @endif
+                    @if($player->shoe_brand != '')
                     <tr>
                         <td>Shoe brand</td>
                         <td class="font-weight-semibold">{{$player->shoe_brand}}</td>
                     </tr>
+                    @endif
+                    @if($player->goals_for_next_season != '')
                     <tr>
                         <td>What are the player’s goals for the next season?</td>
                         <td class="font-weight-semibold">{{$player->goals_for_next_season}}</td>
                     </tr>
+                    @endif
+                    @if($player->hobby != '')
                     <tr>
                         <td>Hobby</td>
                         <td class="font-weight-semibold">{{$player->hobby}}</td>
                     </tr>
+                    @endif
+                    @if($player->favorite_player != '')
                     <tr>
                         <td>Favorite player</td>
                         <td class="font-weight-semibold">{{$player->favorite_player}}</td>
                     </tr>
+                        @endif
+                    @elseif($player->sport_type == 2)
+                        @if($player->poker_favorite_wsop != '')
+                        <tr>
+                            <td>Favorite WSOP tournament</td>
+                            <td class="font-weight-semibold">{{$player->poker_favorite_wsop}}</td>
+                        </tr>
+                        @endif
+                        @if($player->poker_favorite_wcoop != '')
+                        <tr>
+                            <td>Favorite WCOOP tournament</td>
+                            <td class="font-weight-semibold">{{$player->poker_favorite_wcoop}}</td>
+                        </tr>
+                        @endif
+                        @if($player->poker_wat_next_year != '')
+                        <tr>
+                            <td>What are the player’s goals for the next year?</td>
+                            <td class="font-weight-semibold">{{$player->poker_wat_next_year}}</td>
+                        </tr>
+                        @endif
+                        @if($player->hobby != '')
+                        <tr>
+                            <td>Hobby</td>
+                            <td class="font-weight-semibold">{{$player->hobby}}</td>
+                        </tr>
+                        @endif
+                        @if($player->favorite_player != '')
+                        <tr>
+                            <td>Favorite poker player</td>
+                            <td class="font-weight-semibold">{{$player->favorite_player}}</td>
+                        </tr>
+                        @endif
+                        @if($player->poker_twitch != '')
+                        <tr>
+                            <td>Twitch link</td>
+                            <td class="font-weight-semibold">{{$player->poker_twitch}}</td>
+                        </tr>
+                        @endif
+                    @endif
                     </tbody>
                 </table>
 
@@ -637,113 +825,277 @@
                 $diagram = \App\Models\Scouting\PlayerDiagram::where('player_id', $player->id)->first();
             @endphp
             <div class="tab-pane px-5 py-5_5" id="skills-tab">
+                @if($player->is_pro == false)
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Player Skills Diagram</h4>
                 <div class="row">
-                    @if(empty($diagram->id))
+                    @php
+                        $diagram_data = [];
+                            if(!empty($diagram->data) && count($diagram->data) > 0)
+                            {
+                                $diagram_data = json_decode($diagram->data);
+                            }
+
+                    @endphp
+                    @if(count($diagram_data) == 0)
                     <div class="col-12 text-center">
                         <div style="background-image: url('/images/diagram-after.png'); background-repeat: no-repeat;background-position: center;height: 340px;width: 100%; padding-top: 14%">
                             <span style="text-transform:uppercase;width: 605px;height: 36px;font-family: Exo\ 2,Arial,Helvetica,sans-serif;;font-size: 30px;font-weight: 600;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;text-align: center;color: #060535;">To be completed after experts review</span>
                         </div>
                     </div>
                     @else
+                    <div class="col-6 text-center" style="margin-top: -22px; padding-left: 0">
+                        <div class="chart-container"><canvas id="chart-0" width="452" height="300" class="chartjs-render-monitor" style="display: block; width: 452px; height: 300px;"></canvas></div>
+                    </div>
+
                     <script>
-                        var data = [
+                        var presets = window.chartColors;
+                        var utils = Samples.utils;
+                        var inputs = {
+                            min: 0,
+                            max: 5,
+                            count: '{{count($diagram_data)}}',
+                            decimals: 2,
+                            continuity: 1
+                        };
+                        var s = '@php echo $diagram->data @endphp';
+                        var json = JSON.parse(s);
+
+                        function formatLabel(str, maxwidth){
+                            var sections = [];
+                            var words = str.split(" ");
+                            var temp = "";
+
+                            words.forEach(function(item, index){
+                                if(temp.length > 0)
+                                {
+                                    var concat = temp + ' ' + item;
+
+                                    if(concat.length > maxwidth){
+                                        sections.push(temp);
+                                        temp = "";
+                                    }
+                                    else{
+                                        if(index == (words.length-1))
+                                        {
+                                            sections.push(concat);
+                                            return;
+                                        }
+                                        else{
+                                            temp = concat;
+                                            return;
+                                        }
+                                    }
+                                }
+
+                                if(index == (words.length-1))
+                                {
+                                    sections.push(item);
+                                    return;
+                                }
+
+                                if(item.length < maxwidth) {
+                                    temp = item;
+                                }
+                                else {
+                                    sections.push(item);
+                                }
+
+                            });
+
+                            return sections;
+                        }
+
+                        function generateData() {
+                            // radar chart doesn't support stacked values, let's do it manually
+                            var ddata = [];
+                            for(var i = 0; i < json.length; i++)
                             {
-                                className: 'result',
-                                axes: [
-                                    {axis:"SERVE",value: '{{json_decode($diagram->serve)->value}}'},
-                                    {axis:"RETURN",value:'{{json_decode($diagram->return)->value}}'},
-                                    {axis:"FOREHAND",value:'{{json_decode($diagram->forehand)->value}}'},
-                                    {axis:"BACKHAND",value:'{{json_decode($diagram->backhand)->value}}'},
-                                    {axis:"SLICE",value:'{{json_decode($diagram->slice)->value}}'},
-                                    {axis:"DRILLS AND FOOTWORK",value:'{{json_decode($diagram->drills)->value}}'},
-                                    {axis:"VOLLEYS",value:'{{json_decode($diagram->volleys)->value}}'},
-                                    {axis:"POINTS PLAY",value:'{{json_decode($diagram->points)->value}}'}
-                                ]
-                            },
+                                ddata.push(json[i].value)
+                            }
+                            inputs.from = ddata;
+                            return ddata;
+                        }
+
+                        function generateLabels() {
+
+                            var ddata = [];
+                            for(var i = 0; i < json.length; i++)
                             {
-                                className: 'level_5',
-                                axes: [
-                                    {axis:"SERVE",value:5},
-                                    {axis:"RETURN",value:5},
-                                    {axis:"FOREHAND",value:5},
-                                    {axis:"BACKHAND",value:5},
-                                    {axis:"SLICE",value:5},
-                                    {axis:"DRILLS AND FOOTWORK",value:5},
-                                    {axis:"VOLLEYS",value:5},
-                                    {axis:"POINTS PLAY",value:5}
-                                ]
+                                ddata.push(formatLabel(json[i].label.toUpperCase(), 12))
+                            }
+                            return ddata
+                        }
+
+                        utils.srand(42);
+
+                        function fillRadar(num)
+                        {
+                            var d = [];
+                            for(var i = 0; i < inputs.count; i++)
+                            {
+                                d.push(num)
+                            }
+                            return d
+                        }
+
+                        var data = {
+                            labels: generateLabels(),
+
+                            datasets: [ {
+                                backgroundColor: 'rgb(223,233,17,0.6)',
+                                borderColor: 'rgb(0,0,0)',
+                                data: generateData(),
+                                label: '',
+                                fill: true,
+
+                            },{
+                                backgroundColor: 'rgb(147,147,147)',
+                                borderColor: 'rgb(0,0,0,0.0)',
+                                data: fillRadar(0),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            },{
+                                backgroundColor: 'rgb(147,147,147)',
+                                borderColor: 'rgb(0,0,0, 0.0)',
+                                data: fillRadar(1),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            },{
+                                backgroundColor: 'rgb(170,170,170)',
+                                borderColor: 'rgb(0,0,0, 0.0)',
+                                data: fillRadar(2),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            },{
+                                backgroundColor: 'rgb(185,185,185)',
+                                borderColor: 'rgb(0,0,0, 0.0)',
+                                data: fillRadar(3),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            },{
+                                backgroundColor: 'rgb(205,205,205)',
+                                borderColor: 'rgb(0,0,0, 0.0)',
+                                data: fillRadar(4),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            },{
+                                backgroundColor: 'rgb(225,225,225)',
+                                borderColor: 'rgb(0,0,0, 0.0)',
+                                data: fillRadar(5),
+                                label: '',
+                                fill: true,
+                                borderWidth: 0,
+                                lineWidth: [
+                                    0.0
+                                ],
+                                pointRadius: 0
+
+                            }]
+                        };
+
+                        var options = {
+
+                            scale: {
+                                gridLines: {
+                                    lineWidth: [
+                                        0.3
+                                    ],
+                                    offsetGridLines: false,
+
+                                },
+                                ticks: {
+                                    beginAtZero: true,
+                                    display: false,
+
+                                },
+                                angleLines: {
+                                    display: false
+                                },
+                                pointLabels: {
+                                    fontColor: '#9898aa',
+                                    fontSize: 15,
+                                    fontFamily: "'Exo 2', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+                                }
                             },
 
-                            {
-                                className: 'level_4',
-                                axes: [
-                                    {axis:"SERVE",value:4},
-                                    {axis:"RETURN",value:4},
-                                    {axis:"FOREHAND",value:4},
-                                    {axis:"BACKHAND",value:4},
-                                    {axis:"SLICE",value:4},
-                                    {axis:"DRILLS AND FOOTWORK",value:4},
-                                    {axis:"VOLLEYS",value:4},
-                                    {axis:"POINTS PLAY",value:4}
-                                ]
+                            maintainAspectRatio: true,
+                            spanGaps: false,
+                            plugins: {
+                                filler: {
+                                    propagate: true
+                                },
                             },
-                            {
-                                className: 'level_3',
-                                axes: [
-                                    {axis:"SERVE",value:3},
-                                    {axis:"RETURN",value:3},
-                                    {axis:"FOREHAND",value:3},
-                                    {axis:"BACKHAND",value:3},
-                                    {axis:"SLICE",value:3},
-                                    {axis:"DRILLS AND FOOTWORK",value:3},
-                                    {axis:"VOLLEYS",value:3},
-                                    {axis:"POINTS PLAY",value:3}
-                                ]
-                            }
-                            ,
-                            {
-                                className: 'level_2',
-                                axes: [
-                                    {axis:"SERVE",value:2},
-                                    {axis:"RETURN",value:2},
-                                    {axis:"FOREHAND",value:2},
-                                    {axis:"BACKHAND",value:2},
-                                    {axis:"SLICE",value:2},
-                                    {axis:"DRILLS AND FOOTWORK",value:2},
-                                    {axis:"VOLLEYS",value:2},
-                                    {axis:"POINTS PLAY",value:2}
-                                ]
+                            legend: {
+                                display: false
                             },
-                            {
-                                className: 'level_1',
-                                axes: [
-                                    {axis:"SERVE",value:1},
-                                    {axis:"RETURN",value:1},
-                                    {axis:"FOREHAND",value:1},
-                                    {axis:"BACKHAND",value:1},
-                                    {axis:"SLICE",value:1},
-                                    {axis:"DRILLS AND FOOTWORK",value:1},
-                                    {axis:"VOLLEYS",value:1},
-                                    {axis:"POINTS PLAY",value:1}
-                                ]
-                            }
-                        ];
+                            elements: {
+                                point: {
+                                    radius: 6,
+                                    backgroundColor: 'rgb(255,255,255)',
+                                    borderWidth: 3,
+                                    borderColor: 'rgb(205,109,130)'
+                                },
+                                line : {
+                                    tension: 0.000001,
+                                    backgroundColor: 'rgb(205,109,130)',
+                                    borderWidth: 2,
+                                    borderColor: 'rgb(255,255,255)',
+
+                                }
+                            },
+                        };
+
+                        var chart = new Chart('chart-0', {
+                            type: 'radar',
+                            data: data,
+                            options: options,
+
+                        });
                     </script>
-                    <div class="col-6 text-center">
-                        <div class="chart-container"></div>
-                    </div>
+                    @if(count($diagram_data) >0)
                     <div class="col mx-auto text-blue-darker text-uppercase">
-                        @if(
-                        json_decode($diagram->serve)->good == 1 ||
-                        json_decode($diagram->return)->good == 1 ||
-                        json_decode($diagram->forehand)->good == 1 ||
-                        json_decode($diagram->backhand)->good == 1 ||
-                        json_decode($diagram->slice)->good == 1 ||
-                        json_decode($diagram->drills)->good == 1 ||
-                        json_decode($diagram->volleys)->good == 1 ||
-                        json_decode($diagram->points)->good == 1
-                        )
+                        @php
+                        $good = [];
+                        $bad = [];
+                        foreach($diagram_data as $di_data)
+                        {
+                            if(isset($di_data->good))
+                                $good[$di_data->label] = 1;
+                            if(isset($di_data->bad))
+                                $bad[$di_data->label] = 1;
+                        }
+                        @endphp
+                        @if(count($good) > 0)
                         <h6 class="h4 mb-0 text-secondary font-weight-normal text-blue-darker">
                             Strongest skills
                             <span class="icon icon-like icon-md ml-2 text-success">
@@ -751,41 +1103,13 @@
       </span>
                         </h6>
                         <ul class="list-unstyled list-base list-base-blue-darker mb-4_5">
-                            @if(json_decode($diagram->serve)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Serve</li>
-                            @endif
-                            @if(json_decode($diagram->return)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Return</li>
-                            @endif
-                            @if(json_decode($diagram->forehand)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Forehand</li>
-                            @endif
-                            @if(json_decode($diagram->backhand)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Backhand</li>
-                            @endif
-                            @if(json_decode($diagram->slice)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Slice</li>
-                            @endif
-                            @if(json_decode($diagram->drills)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Drills and footwork</li>
-                            @endif
-                            @if(json_decode($diagram->volleys)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Volleys</li>
-                            @endif
-                            @if(json_decode($diagram->points)->good == 1)
-                                <li class="h5 font-weight-normal my-2">Points play</li>
-                            @endif
+                            @foreach($good as $k => $g)
+                            <li class="h5 font-weight-normal my-2">{{$k}}</li>
+                            @endforeach
                         </ul>
                         @endif
                             @if(
-                            json_decode($diagram->serve)->bad == 1 ||
-                            json_decode($diagram->return)->bad == 1 ||
-                            json_decode($diagram->forehand)->bad == 1 ||
-                            json_decode($diagram->backhand)->bad == 1 ||
-                            json_decode($diagram->slice)->bad == 1 ||
-                            json_decode($diagram->drills)->bad == 1 ||
-                            json_decode($diagram->volleys)->bad == 1 ||
-                            json_decode($diagram->points)->bad == 1
+                            count($bad) > 0
                             )
                         <h6 class="h4 mb-0 text-secondary font-weight-normal text-blue-darker">
                             Skills to Improve
@@ -794,33 +1118,13 @@
       </span>
                         </h6>
                         <ul class="list-unstyled list-base list-base-blue-darker mb-4_5">
-                            @if(json_decode($diagram->serve)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Serve</li>
-                            @endif
-                            @if(json_decode($diagram->return)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Return</li>
-                            @endif
-                            @if(json_decode($diagram->forehand)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Forehand</li>
-                            @endif
-                            @if(json_decode($diagram->backhand)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Backhand</li>
-                            @endif
-                            @if(json_decode($diagram->slice)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Slice</li>
-                            @endif
-                            @if(json_decode($diagram->drills)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Drills and footwork</li>
-                            @endif
-                            @if(json_decode($diagram->volleys)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Volleys</li>
-                            @endif
-                            @if(json_decode($diagram->points)->bad == 1)
-                                <li class="h5 font-weight-normal my-2">Points play</li>
-                            @endif
+                            @foreach($bad as $k => $b)
+                                <li class="h5 font-weight-normal my-2">{{$k}}</li>
+                            @endforeach
                         </ul>
                         @endif
                     </div>
+                        @endif
                     @endif
                 </div>
                 @if(!empty($diagram->overview) && $diagram->overview != '')
@@ -830,6 +1134,8 @@
                 @endif
 
                 <div class="section-divider-2" style="margin-top: 2.125rem;"></div>
+                @endif
+                    @if($player->sport_type == 1)
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Additional info</h4>
                 <table class="table table-bordered table-add-skills-info text-blue-darker mb-0">
                     <colgroup>
@@ -837,40 +1143,51 @@
                         <col width="auto">
                     </colgroup>
                     <tbody>
+                    @if($player->itf_profile != '')
                     <tr>
                         <td>{{$player->rank}} Ranking Profile</td>
                         <td class="font-weight-semibold">
                             <a href="{{$player->itf_profile}}" target="_blank">{{$player->itf_profile}}</a>
                         </td>
                     </tr>
+                    @endif
+                    @if($player->other_ranking_profiles != '')
                     <tr>
                         <td>Other Ranking Profile</td>
                         <td class="font-weight-semibold">
                             <a href="{{$player->other_ranking_profiles}}" target="_blank">{{$player->other_ranking_profiles}}</a>
                         </td>
                     </tr>
+                    @endif
                     <tr>
                         <td>Forehand</td>
                         <td class="font-weight-semibold">@if($player->forehand == 1){{'Right handed'}}@else{{'Left handed'}}@endif</td>
                     </tr>
                     <tr>
                         <td>Backhand</td>
-                        <td class="font-weight-semibold">@if($player->forehand == 1){{'One-handed'}}@else{{'Double-handed'}}@endif</td>
+                        <td class="font-weight-semibold">@if($player->backhand == 1){{'One-handed'}}@else{{'Double-handed'}}@endif</td>
                     </tr>
+                    @if($player->training_academy != '')
                     <tr>
                         <td>Training Academy</td>
                         <td class="font-weight-semibold">
                             {{$player->training_academy}}
                         </td>
                     </tr>
+                    @endif
+                    @if($player->coach != '')
                     <tr>
                         <td>Coach</td>
                         <td class="font-weight-semibold">{{$player->coach}}</td>
                     </tr>
+                    @endif
+                    @if($player->injuries_24m != '')
                     <tr>
                         <td>Injuries within last 24 months</td>
                         <td class="font-weight-semibold">{{$player->injuries_24m}}</td>
                     </tr>
+                    @endif
+                    @if(!empty($player->fs_hard) || !empty($player->fs_glass) || !empty($player->fs_clay))
                     <tr>
                         <td>Favorite court</td>
                         <td class="font-weight-semibold text-truncate">
@@ -879,11 +1196,29 @@
                             @if($player->fs_clay == 1)<img class="rounded-circle mr-2" src="/images/{{'color-red@2x.jpg'}}" alt="" width="30" height="30">{{'Clay court'}}@endif
                         </td>
                     </tr>
+                        @endif
                     </tbody>
                 </table>
-
+                @elseif($player->sport_type == 2)
+                    @if(!empty($player->poker_preferred_room))
+                        <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Additional skills info</h4>
+                        <table class="table table-bordered table-add-skills-info text-blue-darker mb-0">
+                            <colgroup>
+                                <col width="270">
+                                <col width="auto">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>Preferred online poker room</td>
+                                <td class="font-weight-semibold">{{$player->poker_preferred_room}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        @endif
+                @endif
             </div>
             <div class="tab-pane px-5 py-5_5" id="stats-tab">
+                @if($player->sport_type == 1)
                     <h4 class="text-uppercase mb-2 font-weight-semibold text-blue-darker">Ranking {{$player->rank}}</h4>
                     <table class="table table-bordered table-stats text-blue-darker mb-0">
                         <colgroup>
@@ -1047,9 +1382,106 @@
                 <!--
 
                 -->
+                @elseif($player->sport_type == 2)
 
+
+                    @if(count($player->screenNames) > 0)
+                        @php
+                            $cc = 1;
+                        @endphp
+                        <style>
+                            .sharkscope td {
+                                padding: 5px;
+                                vertical-align: top;
+                            }
+                        </style>
+
+                        @foreach($player->screenNames as $screenName)
+                            <table border="0" class="sharkscope" style="width: 100%;border:solid 1px #ddd;">
+                                <tr style="border-bottom: solid 1px #ddd;">
+                                    <td style="width: 200px"><h5>Screen name {{$cc}}</h5></td>
+                                    <td>{{$screenName->text}}</td>
+                                </tr>
+                                <tr style="border-bottom: solid 1px #ddd;">
+                                    <td><h5>Sharkscope profile</h5></td>
+                                    <td><a href="{{$screenName->link}}">{{$screenName->link}}</a></td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Profit graph</h5></td>
+                                    <td><img src="/{{$screenName->graph}}" width="580px"></td>
+                                </tr>
+                            @php
+                                $cc++;
+                            @endphp
+                            </table>
+                            <br/>
+                        @endforeach
+
+                    @endif
+                <br>
+                    @if(count($player->pokerEvents) > 0)
+                    <h4 class="text-uppercase mb-2 font-weight-semibold text-blue-darker">Major Wins</h4>
+                    <table class="table table-bordered table-stats text-blue-darker mb-0">
+                        <colgroup>
+                            <col width="150">
+                            <col width="120">
+                            <col width="170">
+                            <col width="190">
+                            <col width="160">
+                            <col width="155">
+                        </colgroup>
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Network</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Date</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Type</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Stake (incl. Rake)</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Position</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Profit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <style>
+                            .hide_events {
+                                display: none;
+                            }
+                        </style>
+                        @php
+                        $pe = 0;
+                        @endphp
+                        @foreach($player->pokerEvents as $pokerEvent)
+                        <tr class="@if($pe == 2){{'hide_events'}}@endif" id="he">
+                            <td class="text-truncate">{{$pokerEvent->network}}</td>
+                            <td class="text-truncate">{{$pokerEvent->date}}</td>
+                            <td class="text-truncate">{{$pokerEvent->type}}</td>
+                            <td class="text-truncate">{{$pokerEvent->stake}}$</td>
+                            <td class="text-truncate">{{$pokerEvent->position}}</td>
+                            <td>
+                                <div class="font-weight-bold">{{$pokerEvent->profit}}$</div>
+                            </td>
+                        </tr>
+                        @php
+                            $pe++;
+                        @endphp
+                        @endforeach
+                        </tbody>
+                    </table>
+                    @endif
+                @if(count($player->pokerEvents) > 2)
+                    <div class="mt-4">
+                        <a id="poker_ev_more" class="btn btn-outline-primary font-weight-bold text-uppercase" href="#">+ Show more</a>
+                    </div>
+                    <script>
+                        $('#poker_ev_more').on('click', function(e){
+                            $('.hide_events').css('display', 'table-row')
+                            e.preventDefault();
+                            return false;
+                        });
+                    </script>
+                    @endif
+                @endif
             </div>
-            <div class="tab-pane px-5 py-5_5" id="promotion-tab">
+            <!--<div class="tab-pane px-5 py-5_5" id="promotion-tab">
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Social Networks</h4>
                 <table class="table table-bordered table-social text-blue-darker mb-0">
                     <colgroup>
@@ -1154,51 +1586,298 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="tab-pane px-5 py-5_5" id="services-tab">
-                <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Available services</h4>
-                <ul class="list-unstyled communication-list mb-0 shadow">
-                    <li class="communication-item media position-relative align-items-stretch">
-                        <div class="communication-item-icon-wrapper position-relative mr-3">
-                            <div class="icon icon-training communication-item-icon position-absolute m-auto">
-                                <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#training'></use></svg>
+            </div>-->
+            <div class="tab-pane px-5 py-5_5" id="promotion-tab">
+                <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available Bounty tasks</h4>
+                <div class="list-unstyled service-list mb-0 border">
+                    @foreach($player->bountyTasks as $bounty_task)
+                        @if($bounty_task->status == 1)
+                            <div class="service-item media align-items-stretch position-relative">
+                                <div class="service-item-icon-wrapper position-relative">
+                                    <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker">
+                                        <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#{{$bounty_type_icons[$bounty_task->type]}}'></use></svg>
+                                    </div>
+                                </div>
+                                <div class="media-body service-item-body py-4">
+                                    <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                        {{$bounty_task->name}}
+                                    </h4>
+                                    <p class="service-item-descr mb-0 text-blue-darker">
+                                        {{$bounty_task->description}}
+                                    </p>
+                                </div>
+                                <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                    <div class="mx-4 service-item-secondary-token text-right">
+                                        <div class="h5 text-pink mb-0">${{$bounty_task->cost_usd}}</div>
+                                        <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                            @if($bounty_task->token_ACE)
+                                                <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_ACE), 0, ',', '  ') }} <span class="text-ace">ACE</span></li>
+                                            @endif
+                                            @if($bounty_task->token_TEAM)
+                                                <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }} <span class="text-team">TEAM</span></li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link" data-toggle="collapse" data-target="#collapse-item-bounty-task-{{$bounty_task->id}}">Apply</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="media-body communication-item-body py-4">
-                            <h4 class="communication-item-title  mb-1">
-                                Service 1
-                            </h4>
-                            <p class="communication-item-descr mb-0">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
-                            <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 20 TEAM</div>
-                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold fill-area-link btn-width-120px" href="">Buy</a>
-                        </div>
-                    </li>
-                    <li class="communication-item media position-relative align-items-stretch">
-                        <div class="communication-item-icon-wrapper position-relative mr-3">
-                            <div class="icon icon-qna communication-item-icon position-absolute m-auto">
-                                <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#qna'></use></svg>
+                            <div class="collapse service-item-collapse py-4_5 px-5" id="collapse-item-bounty-task-{{$bounty_task->id}}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                        <p class="mb-0 text-blue-darker">{{$bounty_task->description}}</p>
+                                        <div class="mt-4">
+                                            <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                            @auth
+                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn" href="#buy-modal1" data-toggle="modal" data-productid="{{$bounty_task->id}}">Join</a>
+                                            @else
+                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" href="#information" data-toggle="modal">Apply</a>
+                                            @endauth
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="media-body communication-item-body py-4">
-                            <h4 class="communication-item-title mb-1">
-                                Service 2
-                            </h4>
-                            <p class="communication-item-descr mb-0">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
-                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
-                            <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 120 TEAM</div>
-                            <a class="btn btn-primary px-4 text-uppercase fill-area-link font-weight-bold btn-width-120px" href="">Buy</a>
-                        </div>
-                    </li>
-                </ul>
+                        @endif
+                    @endforeach
+                </div>
+
 
             </div>
+
+
+            @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
+                <div class="tab-pane px-5 py-5_5" id="fan-tab">
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
+                    <div class="list-unstyled service-list mb-0 border">
+                        @foreach($player->servicesProducts as $service)
+                            @if($service->status == 1)
+                                @if($service->type == 1)
+                                    <div class="service-item media align-items-stretch position-relative">
+                                        <div class="service-item-icon-wrapper position-relative">
+                                            <div class="icon icon-{{$kinds_service[$service->kind]}} service-item-icon position-absolute m-auto text-blue-darker">
+                                                <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#{{$kinds_service[$service->kind]}}'></use></svg>
+                                            </div>
+                                        </div>
+                                        <div class="media-body service-item-body py-4">
+                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                {{$service->name}}
+                                            </h4>
+                                            <p class="service-item-descr mb-0 text-blue-darker">
+                                                {{$service->description}}
+                                            </p>
+                                        </div>
+                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                            <div class="mx-4 service-item-secondary-token text-right">
+                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
+                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                    @if($service->token_ACE)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }} <span class="text-ace">ACE</span></li>
+                                                    @endif
+                                                    @if($service->token_TEAM)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }} <span class="text-team">TEAM</span></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link" data-toggle="collapse" data-target="#collapse-item-{{$service->id}}">Join</button>
+                                        </div>
+                                    </div>
+                                    <div class="collapse service-item-collapse py-4_5 px-5" id="collapse-item-{{$service->id}}">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                <p class="mb-0 text-blue-darker">{{$service->description_full}}</p>
+                                                <div class="mt-4">
+                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                    @auth
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn" href="#buy-modal" data-toggle="modal" data-productid="{{$service->id}}">Join</a>
+                                                    @else
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" href="#information" data-toggle="modal">Join</a>
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <h5 class="text-blue-darker font-weight-bold">Video</h5>
+                                                @if($service->video_link)
+                                                    <div class="embed-responsive service-item-embed embed-responsive-16by9">
+                                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$service->video_link}}?rel=0" allowfullscreen></iframe>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available goods</h4>
+                    <div class="list-unstyled service-list mb-0 border">
+                        @foreach($player->servicesProducts as $service)
+                            @if($service->status == 1)
+                                @if($service->type == 2)
+                                    <div class="service-item media align-items-stretch position-relative">
+                                        <div class="service-item-icon-wrapper position-relative">
+                                            <div class="icon service-item-icon position-absolute m-auto text-blue-darker">
+                                                <img class="commerce-slider-slide-image img-fluid" src="{{$service->main_image}}" width="74">
+                                            </div>
+                                        </div>
+                                        <div class="media-body service-item-body py-4">
+                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                {{$service->name}}
+                                            </h4>
+                                            <p class="service-item-descr mb-0 text-blue-darker">
+                                                {{str_limit($service->description, $limit= 150, $end = '...')}}
+                                            </p>
+                                        </div>
+                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                            <div class="mx-4 service-item-secondary-token text-right">
+                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
+                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                    @if($service->token_ACE)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }} <span class="text-ace">ACE</span></li>
+                                                    @endif
+                                                    @if($service->token_TEAM)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }} <span class="text-team">TEAM</span></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link" data-toggle="collapse" data-target="#collapse-item-{{$service->id}}">Buy</button>
+                                        </div>
+                                    </div>
+                                    <div class="collapse service-item-collapse py-4_5 px-5" id="collapse-item-{{$service->id}}">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                <p class="mb-0 text-blue-darker">{{$service->description}}</p>
+                                                <div class="mt-4">
+                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                    @auth
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn" href="#buy-modal" data-toggle="modal" data-productid="{{$service->id}}">Buy</a>
+                                                    @else
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" href="#information" data-toggle="modal">Join</a>
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                            <div class="col-4 commerce-item-col-slider">
+                                                <h5 class="text-blue-darker font-weight-bold">Images</h5>
+                                                <div class="commerce-item__image-wrap" data-module="commerce-slider">
+                                                    <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
+                                                        <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
+                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                <img class="commerce-slider-slide-image img-fluid" src="{{$service->main_image}}" width="230" height="230">
+                                                            </div>
+
+                                                            @foreach($service->images as $image)
+                                                                <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                    <img class="commerce-slider-slide-image img-fluid" src="/{{$image->image}}" alt="" width="230" height="230">
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                <div class="tab-pane px-5 py-5_5" id="services-tab">
+                    <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Available services</h4>
+                    <ul class="list-unstyled communication-list mb-0 shadow">
+                        <li class="communication-item media position-relative align-items-stretch">
+                            <div class="communication-item-icon-wrapper position-relative mr-3">
+                                <div class="icon icon-training communication-item-icon position-absolute m-auto">
+                                    <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#training'></use></svg>
+                                </div>
+                            </div>
+                            <div class="media-body communication-item-body py-4">
+                                <h4 class="communication-item-title  mb-1">
+                                    Service 1
+                                </h4>
+                                <p class="communication-item-descr mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                </p>
+                            </div>
+                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
+                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 20 TEAM</div>
+                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold fill-area-link btn-width-120px" href="">Buy</a>
+                            </div>
+                        </li>
+                        <li class="communication-item media position-relative align-items-stretch">
+                            <div class="communication-item-icon-wrapper position-relative mr-3">
+                                <div class="icon icon-qna communication-item-icon position-absolute m-auto">
+                                    <svg viewBox="0 0 1 1"><use xlink:href='/images/icons.svg#qna'></use></svg>
+                                </div>
+                            </div>
+                            <div class="media-body communication-item-body py-4">
+                                <h4 class="communication-item-title mb-1">
+                                    Service 2
+                                </h4>
+                                <p class="communication-item-descr mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
+                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 120 TEAM</div>
+                                <a class="btn btn-primary px-4 text-uppercase fill-area-link font-weight-bold btn-width-120px" href="">Buy</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="tab-pane px-5 py-5_5" id="admin-tab">
+                    <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Vote Stats</h4>
+                    @php
+                            $vote_result = [];
+                            if(!empty($voteModel->id))
+                            {
+                                $sql = "select `wallet_hash`, `start_team_balance`, `start_ace_balance`, `end_team_balance`, `end_ace_balance`, (IF(result = 0, 'NO', 'YES')) as golos from scout_voting_result left join scout_voting_wallets on scout_voting_wallets.sv_result_id = scout_voting_result.id  where scout_voting_result.svoting_id = ".$voteModel->id;
+                                $vote_result = DB::select($sql);
+                            }
+                    @endphp
+                    <table class="table table-bordered table-stat" style="font-size: 14px;">
+                        <colgroup>
+                            <col width="140">
+                            <col width="120">
+                            <col width="110">
+                            <col width="120">
+                            <col width="120">
+                            <col width="40">
+                        </colgroup>
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Hash</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Team before</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Ace before</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Team after</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Ace after</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Vote</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($vote_result) > 0)
+
+
+                            @foreach($vote_result as $vot)
+                                <tr>
+                                <td>{{$vot->wallet_hash}}</td>
+                                <td>{{round($vot->start_team_balance)}}</td>
+                                <td>{{round($vot->start_ace_balance)}}</td>
+                                <td>{{round($vot->end_team_balance)}}</td>
+                                <td>{{round($vot->end_ace_balance)}}</td>
+                                <td><span style="color:@if($vot->golos == 'NO'){{'red'}}@else{{'green'}}@endif">{{$vot->golos}}</span></td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+
+                </div>
+            @endif
+
         </div>
     </article>
     <div class="section-divider"></div>
