@@ -45,13 +45,29 @@
                 @php
                     if(!empty($vote->ended))
                     {
-                        $count_yes = $vote->end_ace_yes;
-                        $count_no = $vote->end_ace_no;
+                        switch ($talent->sport_type) {
+                            case 1:
+                                $count_yes = $vote->end_ace_yes;
+                                $count_no = $vote->end_ace_no;
+                                break;
+                            case 2:
+                                $count_yes = $vote->end_team_yes;
+                                $count_no = $vote->end_team_no;
+                                break;
+                        }
                     }
                     else
                     {
-                        $count_yes = $vote->start_ace_yes;
-                        $count_no = $vote->start_ace_no;
+                        switch ($talent->sport_type) {
+                            case 1:
+                                $count_yes = $vote->start_ace_yes;
+                                $count_no = $vote->start_ace_no;
+                                break;
+                            case 2:
+                                $count_yes = $vote->start_team_yes;
+                                $count_no = $vote->start_team_no;
+                                break;
+                        }
                     }
 
                     $total = $count_yes + $count_no;
@@ -97,12 +113,16 @@
                             @endphp
                         @endif
                         <div class="list-item__secondary-progress d-flex flex-column ml-5">
-                            <span class="typo-lg mb-0_5 text-uppercase">
-                                @if(!empty($vote->ended))
+
+                            <span class="typo-lg mb-0_5 text-uppercase" style="font-size:14px">
+                                {{$statuses[$talent->status]}}
+
+                                <!--
+                                @if(!empty($vote->ended) && !isset($votetype->result))
                                     {{'Final Result'}}
                                 @else
-                                    @if(!empty($votetype->result) && $votetype->result == 1){!! 'You voted: <span class="text-success font-weight-semibold">Yes</span>' !!}@elseif(!empty($votetype->result) && $votetype->result == 0){!! 'You voted: <span class="text-danger font-weight-semibold">No</span>' !!}@else{{'Current result'}}@endif
-                                @endif
+                                    @if(isset($votetype->result) && $votetype->result == 1){!! 'You voted: <span class="text-success font-weight-semibold">Yes</span>' !!}@elseif(isset($votetype->result) && $votetype->result == 0){!! 'You voted: <span class="text-danger font-weight-semibold">No</span>' !!}@else{{'Current result'}}@endif
+                                @endif-->
                             </span>
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: {{$perc_yes}}%" aria-valuenow="{{$perc_yes}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -112,6 +132,12 @@
                                 <div class="col-6 font-weight-semibold">{{$perc_yes}}% -yes</div>
                                 <div class="col-6 text-secondary text-right">{{$perc_no}}% -No</div>
                                 @if(!empty($vote->ended))
+                                    @if(!empty(Auth::user()->id))
+                                        <div class="col-12 text-secondary mt-1">@if(isset($votetype->result) && $votetype->result == 1){{'You voted: Yes'}}@elseif(isset($votetype->result) && $votetype->result == 0){{'You voted: No'}}@else{{'You didn\'t take the vote'}}@endif</div>
+                                    @else
+                                        <div class="col-12 text-secondary mt-1">You didn't take the vote</div>
+                                    @endif
+                                @else
                                     @if(!empty(Auth::user()->id))
                                         <div class="col-12 text-secondary mt-1">@if(isset($votetype->result) && $votetype->result == 1){{'You voted: Yes'}}@elseif(isset($votetype->result) && $votetype->result == 0){{'You voted: No'}}@else{{'You didn\'t take the vote'}}@endif</div>
                                     @else
@@ -131,7 +157,7 @@
                             <img class="list-item__image rounded" src="/images/_temp/1.png" alt="" width="86" height="86">
                         </div>
                         <div class="d-flex flex-column">
-                            <h3 class="h4 mb-1 list-item__title"><a class="text-blue-darker fill-area-link" href="/votingarchive">Archive Voting Records</a></h3>
+                            <h3 class="h4 mb-1 list-item__title"><a class="text-blue-darker fill-area-link" href="http://votingarchive.tokenstars.com/">Archive Voting Records</a></h3>
                             <p class="mb-0 list-item__text typo-xl"></p>
                         </div>
                     </div>
