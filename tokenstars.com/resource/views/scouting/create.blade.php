@@ -91,14 +91,14 @@
                             <div class="custom-control custom-checkbox h5 text-blue-darker">
                                 <input name="ch_agree_1" type="checkbox" class="custom-control-input" id="agree_1" ngrequired="required">
                                 <label class="custom-control-label" for="agree_1">
-                                    I agree with TokenStars' <a href="https://tokenstars.com/pdfs/Terms_of_Use.pdf" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'terms_of_use', 'footer');">@lang('tokenstars-messages.footer.terms')</a>
+                                    I agree with TokenStars' <a href="https://tokenstars.com/pdfs/Terms_of_Use.pdf" rel="noreferer, ,noopener" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'terms_of_use', 'footer');">@lang('tokenstars-messages.footer.terms')</a>
                                 </label>
                             </div>
 
                             <div class="custom-control custom-checkbox h5 text-blue-darker">
                                 <input name="ch_agree_2" type="checkbox" class="custom-control-input" id="agree_2" ngrequired="required">
                                 <label class="custom-control-label" for="agree_2">
-                                    I agree with TokenStars' <a href="https://tokenstars.com/pdfs/Privacy_Policy.pdf" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'privacy_policy', 'footer');">@lang('tokenstars-messages.footer.privacy')</a>
+                                    I agree with TokenStars' <a href="https://tokenstars.com/pdfs/Privacy_Policy.pdf" rel="noreferer, ,noopener" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'privacy_policy', 'footer');">@lang('tokenstars-messages.footer.privacy')</a>
                                 </label>
                             </div>
                             <div class="custom-control custom-checkbox h5 text-blue-darker">
