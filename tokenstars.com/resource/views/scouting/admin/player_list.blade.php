@@ -29,7 +29,11 @@
         .admin ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     </style>
     <article class="card player-card">
+
         <div class="tab-pane px-5 py-5_5" id="bio-tab">
+            <div class="text-right">
+                <a class="btn btn-primary text-uppercase px-4" href="{{route('scouting.admin.players.create')}}">Add player</a>
+            </div>
             <table style="width: 100%">
                 <thead>
                     <tr>
@@ -37,7 +41,9 @@
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>City</th>
+                        <th>Sport</th>
                         <th>Status</th>
+
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -48,7 +54,9 @@
                             <td>{{$player->first_name}}</td>
                             <td>{{$player->last_name}}</td>
                             <td>{{$player->city}}</td>
+                            <td>{{$sport_types[$player->sport_type]}}</td>
                             <td>{{$statuses[$player->status]}}</td>
+
                             <td>
                                 <a href="{{route('scouting.admin.players.id', $player->id)}}">Edit player</a>
                             </td>
