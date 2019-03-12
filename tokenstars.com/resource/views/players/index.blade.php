@@ -41,6 +41,7 @@
         <svg viewBox="0 0 1 1"><use xlink:href="images/icons.svg#search"></use></svg>
     </span>
                     <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
+                    <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
                 </a>
             </div>
         </div>
@@ -56,7 +57,7 @@
             <div class="card talent-item hoverable w-100 mx-auto ">
                 <div>
                     <div class="talent-item-img-wrapper d-inline-block position-relative">
-                        <img class="talent-item-img" src="{{$pl->photo}}" alt="" width="auto" height="250">
+                        <img class="talent-item-img" src="{{$pl->photo}}" alt="" width="auto" height="280">
                     </div>
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
@@ -81,7 +82,6 @@
     <span class="icon icon-search ml-5 talent-item-icon">
         <svg viewBox="0 0 1 1"><use xlink:href="images/icons.svg#search"></use></svg>
     </span>
-                    <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
                 </a>
             </div>
         </div>
