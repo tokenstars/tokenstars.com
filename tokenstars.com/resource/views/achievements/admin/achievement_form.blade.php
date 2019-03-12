@@ -121,17 +121,7 @@
                                            placeholder="">
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                           for="weight_module_{{$ahievementModule->id}}">weight</label>
-                                    <input name="weight_module_{{$ahievementModule->id}}"
-                                           class="form-control form-control-lg font-weight-bold text-blue-darker"
-                                           type="text"
-                                           value="@if(!empty($ahievementModule->weight)){{$ahievementModule->weight}}@endif">
-                                </div>
-                            </div>
-
+                           
 
                             @php $bg_ = 0; @endphp
                             @php $j = 0; @endphp
@@ -195,7 +185,17 @@
                                         </div>
                                     @endfor
                                 </div>
-                            @endforeach
+                            @endforeach <div class="col-6">
+                                <div class="form-group">
+                                    <label class="text-uppercase text-blue-gray-light font-weight-bold"
+                                           for="weight_module_{{$ahievementModule->id}}">weight</label>
+                                    <input name="weight_module_{{$ahievementModule->id}}"
+                                           class="form-control form-control-lg font-weight-bold text-blue-darker"
+                                           type="text"
+                                           value="@if(!empty($ahievementModule->weight)){{$ahievementModule->weight}}@endif">
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
                             <div class="mt-5 mb-2 d-flex">
