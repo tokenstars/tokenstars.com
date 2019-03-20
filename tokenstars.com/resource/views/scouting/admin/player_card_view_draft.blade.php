@@ -107,14 +107,6 @@
                              </div>
                         @endif
                     </div>
-                    @if($player->sport_type == 1)
-                        <div class="col-4 player-card-header-item mb-2">
-                            <div class="title text-uppercase text-secondary">{{$player->rank}} Ranking</div>
-                            <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
-                                <span>{{$player->itf_current_combined}}</span>
-                            </div>
-                        </div>
-                    @endif
                     @if($player->sport_type == 3)
                         <div class="col-4 player-card-header-item mb-2">
                             <div class="title text-uppercase text-secondary">Club</div>
@@ -128,6 +120,14 @@
                             <div class="title text-uppercase text-secondary">Scout</div>
                             <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
                                 <span>@if(!empty($player->scout->RUser->first_name) && $player->scout->RUser->last_name) {{$player->scout->RUser->first_name}} {{$player->scout->RUser->last_name}} @else ID: {{$player->scout_id}} @endif</span>
+                            </div>
+                        </div>
+                    @endif
+                    @if($player->sport_type == 3)
+                        <div class="col-4 player-card-header-item mb-2">
+                            <div class="title text-uppercase text-secondary">Position</div>
+                            <div class="content text-blue-darker h5 mb-0 font-weight-semibold d-flex flex-column">
+                                <span>@if(!empty($player->football_position)){{$player->football_position}}@endif</span>
                             </div>
                         </div>
                     @endif
