@@ -390,16 +390,6 @@
                                            placeholder="00 - 00" name="win_loss_cys">
                                 </div>
                             </div>
-                            <div class="col-6 pr-5">
-                                <div class="form-group">
-                                    <label class="text-uppercase text-blue-gray-light font-weight-bold" for="">Win-Loss
-                                        (current year singles)</label>
-                                    <input class="form-control form-control-lg font-weight-bold text-blue-darker"
-                                           type="text"
-                                           value="@if(!empty($player->win_loss_cys)){{$player->win_loss_cys}}@endif"
-                                           placeholder="00 - 00" name="win_loss_cys">
-                                </div>
-                            </div>
                             <div class="col-6 pl-5">
                                 <div class="form-group">
                                     <label class="text-uppercase text-blue-gray-light font-weight-bold" for="">Win-Loss
@@ -2262,15 +2252,6 @@
                                                    placeholder="3" name="diagram[3][value]">
                                         </div>
                                     </div>
-                                    <div class="col-2 pl-5">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold">Value</label>
-                                            <input class="form-control form-control-lg font-weight-bold text-blue-darker"
-                                                   type="text"
-                                                   value="@if(isset($js_diagram[3])){{$js_diagram[3]->value}}@endif"
-                                                   placeholder="3" name="diagram[3][value]">
-                                        </div>
-                                    </div>
 
                                     <div class="col-6 pl-5">
                                         <div class="form-group">
@@ -2799,7 +2780,7 @@
                                                                            name="football_results_last_seasons[season][]">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4">
+                                                            <div class="col-8">
                                                                 <div class="form-group">
                                                                     <label class="text-uppercase text-blue-gray-light font-weight-bold"
                                                                            for="">Competition</label>
@@ -2810,6 +2791,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label class="text-uppercase text-blue-gray-light font-weight-bold"
+                                                                           for="">Club</label>
+                                                                    <input class="form-control form-control-lg font-weight-bold text-blue-darker"
+                                                                           type="text"
+                                                                           value="@if(!empty($results_last_season->club)){{$results_last_season->club}}@endif"
+                                                                           name="football_results_last_seasons[club][]">
+                                                                </div>
+                                                            </div><div class="col-4">
                                                                 <div class="form-group">
                                                                     <label class="text-uppercase text-blue-gray-light font-weight-bold"
                                                                            for="">Club</label>
@@ -2933,6 +2923,16 @@
                                                                        type="text"
                                                                        value=""
                                                                        name="football_results_last_seasons[appearences][]">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label class="text-uppercase text-blue-gray-light font-weight-bold"
+                                                                       for="">Goals</label>
+                                                                <input class="form-control form-control-lg font-weight-bold text-blue-darker"
+                                                                       type="text"
+                                                                       value=""
+                                                                       name="football_results_last_seasons[goals][]">
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
