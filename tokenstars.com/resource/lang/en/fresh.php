@@ -65,6 +65,42 @@ return [
 
     ],
 
+    "adertise_smart_contract" => [
+        "title" => "Adertise Smart Contract",
+        "live" => "Live",
+
+        "platform_1" => [
+            "title" => "Adertise Smart Contract",
+            "button" => "Adertise Smart Contract&nbsp;&nbsp;►",
+            "text" => "Fans can earn rewards for their work as scouts. Scouts submit promising young talents from around the world, help negotiate the terms of the deals, and get rewarded in tokens."
+        ],
+
+    ],
+
+    "players" => [
+        "title" => "Players",
+        "live" => "Live",
+
+        "platform_1" => [
+            "title" => "Players",
+            "button" => "Connect with sport stars&nbsp;&nbsp;►",
+            "text" => "Connect with sport stars through our ecosystem: join players’ fan clubs and earn ACE & TEAM tokens by completing bounty tasks, purchase exclusive activities with the stars, buy merchandise, promote athletes to bring in new brands and sponsors."
+        ],
+
+    ],
+
+    "brand_relations" => [
+        "title" => "Brand Relations",
+        "live" => "Live",
+
+        "platform_1" => [
+            "title" => "Brand Relations",
+            "button" => "Become our partner&nbsp;&nbsp;►",
+            "text" => "Introduce the brand or company, which is interested in interaction with TokenStars talents and PRO athletes: sponsorship deal, special event, influencer endorsement, etc."
+        ],
+
+    ],
+
     "coming_soon" => [
         "title" => "Coming soon",
         "module_1" => [

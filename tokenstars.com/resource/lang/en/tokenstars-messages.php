@@ -513,6 +513,19 @@ return [
                     "ig" => "https://www.instagram.com/s2k_/"
                   ],
             ],
+            "tsagolov" => [
+                "text" => "Managing partner in TokenSwap Fund; Founder in Digital Cellar agency, Business developer in BitClave.",
+                "name" => "Philipp Tsagolov",
+                "title" => "General Manager / Head of BizDev",
+                "social" => [
+                    "me" => "",
+                    "fb" => "https://www.facebook.com/philipp.tsagolov",
+                    "in" => "https://www.linkedin.com/in/philipp-tsagolov-a75ba7151/",
+                    "url" => "",
+                    "tw" => "",
+                    "ig" => ""
+                ],
+            ],
             "kotov" => [
                 "text" => "<b>Ex-head of Marketing and Business Development</b> in Lingualeo (cross-platform SAAS for language learning with over 16 million registered users). Earlier was responsible for business planning at Travel department of Groupon Russia.",
                 "name" => "Ivan Kotov",
