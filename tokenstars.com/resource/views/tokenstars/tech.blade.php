@@ -582,6 +582,19 @@
                         </div>
                         <div class="col-lg-3 col-md-3">
                             <div class="team-ambassador-card team-card">
+                                <img src="/upload/images/tsagolov.png" alt="" class="team-ambassador-card-image">
+                                <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.title')</div>
+                                <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.name')</div>
+                                <a href="@lang('tokenstars-messages.team.members.tsagolov.social.fb')">
+                                    <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                </a>
+                                <a href="@lang('tokenstars-messages.team.members.tsagolov.social.in')">
+                                    <img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <div class="team-ambassador-card team-card">
                                 <img src="/upload/images/zak.jpg" alt="" class="team-ambassador-card-image">
                                 <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.zak.title')</div>
                                 <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.zak.name')</div>
@@ -603,8 +616,7 @@
                         @php
                             $team1 = ['mintz'];
                         @endphp
-
-
+                        <div style="clear: both"></div>
                         <div class="col-lg-3 col-md-3">
                             <div class="team-ambassador-card team-card">
                                 <img style="" src="/upload/images/kureev2.png" alt="" class="team-ambassador-card-image">
@@ -615,9 +627,6 @@
                             </a>-->
                             </div>
                         </div>
-
-
-                        <div style="clear: both"></div>
                         <div class="col-lg-3 col-md-3">
                             <div class="team-ambassador-card team-card">
                                 <img style="" src="/upload/images/ulyanov.png" alt="" class="team-ambassador-card-image">
@@ -650,6 +659,7 @@
                             </a>-->
                             </div>
                         </div>
+                        <div style="clear: both"></div>
                         @foreach($team1 as $name)
                             <div class="col-lg-3 col-md-3">
                                 <div class="team-ambassador-card team-card">

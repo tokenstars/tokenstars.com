@@ -124,11 +124,29 @@
 
     <section class="section modules-section" id="platform">
         <div class="wrap">
-            <h2 class="section-title">@lang('fresh.platform_modules.title')</h2>
+            <h2 class="section-title">@lang('fresh.brand_relations.title')</h2>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="module-item" style="max-height: 450px">
                         <p class="module-label">NEW!</p>
+                        <img class="module-item__image" src="/images/fresh/module-players-bg.jpg" />
+                        <p class="module-item__title">@lang('fresh.players.platform_1.title')</p>
+                        <p class="module-item__text">@lang('fresh.players.platform_1.text')</p>
+                        <a onclick="ga('send', 'event', 'module', 'players', 'main');" href="/players" class="btn btn-blue btn-regular">@lang('fresh.players.platform_1.button')</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="module-item" style="max-height: 450px">
+                        <p class="module-label">NEW!</p>
+                        <img class="module-item__image" src="/images/fresh/module-brand-bg.png" />
+                        <p class="module-item__title">@lang('fresh.brand_relations.platform_1.title')</p>
+                        <p class="module-item__text" style="margin-bottom:20px;">@lang('fresh.brand_relations.platform_1.text')</p>
+                        <a onclick="ga('send', 'event', 'module', 'brand_relations', 'main');" href="/brand" class="btn btn-blue btn-regular">@lang('fresh.brand_relations.platform_1.button')</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="module-item" style="max-height: 450px">
+                        <p class="module-label">@lang('fresh.scouting_module.live')</p>
                         <img class="module-item__image" src="/images/fresh/module-scouting-bg.jpg" />
                         <p class="module-item__title">@lang('fresh.scouting_module.platform_1.title')</p>
                         <p class="module-item__text">@lang('fresh.scouting_module.platform_1.text')</p>
@@ -490,6 +508,19 @@
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
+                            <img src="/upload/images/tsagolov.png" alt="" class="team-ambassador-card-image">
+                            <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.title')</div>
+                            <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.name')</div>
+                            <a href="@lang('tokenstars-messages.team.members.tsagolov.social.fb')">
+                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                            </a>
+                            <a href="@lang('tokenstars-messages.team.members.tsagolov.social.in')">
+                                <img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="team-ambassador-card team-card">
                             <img src="/upload/images/zak.jpg" alt="" class="team-ambassador-card-image">
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.zak.title')</div>
                             <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.zak.name')</div>
@@ -511,8 +542,7 @@
                     @php
                         $team1 = ['mintz'];
                     @endphp
-
-
+                    <div style="clear: both"></div>
                     <div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
                             <img style="" src="/upload/images/kureev2.png" alt="" class="team-ambassador-card-image">
@@ -523,9 +553,6 @@
                             </a>-->
                         </div>
                     </div>
-
-
-                    <div style="clear: both"></div>
                     <div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
                             <img style="" src="/upload/images/ulyanov.png" alt="" class="team-ambassador-card-image">
@@ -558,6 +585,7 @@
                             </a>-->
                         </div>
                     </div>
+                    <div style="clear: both"></div>
                     @foreach($team1 as $name)
                         <div class="col-lg-3 col-md-3">
                             <div class="team-ambassador-card team-card">

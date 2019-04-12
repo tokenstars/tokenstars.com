@@ -483,8 +483,9 @@
                             <li class="list-inline-item"><a class="d-inline-block p-1" href="/pdfs/AML_Policy.pdf" target="_blank">AML</a></li>
                         </ul>
                     </div>
+                    <div class="col-6">
                     @if($iso_amount['ACE'] > 0 || $iso_amount['TEAM'] > 0)
-                        <div class="col-6">
+
                             <h6 class="h6_5 font-family-alt text-uppercase font-weight-normal text-blue-darker pt-1">Remaining balances after token sale:</h6>
                             <span class="d-inline-block h3 font-family-alt text-uppercase font-weight-normal mr-4">
 						<span class="text-success font-weight-semibold">{{$iso_amount['ACE']}}</span>
@@ -494,8 +495,19 @@
 						<span class="text-success font-weight-semibold">{{$iso_amount['TEAM']}}</span>
 						<span class="text-secondary">TEAM</span>
 					</span>
-                        </div>
+
+
                     @endif
+                    @if(count($isoCoinsCount) > 0)
+                        <h6 class="h6_5 font-family-alt text-uppercase font-weight-normal text-blue-darker pt-1">Coins count:</h6>
+                        @foreach($isoCoinsCount as $isoCoin=>$isoBalance)
+                            <span class="d-inline-block h3 font-family-alt text-uppercase font-weight-normal mr-4">
+						        <span class="text-success font-weight-semibold">{{$isoBalance}}</span>
+						        <span class="text-secondary">{{$isoCoin}}</span>
+					        </span>
+                        @endforeach
+                    @endif
+                    </div>
                 </div>
             </div>
         </div>
