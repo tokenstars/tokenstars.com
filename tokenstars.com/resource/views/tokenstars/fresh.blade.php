@@ -124,7 +124,7 @@
 
     <section class="section modules-section" id="platform">
         <div class="wrap">
-            <h2 class="section-title">@lang('fresh.brand_relations.title')</h2>
+            <h2 class="section-title"></h2>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="module-item" style="max-height: 450px">
