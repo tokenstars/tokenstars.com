@@ -2,6 +2,16 @@
 
 @section('content')
 
+<style>
+    .talent-item-img {
+        max-height: 250px;
+        object-fit: cover;
+        object-position: top;
+    }
+    .card-title  span{
+        font-size: 1.595rem;
+    }
+</style>
 <div class="section-divider"></div>
 <div class="container">
     @if(!empty($pro))
@@ -19,13 +29,13 @@
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
                     <h3 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-                        <span @if (mb_strlen($p->first_name) >= 9) class="short_name" @endif >{{mb_strimwidth($p->first_name,0, 15,'...')}}</span> <span @if (mb_strlen($p->last_name) >= 20) class="short_name" @endif>{{mb_strimwidth($p->last_name,0, 30,'...')}}</span>
+                        <span>{{$p->first_name}}</span> <span>{{$p->last_name}}</span>
                     </h3>
                     <div class="talent-item-subtitle text-uppercase mb-4">Pro star</div>
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Age:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">{{ $p->calc_age($p->date_of_birth)}}</span></span></li>
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Sport:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if($p->sport_type == 1){{'Tennis'}}@elseif($p->sport_type == 2){{'Poker'}}@elseif($p->sport_type == 3){{'Football'}}@endif</span></span></li>
-                        <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Country:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if(!empty($p->nationality_name->iso_3166_3)){{$p->nationality_name->iso_3166_3}}@else{{'--'}}@endif</span></span></li>
+                        <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Country:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if(!empty($p->country->iso_3166_3)){{$p->country->iso_3166_3}}@else{{'--'}}@endif</span></span></li>
                     </ul>
                 </div>
 
@@ -40,7 +50,6 @@
     <span class="icon icon-search ml-5 talent-item-icon">
         <svg viewBox="0 0 1 1"><use xlink:href="images/icons.svg#search"></use></svg>
     </span>
-                    <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
                     <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
                 </a>
             </div>
@@ -57,14 +66,14 @@
             <div class="card talent-item hoverable w-100 mx-auto ">
                 <div>
                     <div class="talent-item-img-wrapper d-inline-block position-relative">
-                        <img class="talent-item-img" src="{{$pl->photo}}" alt="" width="auto" height="280">
+                        <img class="talent-item-img" src="{{$pl->photo}}" alt="" width="auto" height="250">
                     </div>
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
                     <h3 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-                        <span @if (mb_strlen($pl->first_name) >= 9) class="short_name" @endif >{{mb_strimwidth($pl->first_name,0, 15,'...')}}</span> <span @if (mb_strlen($pl->last_name) >= 20) class="short_name" @endif>{{mb_strimwidth($pl->last_name,0, 30,'...')}}</span>
+                        <span>{{$p->first_name}}</span> <span>{{$p->last_name}}</span>
                     </h3>
-                    <div class="talent-item-subtitle text-uppercase mb-4">@if($pl->sport_type == 1){{'Junior'}}@elseif($pl->sport_type == 2) {{'Poker player'}}@elseif($pl->sport_type == 3){{'Football player'}}@endif</div>
+                    <div class="talent-item-subtitle text-uppercase mb-4">@if($p->sport_type == 1){{'Junior'}}@elseif($p->sport_type == 2) {{'Poker player'}}@elseif($p->sport_type == 3){{'Football player'}}@endif</div>
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Age:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">{{ $pl->calc_age($pl->date_of_birth)}}</span></span></li>
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Sport:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if($pl->sport_type == 1){{'Tennis'}}@elseif($pl->sport_type == 2){{'Poker'}}@elseif($pl->sport_type == 3){{'Football'}}@endif</span></span></li>
@@ -82,6 +91,7 @@
     <span class="icon icon-search ml-5 talent-item-icon">
         <svg viewBox="0 0 1 1"><use xlink:href="images/icons.svg#search"></use></svg>
     </span>
+                    <span class="h5 mt-2 mb-0 d-block ml-2 text-uppercase">Go to profile</span>
                 </a>
             </div>
         </div>
