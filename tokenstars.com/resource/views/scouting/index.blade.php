@@ -6,6 +6,13 @@
 @endphp
 
 @section('content')
+	<style>
+		.icon-sprite.icon-download-white::before {
+			background-position: -79px -43px;
+			height: 50px;
+			width: 16px;
+		}
+	</style>
 	<div class="bg-light">
         @include('scouting.intro')
 		<div class="section-divider"></div>
@@ -14,14 +21,17 @@
 			<div class="dotdotdot dotdotdot_talent" data-module="dotdotdot" data-ellipsis="" data-height="152">
 				<div class="row js-text dotdotdot__text">
 					<div class="col-8 pr-5_5">
-						<p class="typo-lg font-family-alt text-blue-darker mb-2">Scouts, located all over the world, bring applications from talented juniors and receive rewards in tokens: ACE for tennis, TEAM for other sports (hockey, esports, poker, football).  Scouts are strongly motivated to bring the most ambitious players, because their compensation depends on “how far” the submitted application progresses in the selection. The biggest reward is received for the player who signs the contract with TokenStars.</p>
+						<p class="typo-lg font-family-alt text-blue-darker mb-2">Scouts, located all over the world, bring applications from talented juniors and receive rewards in tokens: ACE for tennis, TEAM for other sports (hockey, esports, poker, football).  Scouts are strongly motivated to bring the most ambitious players, because <a target="_blank" href="/pdfs/TS_Scouting_Rewards.pdf">their compensation</a> depends on “how far” the submitted application progresses in the selection. The biggest reward is received for the player who signs the contract with TokenStars.</p>
 						<p class="typo-lg font-family-alt text-blue-darker mb-2">TokenStars brakes the barriers and creates scouting opportunities for everybody. Everyone can become a TokenStars scout: junior coach, academy representative, or even relatives of the player. You just need to create the TokenStars account, coordinate the submission with the talent and fill in the application form on our website.</p>
 					</div>
 					<div class="col-4 pl-5_5">
 						<h5 class="text-uppercase mb-2 font-family-alt text-blue-darker">Download materials:</h5>
 						<ul class="list-unstyled font-family-alt typo-lg">
-<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/upload/files/TokenStars_Agencies_Tennis.pdf" target="_blank" style="text-transform: capitalize;">Scout’s Presentation</a></li>
-							<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/upload/files/Talent_Support_Agreement_Template.pdf" target="_blank" style="text-transform: capitalize;">Talent support Agreement</a></li>						</ul>
+<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/upload/files/TokenStars_Agencies_Tennis.pdf" target="_blank" style="text-transform: capitalize;">Tennis Presentation</a></li>
+							<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/upload/files/Talent_Support_Agreement_Template.pdf" target="_blank" style="text-transform: capitalize;">Tennis Talent Agreement</a></li>
+							<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/pdfs/Poker_Presentation.pdf" target="_blank" style="text-transform: capitalize;">Poker Presentation</a></li>
+							<li class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative"><i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i><a class="download-item-link fill-area-link" href="/upload/files/Poker_Staking_Agreement.pdf" target="_blank" style="text-transform: capitalize;">Poker Staking Agreement</a></li>
+						</ul>
 						<p class="typo-lg mb-0 font-family-alt text-secondary dotdotdot__hide">Please use these materials to tell the player about TokenStars and opportunities we provide to the promising athletes.</p>
 					</div>
 					<div class="col-12">
@@ -30,7 +40,7 @@
 						<div class="talent-flow-footer">
 							<div class="d-flex flex-nowrap align-items-center">
 								<div class="h5 mb-0 font-family-alt text-blue-darker pr-2">Total</div>
-								<div class="badge badge-simple badge-lg font-family-alt">Scout receives up to $1,000*</div>
+								<div class="badge badge-simple badge-lg font-family-alt">Scout receives up to $600*</div>
 								<div class="text-secondary font-family-alt typo-lg pl-3">*paid in ACE and TEAM tokens, for details please see <a target="_blank" href="/pdfs/TS_Scouting_Rewards.pdf">Scouting Rewards</a></div>
 							</div>
 						</div>
@@ -44,6 +54,19 @@
 				</div>
 			</div>
 			<h3 id="list-of-tallents" class="h3_5 font-family-alt font-weight-semibold text-uppercase text-secondary mb-2">List of Talents</h3>
+			<div class="row">
+				<div class="col-12">
+					<a href="{{route('scouting.index',['f_sport' => 'all'])}}#list-of-tallents" class="btn btn-outline-primary text-uppercase px-4 @if($f_sport == 'all') active @endif">
+						<span>All</span>
+					</a>
+					<a href="{{route('scouting.index',['f_sport' => 'tennis'])}}#list-of-tallents" class="btn btn-outline-primary text-uppercase px-4 @if($f_sport == 'tennis') active @endif">
+						<span>Tennis</span>
+					</a>
+					<a href="{{route('scouting.index',['f_sport' => 'poker'])}}#list-of-tallents" class="btn btn-outline-primary text-uppercase px-4 @if($f_sport == 'poker') active @endif">
+						<span>Poker</span>
+					</a>
+				</div>
+			</div>
             @include('scouting.talent-list')
 		</div>
 	</div>

@@ -38,15 +38,15 @@
             <div class="card-img-overlay py-5 pr-5_5 player-card__content">
                 <div class="d-flex flex-nowrap">
                     <h2 class="card-title text-uppercase d-flex flex-column mb-0 text-blue-darker player-card__title text-truncate">
-                        <span @if (mb_strlen($player->first_name) >= 9) class="short_name_view" @endif >{{mb_strimwidth($player->first_name,0, 15,'...')}}</span>
-                        <span @if (mb_strlen($player->last_name) >= 20) class="short_name_view" @endif>{{mb_strimwidth($player->last_name,0, 30,'...')}}</span>
+                        <span>{{$player->first_name}}</span>
+                        <span>{{$player->last_name}}</span>
                         <small class="h4 mb-0 font-weight-normal player-card__sub-title pt-1">@if($player->is_pro){{'PRO STAR'}}@elseif($player->sport_type == 2){{'Poker player'}}@else{{'Junior'}}@endif</small>
                     </h2>
                     <div class="mt-5_5 ml-auto">
                         <div class="icon-group-md">
                             @if(!empty($player->fb_link))
                                 <a class="icon icon-md icon-facebook my-2 ml-3 text-primary-50 hoverable'"
-                                   href="{{$player->fb_link}}" rel="noreferer, ,noopener" target="_blank">
+                                   href="{{$player->fb_link}}" target="_blank">
                                     <svg viewBox="0 0 1 1">
                                         <use xlink:href="/images/icons.svg#facebook"></use>
                                     </svg>
@@ -55,7 +55,7 @@
 
                             @if(!empty($player->ins_link))
                                 <a class="icon icon-md icon-instagram my-2 ml-3 text-primary-50 hoverable'"
-                                   href="{{$player->ins_link}}" rel="noreferer, ,noopener" target="_blank">
+                                   href="{{$player->ins_link}}" target="_blank">
                                     <svg viewBox="0 0 1 1">
                                         <use xlink:href="/images/icons.svg#instagram"></use>
                                     </svg>
@@ -64,7 +64,7 @@
 
                             @if(!empty($player->tw_link))
                                 <a class="icon icon-md icon-twitter my-2 ml-3 text-primary-50 hoverable'"
-                                   href="{{$player->tw_link}}" rel="noreferer, ,noopener" target="_blank">
+                                   href="{{$player->tw_link}}" target="_blank">
                                     <svg viewBox="0 0 1 1">
                                         <use xlink:href="/images/icons.svg#twitter"></use>
                                     </svg>
@@ -378,37 +378,28 @@
             });
         </script>
         <div class="nav nav-pills nav-justified navigation flex-nowrap bg-white">
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'overview-tab') active @endif" data-toggle="pill"
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 active" data-toggle="pill"
                href="#overview-tab">Overview</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'bio-tab') active @endif" data-toggle="pill"
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
                href="#bio-tab">Bio</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'skills-tab') active @endif" data-toggle="pill" href="#skills-tab">Skills</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'stats-tab') active @endif" data-toggle="pill" href="#stats-tab">Stats</a>
-            @if(count($player->bountyTasks) > 0)
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'promotion-tab') active @endif" data-toggle="pill"
-                   href="#promotion-tab">Bounty&Promo</a>
-            @endif
-
-            @php
-                $countServicesProducts = 0;
-            @endphp
-            <!--<a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#fan-tab">Fan Club<br/>(Soon)</a>-->
-            @if(\App\Models\ServiceProduct\ServicesProducts::where('player_tennis_id', $player->id)->where(function ($query) {$query->where('status', 1)->orWhere('status',2);})->count() > 0)
-                @php
-                    $countServicesProducts = 1;
-                @endphp
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'fan-tab') active @endif" data-toggle="pill" href="#fan-tab">Fan Club</a>
-            @endif
-
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#skills-tab">Skills</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#stats-tab">Stats</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill"
+               href="#promotion-tab">Bounty&Promo<br/>(Soon)</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill"
+               href="#fan-tab">Fan Club<br/>(Soon)</a>
             @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
-
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'admin-tab') active @endif" data-toggle="pill"
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
+                   href="#promotion-tab">Bounty&Promo</a>
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#fan-tab">Fan
+                    Club</a>
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
                    href="#admin-tab">Admin</a>
             @endif
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'overview-tab') show active @endif" id="overview-tab">
+            <div class="tab-pane px-5 py-5_5 show active" id="overview-tab">
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Overall Statistics</h4>
                 @if($player->sport_type == 1)
                     <table class="table table-bordered table-stat">
@@ -824,7 +815,7 @@
                 })
 
             </script>
-            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'bio-tab') show active @endif" id="bio-tab">
+            <div class="tab-pane px-5 py-5_5" id="bio-tab">
 
                 <div class="section-divider-2"></div>
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Biography</h4>
@@ -999,7 +990,7 @@
             @php
                 $diagram = \App\Models\Scouting\PlayerDiagram::where('player_id', $player->id)->first();
             @endphp
-            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'skills-tab') show active @endif" id="skills-tab">
+            <div class="tab-pane px-5 py-5_5" id="skills-tab">
                 @if($player->is_pro == false)
                     @if($player->sport_type == 1 || $player->sport_type == 2)
                         <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Player Skills Diagram</h4>
@@ -1324,7 +1315,7 @@
                             <tr>
                                 <td>{{$player->rank}} Ranking Profile</td>
                                 <td class="font-weight-semibold">
-                                    <a href="{{$player->itf_profile}}" rel="noreferer, ,noopener" target="_blank">{{$player->itf_profile}}</a>
+                                    <a href="{{$player->itf_profile}}" target="_blank">{{$player->itf_profile}}</a>
                                 </td>
                             </tr>
                         @endif
@@ -1333,7 +1324,7 @@
                                 <td>Other Ranking Profile</td>
                                 <td class="font-weight-semibold">
                                     <a href="{{$player->other_ranking_profiles}}"
-                                       rel="noreferer, ,noopener" target="_blank">{{$player->other_ranking_profiles}}</a>
+                                       target="_blank">{{$player->other_ranking_profiles}}</a>
                                 </td>
                             </tr>
                         @endif
@@ -1413,7 +1404,7 @@
                                 <td>TransMarket Profile</td>
                                 <td class="font-weight-semibold">
                                     <a href="{{$player->football_transmarket_profile_link}}"
-                                       rel="noreferer, ,noopener" target="_blank">{{$player->football_transmarket_profile_link}}</a>
+                                       target="_blank">{{$player->football_transmarket_profile_link}}</a>
                                 </td>
                             </tr>
                         @endif
@@ -1422,7 +1413,7 @@
                                 <td>Clubs Profile</td>
                                 <td class="font-weight-semibold">
                                     <a href="{{$player->football_club_profile_link}}"
-                                       rel="noreferer, ,noopener" target="_blank">{{$player->football_club_profile_link}}</a>
+                                       target="_blank">{{$player->football_club_profile_link}}</a>
                                 </td>
                             </tr>
                         @endif
@@ -1460,7 +1451,7 @@
                     </table>
                 @endif
             </div>
-            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'stats-tab') show active @endif" id="stats-tab">
+            <div class="tab-pane px-5 py-5_5" id="stats-tab">
                 @if($player->sport_type == 1)
                     <h4 class="text-uppercase mb-2 font-weight-semibold text-blue-darker">Ranking {{$player->rank}}</h4>
                     <table class="table table-bordered table-stats text-blue-darker mb-0">
@@ -1847,19 +1838,123 @@
                     @endif
                 @endif
             </div>
+            <!--<div class="tab-pane px-5 py-5_5" id="promotion-tab">
+                <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Social Networks</h4>
+                <table class="table table-bordered table-social text-blue-darker mb-0">
+                    <colgroup>
+                        <col width="90">
+                        <col width="120">
+                        <col width="auto">
+                        <col width="100">
+                        <col width="100">
+                        <col width="100">
+                        <col width="100">
+                        <col width="auto">
+                    </colgroup>
+                    <thead class="thead-light">
+                    <tr>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Social</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Language</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate" scope="col">Name (link)</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Subs</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Posts</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Likes</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Shares</th>
+                        <th class="font-weight-semibold text-uppercase text-truncate" scope="col">Promoter</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-truncate text-center align-middle">
+                            <i class="icon icon-sprite icon-facebook"></i>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            <i class="icon icon-sprite icon-flag-england"></i>
+                        </td>
+                        <td class="text-truncate align-middle">
+                            <a href="">David Smith – Junior Star</a>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            1,034
+                            <small class="text-success d-block">+98</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            34
+                            <small class="text-success d-block">+2</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            3,011
+                            <small class="text-success d-block">+321</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            123
+                            <small class="text-success d-block">+24</small>
+                        </td>
+                        <td class="text-truncate align-middle">
+                            <a href="">Daniel Adams</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-truncate text-center align-middle">
+                            <i class="icon icon-sprite icon-instagram"></i>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            <i class="icon icon-sprite icon-flag-england"></i>
+                        </td>
+                        <td class="text-truncate align-middle">
+                            <a href="">David Smith – Junior Star</a>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            1,034
+                            <small class="text-success d-block">+98</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            34
+                            <small class="text-success d-block">+2</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            3,011
+                            <small class="text-success d-block">+321</small>
+                        </td>
+                        <td class="text-truncate text-center align-middle">
+                            123
+                            <small class="text-success d-block">+24</small>
+                        </td>
+                        <td class="text-truncate align-middle">
+                            <a href="">Daniel Adams</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button class="btn btn-primary btn-sm font-weight-bold text-uppercase">+ Add New</button>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
 
-            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'promotion-tab') show active @endif" id="promotion-tab">
+                <div class="row my-5_5">
+                    <div class="col-4 mx-auto">
+                        <div class="text-center">
+                            <h5 class="text-blue-darker font-weight-normal mb-4">This player has no promoters yet. Click a button below to be the first one.</h5>
+                            <p class="mb-0"><a class="btn btn-primary font-weight-bold btn-lg text-uppercase" href="">Become a David's promoter</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>-->
+            <div class="tab-pane px-5 py-5_5" id="promotion-tab">
                 <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available Bounty tasks</h4>
                 <div class="list-unstyled service-list mb-0 border">
                     @foreach($player->bountyTasks as $bounty_task)
-                        @if($bounty_task->status == 1 or $bounty_task->status == 2)
+                        @if($bounty_task->status == 1)
                             <div class="service-item media align-items-stretch position-relative">
-                                <div class="service-item-icon-wrapper position-relative" style="width:7.8rem">
-                                    <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker" style="width:5.9rem">
-                                        <!--<svg viewBox="0 0 1 1">
+                                <div class="service-item-icon-wrapper position-relative">
+                                    <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker">
+                                        <svg viewBox="0 0 1 1">
                                             <use xlink:href='/images/icons.svg#{{$bounty_type_icons[$bounty_task->type]}}'></use>
-                                        </svg>-->
-                                        <img src="{{$bounty_task->icon_w350_h205}}" alt="" height="56px">
+                                        </svg>
                                     </div>
                                 </div>
                                 <div class="media-body service-item-body py-4">
@@ -1867,32 +1962,13 @@
                                         {{$bounty_task->name}}
                                     </h4>
                                     <p class="service-item-descr mb-0 text-blue-darker">
-                                        {!!$bounty_task->description!!}
+                                        {{$bounty_task->description}}
                                     </p>
                                 </div>
                                 <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
-                                    @if(isset($specifiedDatetimeBountyTasks[$bounty_task->id]))
-
-                                        <div class="list-item__secondary-time d-flex flex-column pl-4" style="float:right; position:relative; top:-10px;">
-                                            <span class="typo-lg mb-0_5 text-uppercase text-status text-status-{{$specifiedDatetimeBountyTasks[$bounty_task->id][0]}} text-status-shift">{{$specifiedDatetimeBountyTasks[$bounty_task->id][1]}}</span>
-                                            <span class="h4 mb-0">{{$specifiedDatetimeBountyTasks[$bounty_task->id][2]}}</span>
-                                        </div>
-                                    @endif
                                     <div class="mx-4 service-item-secondary-token text-right">
-                                        <div class="h5 text-pink mb-0">
-                                        @if($bounty_task->cost_main_token == 1)
-                                            {{number_format($bounty_task->cost_ACE,0,'',' ').' ACE'}}
-                                        @else
-                                            {{number_format($bounty_task->cost_TEAM,0,'',' ').' TEAM'}}
-                                        @endif
-                                        </div>
+                                        <div class="h5 text-pink mb-0">${{$bounty_task->cost_usd}}</div>
                                         <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
-                                            @if($bounty_task->cost_usd)
-                                                <li class="list-inline-item text-nowrap">approx. ${{$bounty_task->cost_usd }}
-                                                </li>
-                                            @endif
-                                            <!--
-
                                             @if($bounty_task->token_ACE)
                                                 <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
                                                     <span class="text-ace">ACE</span></li>
@@ -1900,68 +1976,32 @@
                                             @if($bounty_task->token_TEAM)
                                                 <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
                                                     <span class="text-team">TEAM</span></li>
-                                            @endif-->
+                                            @endif
                                         </ul>
                                     </div>
-                                    <button class="btn @if($bounty_task->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px fill-area-link"
+                                    <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
                                             data-toggle="collapse"
-                                            data-target="#collapse-item-bounty-task-{{$bounty_task->id}}"
-                                            @if($activeBountyTask == $bounty_task->id) aria-expanded="true" @else aria-expanded="false" @endif>@if($bounty_task->status == 1)More @else Finished @endif
+                                            data-target="#collapse-item-bounty-task-{{$bounty_task->id}}">Apply
                                     </button>
-
-
                                 </div>
                             </div>
-                            <div class="collapse service-item-collapse py-4_5 px-5 @if($activeBountyTask == $bounty_task->id) show @endif"
+                            <div class="collapse service-item-collapse py-4_5 px-5"
                                  id="collapse-item-bounty-task-{{$bounty_task->id}}">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                        <p class="mb-0 text-blue-darker">{!!$bounty_task->description_full!!}</p>
+                                        <p class="mb-0 text-blue-darker">{{$bounty_task->description}}</p>
                                         <div class="mt-4">
                                             <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                            @if($bounty_task->status == 1)
-                                                @auth
-                                                    @if(in_array($bounty_task->id, $bountyPerformeByUser))
-                                                        <button type="button" class="btn btn-secondary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn" disabled>You joined</button>
-                                                    @else
-                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn"
-                                                           href="#join-modal" data-toggle="modal"
-                                                           data-bountytaskid="{{$bounty_task->id}}">Join</a>
-                                                    @endif
-                                                @else
-                                                    <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                       href="#information-join" data-toggle="modal">Apply</a>
-                                                @endauth
-                                            @endif
+                                            @auth
+                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                   href="#buy-modal1" data-toggle="modal"
+                                                   data-productid="{{$bounty_task->id}}">Join</a>
+                                            @else
+                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                   href="#information" data-toggle="modal">Apply</a>
+                                            @endauth
                                         </div>
-                                    </div>
-                                    <div class="col-4">
-                                        @if($bounty_task->video_link)
-                                            <h5 class="text-blue-darker font-weight-bold">Video</h5>
-                                            <div class="embed-responsive service-item-embed embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item"
-                                                        src="https://www.youtube.com/embed/{{$bounty_task->video_link}}?rel=0"
-                                                        allowfullscreen></iframe>
-                                            </div>
-                                        @endif
-                                        @if($bounty_task->images)
-                                            <h5 class="text-blue-darker font-weight-bold">Images</h5>
-                                            <div class="commerce-item__image-wrap" data-module="commerce-slider">
-                                                <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
-                                                    <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
-                                                        @foreach($bounty_task->images as $image)
-                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
-                                                                <img class="commerce-slider-slide-image img-fluid"
-                                                                     src="/{{$image->image}}" alt="" width="230"
-                                                                     height="230">
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1972,236 +2012,237 @@
 
             </div>
 
-            @if($countServicesProducts > 0)
-                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'fan-tab') show active @endif" id="fan-tab">
-                    @php
-                        $firstServices = 0;
-                    @endphp
-                    @foreach($player->servicesProducts as $service)
-                        @if($service->status == 1 or $service->status == 2)
-                            @if($service->type == 1)
-                                @if(!$firstServices)
-                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
-                                    <div class="list-unstyled service-list mb-0 border">
-                                        @endif
-
-                                        <div class="service-item media align-items-stretch position-relative">
-                                            <div class="service-item-icon-wrapper position-relative">
-                                                <div class="icon icon-{{$kinds_service[$service->kind]}} service-item-icon position-absolute m-auto text-blue-darker">
-                                                <!--<svg viewBox="0 0 1 1">
-                                                    <use xlink:href='/images/icons.svg#{{$kinds_service[$service->kind]}}'></use>
-                                                </svg>-->
-                                                    <img src="{{$service->prev_image2}}" alt="" height="56px">
-                                                </div>
-                                            </div>
-                                            <div class="media-body service-item-body py-4">
-                                                <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
-                                                    {{$service->name}}
-                                                </h4>
-                                                <p class="service-item-descr mb-0 text-blue-darker">
-                                                    {!! $service->description !!}
-                                                </p>
-                                            </div>
-                                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
-                                                <div class="mx-4 service-item-secondary-token text-right">
-                                                    <div class="h5 text-pink mb-0">
-                                                        @if($service->cost_main_token == 1)
-                                                            {{number_format($service->cost_ACE,0,'',' ').' ACE'}}
-                                                        @else
-                                                            {{number_format($service->cost_TEAM,0,'',' ').' TEAM'}}
-                                                        @endif
-                                                    </div>
-                                                    <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
-                                                        @if($service->cost_usd)
-                                                            <li class="list-inline-item text-nowrap">approx. ${{$service->cost_usd }}</li>
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                <button class="btn @if($service->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
-                                                        data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Join @else Finished @endif
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="collapse service-item-collapse py-4_5 px-5"
-                                             id="collapse-item-{{$service->id}}">
-                                            <div class="row">
-                                                <div class="col-@if($service->video_link || $service->images){{8}}@else{{12}}@endif">
-                                                    <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                                    <p class="mb-0 text-blue-darker">{!!$service->description_full !!}</p>
-                                                    <div class="mt-4">
-                                                        <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                        @if($service->status == 1)
-                                                            @auth
-                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                                   href="#buy-modal" data-toggle="modal"
-                                                                   data-productid="{{$service->id}}">Join</a>
-                                                            @else
-                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                                   href="#information" data-toggle="modal">Join</a>
-                                                            @endauth
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                @if($service->video_link || ($service->images && count($service->images) > 0))
-                                                    <div class="col-4">
-                                                        @if($service->video_link)
-                                                            <h5 class="text-blue-darker font-weight-bold">Video</h5>
-                                                            <div class="embed-responsive service-item-embed embed-responsive-16by9">
-                                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$service->video_link}}?rel=0" allowfullscreen></iframe>
-                                                            </div>
-                                                        @endif
-                                                        @if($service->images && count($service->images) > 0)
-                                                            <h5 class="text-blue-darker font-weight-bold">Images</h5>
-                                                            <div class="commerce-item__image-wrap" data-module="commerce-slider">
-                                                                <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
-                                                                    <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
-                                                                        @foreach($service->images as $image)
-                                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
-                                                                                <img class="commerce-slider-slide-image img-fluid"
-                                                                                     src="/{{$image->image}}" alt="" width="230"
-                                                                                     height="230">
-                                                                            </div>
-                                                                        @endforeach
-                                                                    </div>
-                                                                </div>
-                                                                <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                @endif
-
-                                            </div>
-                                        </div>
-
-                                        @if(!$firstServices)
-                                    </div>
-                                    @php
-                                        $firstServices = 1;
-                                    @endphp
-                                @endif
-                            @endif
-                        @endif
-                    @endforeach
-
-                    @php
-                        $firstSProducts = 0;
-                    @endphp
-                    @foreach($player->servicesProducts as $service)
-                        @if($service->status == 1 or $service->status == 2)
-                            @if($service->type == 2)
-                                @if(!$firstSProducts)
-                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
-                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available goods</h4>
-                                    <div class="list-unstyled service-list mb-0 border">
-                                        @endif
-                                        <div class="service-item media align-items-stretch position-relative">
-                                            <div class="service-item-icon-wrapper position-relative">
-                                                <div class="icon service-item-icon position-absolute m-auto text-blue-darker">
-                                                    <img class="commerce-slider-slide-image img-fluid"
-                                                         src="{{$service->main_image}}" width="74">
-                                                </div>
-                                            </div>
-                                            <div class="media-body service-item-body py-4">
-                                                <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
-                                                    {{$service->name}}
-                                                </h4>
-                                                <p class="service-item-descr mb-0 text-blue-darker">
-                                                    {{str_limit($service->description, $limit= 150, $end = '...')}}
-                                                </p>
-                                            </div>
-                                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
-                                                <div class="mx-4 service-item-secondary-token text-right">
-                                                    <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
-                                                    <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
-                                                        @if($service->token_ACE)
-                                                            <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
-                                                                <span class="text-ace">ACE</span></li>
-                                                        @endif
-                                                        @if($service->token_TEAM)
-                                                            <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
-                                                                <span class="text-team">TEAM</span></li>
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                <button class="btn @if($service->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
-                                                        data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Buy @else Finished @endif
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="collapse service-item-collapse py-4_5 px-5"
-                                             id="collapse-item-{{$service->id}}">
-                                            <div class="row">
-                                                <div class="col-8">
-                                                    <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                                    <p class="mb-0 text-blue-darker">{{$service->description}}</p>
-                                                    <div class="mt-4">
-                                                        <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                        @if($service->status == 1)
-                                                            @auth
-                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                                   href="#buy-modal" data-toggle="modal"
-                                                                   data-productid="{{$service->id}}">Buy</a>
-                                                            @else
-                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                                   href="#information" data-toggle="modal">Join</a>
-                                                            @endauth
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-4 commerce-item-col-slider">
-                                                    <h5 class="text-blue-darker font-weight-bold">Images</h5>
-                                                    <div class="commerce-item__image-wrap" data-module="commerce-slider">
-                                                        <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
-                                                            <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
-                                                                <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
-                                                                    <img class="commerce-slider-slide-image img-fluid"
-                                                                         src="{{$service->main_image}}" width="230"
-                                                                         height="230">
-                                                                </div>
-
-                                                                @foreach($service->images as $image)
-                                                                    <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
-                                                                        <img class="commerce-slider-slide-image img-fluid"
-                                                                             src="/{{$image->image}}" alt="" width="230"
-                                                                             height="230">
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if(!$firstSProducts)
-                                    </div>
-                                    @php
-                                        $firstSProducts = 1;
-                                    @endphp
-                                @endif
-                            @endif
-                        @endif
-                    @endforeach
-                </div>
-            @endif
 
             @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
-                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'admin-tab') show active @endif" id="admin-tab">
+                <div class="tab-pane px-5 py-5_5" id="fan-tab">
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
+                    <div class="list-unstyled service-list mb-0 border">
+                        @foreach($player->servicesProducts as $service)
+                            @if($service->status == 1)
+                                @if($service->type == 1)
+                                    <div class="service-item media align-items-stretch position-relative">
+                                        <div class="service-item-icon-wrapper position-relative">
+                                            <div class="icon icon-{{$kinds_service[$service->kind]}} service-item-icon position-absolute m-auto text-blue-darker">
+                                                <svg viewBox="0 0 1 1">
+                                                    <use xlink:href='/images/icons.svg#{{$kinds_service[$service->kind]}}'></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="media-body service-item-body py-4">
+                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                {{$service->name}}
+                                            </h4>
+                                            <p class="service-item-descr mb-0 text-blue-darker">
+                                                {{$service->description}}
+                                            </p>
+                                        </div>
+                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                            <div class="mx-4 service-item-secondary-token text-right">
+                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
+                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                    @if($service->token_ACE)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
+                                                            <span class="text-ace">ACE</span></li>
+                                                    @endif
+                                                    @if($service->token_TEAM)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
+                                                            <span class="text-team">TEAM</span></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapse-item-{{$service->id}}">Join
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="collapse service-item-collapse py-4_5 px-5"
+                                         id="collapse-item-{{$service->id}}">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                <p class="mb-0 text-blue-darker">{{$service->description_full}}</p>
+                                                <div class="mt-4">
+                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                    @auth
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                           href="#buy-modal" data-toggle="modal"
+                                                           data-productid="{{$service->id}}">Join</a>
+                                                    @else
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                           href="#information" data-toggle="modal">Join</a>
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <h5 class="text-blue-darker font-weight-bold">Video</h5>
+                                                @if($service->video_link)
+                                                    <div class="embed-responsive service-item-embed embed-responsive-16by9">
+                                                        <iframe class="embed-responsive-item"
+                                                                src="https://www.youtube.com/embed/{{$service->video_link}}?rel=0"
+                                                                allowfullscreen></iframe>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
+                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available goods</h4>
+                    <div class="list-unstyled service-list mb-0 border">
+                        @foreach($player->servicesProducts as $service)
+                            @if($service->status == 1)
+                                @if($service->type == 2)
+                                    <div class="service-item media align-items-stretch position-relative">
+                                        <div class="service-item-icon-wrapper position-relative">
+                                            <div class="icon service-item-icon position-absolute m-auto text-blue-darker">
+                                                <img class="commerce-slider-slide-image img-fluid"
+                                                     src="{{$service->main_image}}" width="74">
+                                            </div>
+                                        </div>
+                                        <div class="media-body service-item-body py-4">
+                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                {{$service->name}}
+                                            </h4>
+                                            <p class="service-item-descr mb-0 text-blue-darker">
+                                                {{str_limit($service->description, $limit= 150, $end = '...')}}
+                                            </p>
+                                        </div>
+                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                            <div class="mx-4 service-item-secondary-token text-right">
+                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
+                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                    @if($service->token_ACE)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
+                                                            <span class="text-ace">ACE</span></li>
+                                                    @endif
+                                                    @if($service->token_TEAM)
+                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
+                                                            <span class="text-team">TEAM</span></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapse-item-{{$service->id}}">Buy
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="collapse service-item-collapse py-4_5 px-5"
+                                         id="collapse-item-{{$service->id}}">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                <p class="mb-0 text-blue-darker">{{$service->description}}</p>
+                                                <div class="mt-4">
+                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                    @auth
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                           href="#buy-modal" data-toggle="modal"
+                                                           data-productid="{{$service->id}}">Buy</a>
+                                                    @else
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                           href="#information" data-toggle="modal">Join</a>
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                            <div class="col-4 commerce-item-col-slider">
+                                                <h5 class="text-blue-darker font-weight-bold">Images</h5>
+                                                <div class="commerce-item__image-wrap" data-module="commerce-slider">
+                                                    <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
+                                                        <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
+                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                <img class="commerce-slider-slide-image img-fluid"
+                                                                     src="{{$service->main_image}}" width="230"
+                                                                     height="230">
+                                                            </div>
+
+                                                            @foreach($service->images as $image)
+                                                                <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                    <img class="commerce-slider-slide-image img-fluid"
+                                                                         src="/{{$image->image}}" alt="" width="230"
+                                                                         height="230">
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                <div class="tab-pane px-5 py-5_5" id="services-tab">
+                    <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Available services</h4>
+                    <ul class="list-unstyled communication-list mb-0 shadow">
+                        <li class="communication-item media position-relative align-items-stretch">
+                            <div class="communication-item-icon-wrapper position-relative mr-3">
+                                <div class="icon icon-training communication-item-icon position-absolute m-auto">
+                                    <svg viewBox="0 0 1 1">
+                                        <use xlink:href='/images/icons.svg#training'></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="media-body communication-item-body py-4">
+                                <h4 class="communication-item-title  mb-1">
+                                    Service 1
+                                </h4>
+                                <p class="communication-item-descr mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                </p>
+                            </div>
+                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
+                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 20 TEAM</div>
+                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold fill-area-link btn-width-120px"
+                                   href="">Buy</a>
+                            </div>
+                        </li>
+                        <li class="communication-item media position-relative align-items-stretch">
+                            <div class="communication-item-icon-wrapper position-relative mr-3">
+                                <div class="icon icon-qna communication-item-icon position-absolute m-auto">
+                                    <svg viewBox="0 0 1 1">
+                                        <use xlink:href='/images/icons.svg#qna'></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="media-body communication-item-body py-4">
+                                <h4 class="communication-item-title mb-1">
+                                    Service 2
+                                </h4>
+                                <p class="communication-item-descr mb-0">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
+                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 120 TEAM</div>
+                                <a class="btn btn-primary px-4 text-uppercase fill-area-link font-weight-bold btn-width-120px"
+                                   href="">Buy</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="tab-pane px-5 py-5_5" id="admin-tab">
                     <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Vote Stats</h4>
                     @php
                         $vote_result = [];
                         if(!empty($voteModel->id))
                         {
-                            $sql = "select `wallet_hash`, `start_team_balance`, `start_ace_balance`, `end_team_balance`, `end_ace_balance`, (IF(result = 0, 'NO', 'YES')) as golos, scout_voting_wallets.created_at as date_of_voting from scout_voting_result left join scout_voting_wallets on scout_voting_wallets.sv_result_id = scout_voting_result.id  where scout_voting_result.svoting_id = ".$voteModel->id;
+                            $sql = "select `wallet_hash`, `start_team_balance`, `start_ace_balance`, `end_team_balance`, `end_ace_balance`, (IF(result = 0, 'NO', 'YES')) as golos from scout_voting_result left join scout_voting_wallets on scout_voting_wallets.sv_result_id = scout_voting_result.id  where scout_voting_result.svoting_id = ".$voteModel->id;
                             $vote_result = DB::select($sql);
                         }
                     @endphp
                     <table class="table table-bordered table-stat" style="font-size: 14px;">
                         <colgroup>
                             <col width="140">
-                            <col width="120">
                             <col width="120">
                             <col width="110">
                             <col width="120">
@@ -2210,8 +2251,7 @@
                         </colgroup>
                         <thead class="thead-light">
                         <tr>
-                            <th class="font-weight-semibold text-uppercase" scope="col">Wallet</th>
-                            <th class="font-weight-semibold text-uppercase" scope="col">Date of voting</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Hash</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Team before</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Ace before</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Team after</th>
@@ -2226,7 +2266,6 @@
                             @foreach($vote_result as $vot)
                                 <tr>
                                     <td>{{$vot->wallet_hash}}</td>
-                                    <td>{{$vot->date_of_voting}}</td>
                                     <td>{{round($vot->start_team_balance)}}</td>
                                     <td>{{round($vot->start_ace_balance)}}</td>
                                     <td>{{round($vot->end_team_balance)}}</td>
