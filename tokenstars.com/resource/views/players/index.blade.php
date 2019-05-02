@@ -35,7 +35,7 @@
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Age:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">{{ $p->calc_age($p->date_of_birth)}}</span></span></li>
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Sport:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if($p->sport_type == 1){{'Tennis'}}@elseif($p->sport_type == 2){{'Poker'}}@elseif($p->sport_type == 3){{'Football'}}@endif</span></span></li>
-                        <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Country:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if(!empty($p->country->iso_3166_3)){{$p->country->iso_3166_3}}@else{{'--'}}@endif</span></span></li>
+                        <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Country:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if(!empty($p->nationality_name->iso_3166_3)){{$p->nationality_name->iso_3166_3}}@else{{'--'}}@endif</span></span></li>
                     </ul>
                 </div>
 
@@ -71,9 +71,9 @@
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
                     <h3 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-                        <span>{{$p->first_name}}</span> <span>{{$p->last_name}}</span>
+                        <span>{{$pl->first_name}}</span> <span>{{$pl->last_name}}</span>
                     </h3>
-                    <div class="talent-item-subtitle text-uppercase mb-4">@if($p->sport_type == 1){{'Junior'}}@elseif($p->sport_type == 2) {{'Poker player'}}@elseif($p->sport_type == 3){{'Football player'}}@endif</div>
+                    <div class="talent-item-subtitle text-uppercase mb-4">@if($pl->sport_type == 1){{'Junior'}}@elseif($pl->sport_type == 2) {{'Poker player'}}@elseif($pl->sport_type == 3){{'Football player'}}@endif</div>
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Age:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">{{ $pl->calc_age($pl->date_of_birth)}}</span></span></li>
                         <li class="my-1 row no-gutters flex-nowrap talent-item-item"><span class="col-6 pr-2 text-truncate title">Sport:</span> <span class="col-6 pl-2 text-truncate"><span class="font-weight-bold">@if($pl->sport_type == 1){{'Tennis'}}@elseif($pl->sport_type == 2){{'Poker'}}@elseif($pl->sport_type == 3){{'Football'}}@endif</span></span></li>
