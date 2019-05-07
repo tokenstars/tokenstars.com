@@ -284,6 +284,18 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="text-uppercase text-blue-gray-light font-weight-bold"
+                                       for="">Weight(for sorting on the players page)</label>
+                                <input name="weight_players_page"
+                                       class="form-control form-control-lg font-weight-bold text-blue-darker" type="number"
+                                       value="@if(!empty($player->weight_players_page)){{$player->weight_players_page}}@endif"
+                                       maxlength="5"
+                                       placeholder="Only digits!">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
 
                         @if($player->sport_type == 3)
 
@@ -977,7 +989,7 @@
                                             <div class="download-item text-uppercase d-flex flex-nowrap align-items-center position-relative">
                                                 <i class="icon icon-sprite icon-download-white bg-primary mr-2 download-item-icon"></i>
                                                 <a class="download-item-link fill-area-link"
-                                                   href="/upload/files/Tutorial_for_video_shooting.pdf" rel="noreferer, ,noopener" target="_blank"
+                                                   href="/upload/files/Tutorial_for_video_shooting.pdf" target="_blank"
                                                    style="text-transform: capitalize;">Tutorial for video shooting</a>
                                             </div>
                                         </div>
@@ -2679,74 +2691,6 @@
                                                name="is_pro" @if($player->is_pro == 1){{'checked'}}@endif/>
                                     </div>
                                 </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                                   for="">Weight(for sorting on the players page)</label>
-                                            <input name="weight_players_page"
-                                                   class="form-control form-control-lg font-weight-bold text-blue-darker" type="number"
-                                                   value="@if(!empty($player->weight_players_page)){{$player->weight_players_page}}@endif"
-                                                   maxlength="5"
-                                                   placeholder="Only digits!">
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                                   for="">Image on main page</label>
-                                            <input type="file" name="round_image" id="round-img" class="form-control form-control-lg font-weight-bold text-blue-darker">
-                                            <img src="@if(!empty($player->round_image)){{$player->round_image}}@endif" id="round-img-main-page" width="120px" />
-
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold" for="name_on_main_page">Name player on main page</label>
-                                            <input class="form-control form-control-lg font-weight-bold text-blue-darker"
-                                                   type="text" name="name_on_main_page"
-                                                   value="@if(!empty($player->name_on_main_page)){{$player->name_on_main_page}}@endif">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold" for="show_on_main_page">Show on main page?</label>
-                                            <input type="checkbox"
-                                                   name="show_on_main_page" @if($player->show_on_main_page == 1){{'checked'}}@endif/>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                                   for="weight_main_page">Weight (for sorting on the main page)</label>
-                                            <input name="weight_main_page"
-                                                   class="form-control form-control-lg font-weight-bold text-blue-darker" type="number"
-                                                   value="@if(!empty($player->weight_main_page)){{$player->weight_main_page}}@endif"
-                                                   maxlength="5"
-                                                   placeholder="Only digits!">
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                                   for="">Flag country</label>
-                                            <!--<select class="custom-select custom-select-lg font-weight-bold text-blue-darker"
-                                                    id="nationality-id" name="nationality" ngrequired="required">
-                                                <option value="">---</option>
-                                                @foreach($countries as $k=>$country)
-                                                    <option value="{{$k}}" @if(!empty($player->nationality) && $player->nationality == $k){{'selected="selected"'}}@endif>{{$country}}</option>
-                                                @endforeach
-                                            </select>-->
-                                            <select name="country_flag" class="my-select custom-select custom-select-lg font-weight-bold text-blue-darker">
-                                                @foreach($countryFlags as $flag => $country)
-                                                    <option data-img-src="/images/flags/circle/{{$flag}}" value="{{$flag}}" @if(!empty($player->country_flag) && $player->country_flag == $flag){{'selected="selected"'}}@endif>{{$country}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
                             </div>
                             <div class="row pt-4 mt-1 tabb">
                                 @if($player->sport_type == 3)
@@ -2780,7 +2724,7 @@
                                                                            name="football_results_last_seasons[season][]">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-8">
+                                                            <div class="col-4">
                                                                 <div class="form-group">
                                                                     <label class="text-uppercase text-blue-gray-light font-weight-bold"
                                                                            for="">Competition</label>
@@ -2791,15 +2735,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label class="text-uppercase text-blue-gray-light font-weight-bold"
-                                                                           for="">Club</label>
-                                                                    <input class="form-control form-control-lg font-weight-bold text-blue-darker"
-                                                                           type="text"
-                                                                           value="@if(!empty($results_last_season->club)){{$results_last_season->club}}@endif"
-                                                                           name="football_results_last_seasons[club][]">
-                                                                </div>
-                                                            </div><div class="col-4">
                                                                 <div class="form-group">
                                                                     <label class="text-uppercase text-blue-gray-light font-weight-bold"
                                                                            for="">Club</label>
@@ -3605,25 +3540,7 @@
                 element_classes[wrapper_class]['count']--;
             });
 
-            function readURL(input) {
-                console.log('test');
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    console.log(reader);
-                    console.log(input.files[0]);
 
-                    reader.onload = function (e) {
-                        $('#round-img-main-page').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $("#round-img").change(function(){
-                //console.log(this);
-                readURL(this);
-            });
-
-            $(".my-select").chosen({width:"100%"});
         })
         var preview_ph = '<div class="img-thumb-wrapper" id="preview-id-{id}">\n' +
             '<img class="img-thumb-img" src="{e_result}" alt="" style="max-width: 130px">\n' +
