@@ -363,6 +363,8 @@
                         <a class="dropdown-item" href="/voting">Voting</a>
                         <a class="dropdown-item" href="/predictions">Predictions</a>
                         <a class="dropdown-item" href="/scouting">Scouting</a>
+                        <a class="dropdown-item" href="/players">Players</a>
+                        <a class="dropdown-item" href="/brand">Brand relations</a>
                     </div>
                 </li>
                 <script>
@@ -377,7 +379,7 @@
                 </script>
                 <li class="header-nav__listitem"><a href="#news">News</a></li>
                 <li class="header-nav__listitem"><a href="#team">@lang('tokenstars-messages.menu.team')</a></li>
-                <li class="header-nav__listitem"><a href="@lang('tokenstars-messages.other.whitepaper')" target="_blank" onclick="ga('send', 'event', 'click', 'downloadwp', 'menu');">@lang('tokenstars-messages.menu.whitepaper')</a></li>
+                <li class="header-nav__listitem"><a href="/upload/files/team_whitepaper.pdf" target="_blank" onclick="ga('send', 'event', 'click', 'downloadwp', 'menu');">@lang('tokenstars-messages.menu.whitepaper')</a></li>
                 <li class="header-nav__listitem header-nav__listitem--bottom">
                     @guest
                         <a href="/signin" onclick="ga('send', 'event', 'login_main', 'login', 'main');">@lang('tokenstars-messages.menu.login')</a>
