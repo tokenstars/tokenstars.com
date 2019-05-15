@@ -292,42 +292,37 @@
         <div class="wrap align-center">
             <div class="team-splitter">
                 <h2 class="section-title">Players & talents</h2>
-                <div class="huge-margin-before">
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-ambassador-card" style="">
-                        <img style="border-radius: 100%;" src="/upload/images/kudermetova.jpg" alt="" class="team-ambassador-card-image">
-                        <div class="small-font-size small-margin-before">Tennis</div>
-                        <div class="big-font-size bold-font small-margin-before">@lang('tokenstars-messages.team.members.kudermetova.name')</div>
-                        <img style="border-radius: 100%" src="/images/landing-stars/flags/ru.png" alt="" class="medium-margin-before team-ambassador-card-flag">
-                    </div>
-                </div>
+                <div class="row row-eq-height">
+                    @if(!empty($proPlayers))
+                        @foreach($proPlayers as $proPlayer)
+                            @if(!empty($onMainPagePlayers[$proPlayer->id]))
+                            <div class="col-lg-3 col-md-6">
+                                <div class="team-ambassador-card" style="">
+                                    <a href="/scouting/card/{{$proPlayer->id}}"><img style="border-radius: 100%;" src="/images/players/{{$onMainPagePlayers[$proPlayer->id][0]}}" alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" class="team-ambassador-card-image"> </a>
+                                    <div class="small-font-size small-margin-before">{{$sportTypes[$proPlayer->sport_type]}}</div>
+                                    <a href="/scouting/card/{{$proPlayer->id}}"><div class="big-font-size bold-font small-margin-before">{{$proPlayer->first_name}} {{$proPlayer->last_name}}</div></a>
+                                    <img style="border-radius: 100%" src="/images/flags/circle/{{$onMainPagePlayers[$proPlayer->id][1]}}" alt="" class="medium-margin-before team-ambassador-card-flag">
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    @endif
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-ambassador-card" style="">
-                        <img style="border-radius: 100%;" src="/images/landing-stars/team/copil.png" alt="" class="team-ambassador-card-image">
-                        <div class="small-font-size small-margin-before">Tennis</div>
-                        <div class="big-font-size bold-font small-margin-before">@lang('fresh.stars.copil')</div>
-                        <img style="border-radius: 100%" src="/images/landing-stars/flags/rom.png" alt="" class="medium-margin-before team-ambassador-card-flag">
-                    </div>
-                </div>
+                    @if(!empty($almostProPlayers))
+                        @foreach($almostProPlayers as $almostProPlayer)
+                                @if(!empty($onMainPagePlayers[$almostProPlayer->id]))
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="team-ambassador-card" style="">
+                                            <a href="/scouting/card/{{$almostProPlayer->id}}"><img style="border-radius: 100%;" src="/images/players/{{$onMainPagePlayers[$almostProPlayer->id][0]}}" alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" class="team-ambassador-card-image"></a>
+                                            <div class="small-font-size small-margin-before">{{$sportTypes[$almostProPlayer->sport_type]}}</div>
+                                            <a href="/scouting/card/{{$almostProPlayer->id}}"><div class="big-font-size bold-font small-margin-before">{{$almostProPlayer->first_name}} {{$almostProPlayer->last_name}}</div></a>
+                                            <img style="border-radius: 100%" src="/images/flags/circle/{{$onMainPagePlayers[$almostProPlayer->id][1]}}" alt="" class="medium-margin-before team-ambassador-card-flag">
+                                        </div>
+                                    </div>
+                                @endif
+                        @endforeach
+                    @endif
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-ambassador-card" style="">
-                        <img style="border-radius: 100%;" src="{{asset('/images/landing-stars/team/kostova.png')}}" alt="" class="team-ambassador-card-image">
-                        <div class="small-font-size small-margin-before">Tennis</div>
-                        <div class="big-font-size bold-font small-margin-before">@lang('fresh.stars.kostova')</div>
-                        <img style="border-radius: 100%" src="/images/landing-stars/flags/bul.png" alt="" class="medium-margin-before team-ambassador-card-flag">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-ambassador-card" style="">
-                        <img style="border-radius: 100%;" src="/upload/images/makarova.jpg" alt="" class="team-ambassador-card-image">
-                        <div class="small-font-size small-margin-before">Tennis</div>
-                        <div class="big-font-size bold-font small-margin-before">@lang('tokenstars-messages.team.members.makarova.name')</div>
-                        <img style="border-radius: 100%" src="/images/landing-stars/flags/ru.png" alt="" class="medium-margin-before team-ambassador-card-flag">
-                    </div>
-                </div>
                 </div>
                 <div style="clear: both"></div>
                 <!--<div class="huge-margin-before">
