@@ -18,11 +18,11 @@ padding-bottom: 0px; padding-top: 0px;">
             </div>
 
             <div class="bid-currencies">
-                <input type="radio" name="currency" value="BCH" id="radioBCH" onclick="ga('send', 'event', 'click', 'bch', 'Choosing Bitcoin Cash');"/>
+                <!--<input type="radio" name="currency" value="BCH" id="radioBCH" onclick="ga('send', 'event', 'click', 'bch', 'Choosing Bitcoin Cash');"/>
                 <label for="radioBCH"  class="js-bch-radio">Bitcoin Cash</label>
 
                 <input type="radio" name="currency" value="BTC" id="radioBTC" onclick="ga('send', 'event', 'click', 'bitcoin', 'Choosing Bitcoin');"/>
-                <label for="radioBTC"  class="js-btc-radio">Bitcoin</label>
+                <label for="radioBTC"  class="js-btc-radio">Bitcoin</label>-->
 
                 <input type="radio" name="currency" value="ETH" id="radioETH" onclick="ga('send', 'event', 'click', 'ether', 'Choosing Ether');"/>
                 <label for="radioETH">Ethereum</label>
@@ -34,8 +34,8 @@ padding-bottom: 0px; padding-top: 0px;">
                 <label for="radioTEAM" class="js-team-token-radio">TEAM Tokens</label>
 
             @if(config('app.debug'))
-                    <input type="radio" name="currency" value="LTCT" id="radioLTCT">
-                    <label for="radioLTCT">Litecoin Testnet</label>
+                    <!--<input type="radio" name="currency" value="LTCT" id="radioLTCT">
+                    <label for="radioLTCT">Litecoin Testnet</label>-->
                 @endif
             </div>
             @yield('bid_block')
