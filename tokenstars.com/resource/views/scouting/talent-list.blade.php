@@ -68,7 +68,7 @@
 			</div>
 			<div class="card-img-overlay py-5 pr-5 talent-item-content">
 				<h4 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-					<span>{{mb_strimwidth($player->first_name,0, 15)}}</span> <span>{{mb_strimwidth($player->last_name,0, 15)}}</span>
+					<span @if (mb_strlen($player->first_name) >= 9) class="short_name" @endif >{{mb_strimwidth($player->first_name,0, 15,'...')}}</span> <span @if (mb_strlen($player->last_name) >= 20) class="short_name" @endif>{{mb_strimwidth($player->last_name,0, 30,'...')}}</span>
 				</h4>
 				<div class="talent-item-subtitle text-uppercase mb-4"><!--2nd place at Wimbledon--></div>
 				<ul class="list-unstyled mb-0 talent-item-list text-uppercase">

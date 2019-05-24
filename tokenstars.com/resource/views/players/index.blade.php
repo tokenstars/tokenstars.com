@@ -2,16 +2,6 @@
 
 @section('content')
 
-<style>
-    .talent-item-img {
-        max-height: 250px;
-        object-fit: cover;
-        object-position: top;
-    }
-    .card-title  span{
-        font-size: 1.595rem;
-    }
-</style>
 <div class="section-divider"></div>
 <div class="container">
     @if(!empty($pro))
@@ -29,7 +19,7 @@
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
                     <h3 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-                        <span>{{$p->first_name}}</span> <span>{{$p->last_name}}</span>
+                        <span @if (mb_strlen($p->first_name) >= 9) class="short_name" @endif >{{mb_strimwidth($p->first_name,0, 15,'...')}}</span> <span @if (mb_strlen($p->last_name) >= 20) class="short_name" @endif>{{mb_strimwidth($p->last_name,0, 30,'...')}}</span>
                     </h3>
                     <div class="talent-item-subtitle text-uppercase mb-4">Pro star</div>
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">
@@ -71,7 +61,7 @@
                 </div>
                 <div class="card-img-overlay py-5 pr-5 talent-item-content">
                     <h3 class="card-title talent-item-title text-uppercase d-flex flex-column mb-0">
-                        <span>{{$pl->first_name}}</span> <span>{{$pl->last_name}}</span>
+                        <span @if (mb_strlen($pl->first_name) >= 9) class="short_name" @endif >{{mb_strimwidth($pl->first_name,0, 15,'...')}}</span> <span @if (mb_strlen($pl->last_name) >= 20) class="short_name" @endif>{{mb_strimwidth($pl->last_name,0, 30,'...')}}</span>
                     </h3>
                     <div class="talent-item-subtitle text-uppercase mb-4">@if($pl->sport_type == 1){{'Junior'}}@elseif($pl->sport_type == 2) {{'Poker player'}}@elseif($pl->sport_type == 3){{'Football player'}}@endif</div>
                     <ul class="list-unstyled mb-0 talent-item-list text-uppercase">

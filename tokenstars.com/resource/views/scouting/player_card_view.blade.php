@@ -38,8 +38,8 @@
             <div class="card-img-overlay py-5 pr-5_5 player-card__content">
                 <div class="d-flex flex-nowrap">
                     <h2 class="card-title text-uppercase d-flex flex-column mb-0 text-blue-darker player-card__title text-truncate">
-                        <span>{{$player->first_name}}</span>
-                        <span>{{$player->last_name}}</span>
+                        <span @if (mb_strlen($player->first_name) >= 9) class="short_name_view" @endif >{{mb_strimwidth($player->first_name,0, 15,'...')}}</span>
+                        <span @if (mb_strlen($player->last_name) >= 20) class="short_name_view" @endif>{{mb_strimwidth($player->last_name,0, 30,'...')}}</span>
                         <small class="h4 mb-0 font-weight-normal player-card__sub-title pt-1">@if($player->is_pro){{'PRO STAR'}}@elseif($player->sport_type == 2){{'Poker player'}}@else{{'Junior'}}@endif</small>
                     </h2>
                     <div class="mt-5_5 ml-auto">
