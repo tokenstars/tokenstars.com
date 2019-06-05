@@ -378,28 +378,29 @@
             });
         </script>
         <div class="nav nav-pills nav-justified navigation flex-nowrap bg-white">
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 active" data-toggle="pill"
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'overview-tab') active @endif" data-toggle="pill"
                href="#overview-tab">Overview</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'bio-tab') active @endif" data-toggle="pill"
                href="#bio-tab">Bio</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#skills-tab">Skills</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#stats-tab">Stats</a>
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill"
-               href="#promotion-tab">Bounty&Promo<br/>(Soon)</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'skills-tab') active @endif" data-toggle="pill" href="#skills-tab">Skills</a>
+            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'stats-tab') active @endif" data-toggle="pill" href="#stats-tab">Stats</a>
+            @if(count($player->bountyTasks) > 0)
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'promotion-tab') active @endif" data-toggle="pill"
+                   href="#promotion-tab">Bounty&Promo</a>
+            @endif
             <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill"
                href="#fan-tab">Fan Club<br/>(Soon)</a>
             @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
-                   href="#promotion-tab">Bounty&Promo</a>
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill" href="#fan-tab">Fan
+
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'fan-tab') active @endif" data-toggle="pill" href="#fan-tab">Fan
                     Club</a>
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0" data-toggle="pill"
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'admin-tab') active @endif" data-toggle="pill"
                    href="#admin-tab">Admin</a>
             @endif
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane px-5 py-5_5 show active" id="overview-tab">
+            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'overview-tab') show active @endif" id="overview-tab">
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Overall Statistics</h4>
                 @if($player->sport_type == 1)
                     <table class="table table-bordered table-stat">
@@ -815,7 +816,7 @@
                 })
 
             </script>
-            <div class="tab-pane px-5 py-5_5" id="bio-tab">
+            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'bio-tab') show active @endif" id="bio-tab">
 
                 <div class="section-divider-2"></div>
                 <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Biography</h4>
@@ -990,7 +991,7 @@
             @php
                 $diagram = \App\Models\Scouting\PlayerDiagram::where('player_id', $player->id)->first();
             @endphp
-            <div class="tab-pane px-5 py-5_5" id="skills-tab">
+            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'skills-tab') show active @endif" id="skills-tab">
                 @if($player->is_pro == false)
                     @if($player->sport_type == 1 || $player->sport_type == 2)
                         <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Player Skills Diagram</h4>
@@ -1451,7 +1452,7 @@
                     </table>
                 @endif
             </div>
-            <div class="tab-pane px-5 py-5_5" id="stats-tab">
+            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'stats-tab') show active @endif" id="stats-tab">
                 @if($player->sport_type == 1)
                     <h4 class="text-uppercase mb-2 font-weight-semibold text-blue-darker">Ranking {{$player->rank}}</h4>
                     <table class="table table-bordered table-stats text-blue-darker mb-0">
@@ -1838,123 +1839,19 @@
                     @endif
                 @endif
             </div>
-            <!--<div class="tab-pane px-5 py-5_5" id="promotion-tab">
-                <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Social Networks</h4>
-                <table class="table table-bordered table-social text-blue-darker mb-0">
-                    <colgroup>
-                        <col width="90">
-                        <col width="120">
-                        <col width="auto">
-                        <col width="100">
-                        <col width="100">
-                        <col width="100">
-                        <col width="100">
-                        <col width="auto">
-                    </colgroup>
-                    <thead class="thead-light">
-                    <tr>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Social</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Language</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate" scope="col">Name (link)</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Subs</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Posts</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Likes</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate text-center" scope="col">Shares</th>
-                        <th class="font-weight-semibold text-uppercase text-truncate" scope="col">Promoter</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-truncate text-center align-middle">
-                            <i class="icon icon-sprite icon-facebook"></i>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            <i class="icon icon-sprite icon-flag-england"></i>
-                        </td>
-                        <td class="text-truncate align-middle">
-                            <a href="">David Smith – Junior Star</a>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            1,034
-                            <small class="text-success d-block">+98</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            34
-                            <small class="text-success d-block">+2</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            3,011
-                            <small class="text-success d-block">+321</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            123
-                            <small class="text-success d-block">+24</small>
-                        </td>
-                        <td class="text-truncate align-middle">
-                            <a href="">Daniel Adams</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-truncate text-center align-middle">
-                            <i class="icon icon-sprite icon-instagram"></i>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            <i class="icon icon-sprite icon-flag-england"></i>
-                        </td>
-                        <td class="text-truncate align-middle">
-                            <a href="">David Smith – Junior Star</a>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            1,034
-                            <small class="text-success d-block">+98</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            34
-                            <small class="text-success d-block">+2</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            3,011
-                            <small class="text-success d-block">+321</small>
-                        </td>
-                        <td class="text-truncate text-center align-middle">
-                            123
-                            <small class="text-success d-block">+24</small>
-                        </td>
-                        <td class="text-truncate align-middle">
-                            <a href="">Daniel Adams</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="8">
-                            <button class="btn btn-primary btn-sm font-weight-bold text-uppercase">+ Add New</button>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
 
-                <div class="row my-5_5">
-                    <div class="col-4 mx-auto">
-                        <div class="text-center">
-                            <h5 class="text-blue-darker font-weight-normal mb-4">This player has no promoters yet. Click a button below to be the first one.</h5>
-                            <p class="mb-0"><a class="btn btn-primary font-weight-bold btn-lg text-uppercase" href="">Become a David's promoter</a></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>-->
-            <div class="tab-pane px-5 py-5_5" id="promotion-tab">
+            <div class="tab-pane px-5 py-5_5 @if($activeTab == 'promotion-tab') show active @endif" id="promotion-tab">
                 <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available Bounty tasks</h4>
                 <div class="list-unstyled service-list mb-0 border">
                     @foreach($player->bountyTasks as $bounty_task)
                         @if($bounty_task->status == 1)
                             <div class="service-item media align-items-stretch position-relative">
-                                <div class="service-item-icon-wrapper position-relative">
-                                    <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker">
-                                        <svg viewBox="0 0 1 1">
+                                <div class="service-item-icon-wrapper position-relative" style="width:7.8rem">
+                                    <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker" style="width:5.9rem">
+                                        <!--<svg viewBox="0 0 1 1">
                                             <use xlink:href='/images/icons.svg#{{$bounty_type_icons[$bounty_task->type]}}'></use>
-                                        </svg>
+                                        </svg>-->
+                                        <img src="{{$bounty_task->icon_w350_h205}}" alt="" height="56px">
                                     </div>
                                 </div>
                                 <div class="media-body service-item-body py-4">
@@ -1962,13 +1859,32 @@
                                         {{$bounty_task->name}}
                                     </h4>
                                     <p class="service-item-descr mb-0 text-blue-darker">
-                                        {{$bounty_task->description}}
+                                        {!!$bounty_task->description!!}
                                     </p>
                                 </div>
                                 <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                    @if(isset($specifiedDatetimeBountyTasks[$bounty_task->id]))
+
+                                        <div class="list-item__secondary-time d-flex flex-column pl-4" style="float:right; position:relative; top:-10px;">
+                                            <span class="typo-lg mb-0_5 text-uppercase text-status text-status-{{$specifiedDatetimeBountyTasks[$bounty_task->id][0]}} text-status-shift">{{$specifiedDatetimeBountyTasks[$bounty_task->id][1]}}</span>
+                                            <span class="h4 mb-0">{{$specifiedDatetimeBountyTasks[$bounty_task->id][2]}}</span>
+                                        </div>
+                                    @endif
                                     <div class="mx-4 service-item-secondary-token text-right">
-                                        <div class="h5 text-pink mb-0">${{$bounty_task->cost_usd}}</div>
+                                        <div class="h5 text-pink mb-0">
+                                        @if($bounty_task->cost_main_token == 1)
+                                            {{number_format($bounty_task->cost_ACE,0,'',' ').' ACE'}}
+                                        @else
+                                            {{number_format($bounty_task->cost_TEAM,0,'',' ').' TEAM'}}
+                                        @endif
+                                        </div>
                                         <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                            @if($bounty_task->cost_usd)
+                                                <li class="list-inline-item text-nowrap">approx. ${{$bounty_task->cost_usd }}
+                                                </li>
+                                            @endif
+                                            <!--
+
                                             @if($bounty_task->token_ACE)
                                                 <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
                                                     <span class="text-ace">ACE</span></li>
@@ -1976,32 +1892,66 @@
                                             @if($bounty_task->token_TEAM)
                                                 <li class="list-inline-item text-nowrap">{{ number_format(($bounty_task->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
                                                     <span class="text-team">TEAM</span></li>
-                                            @endif
+                                            @endif-->
                                         </ul>
                                     </div>
-                                    <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                    <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px fill-area-link"
                                             data-toggle="collapse"
-                                            data-target="#collapse-item-bounty-task-{{$bounty_task->id}}">Apply
+                                            data-target="#collapse-item-bounty-task-{{$bounty_task->id}}"
+                                            @if($activeBountyTask == $bounty_task->id) aria-expanded="true" @else aria-expanded="false" @endif>More
                                     </button>
+
+
                                 </div>
                             </div>
-                            <div class="collapse service-item-collapse py-4_5 px-5"
+                            <div class="collapse service-item-collapse py-4_5 px-5 @if($activeBountyTask == $bounty_task->id) show @endif"
                                  id="collapse-item-bounty-task-{{$bounty_task->id}}">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-8">
                                         <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                        <p class="mb-0 text-blue-darker">{{$bounty_task->description}}</p>
+                                        <p class="mb-0 text-blue-darker">{!!$bounty_task->description_full!!}</p>
                                         <div class="mt-4">
                                             <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
                                             @auth
-                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                   href="#buy-modal1" data-toggle="modal"
-                                                   data-productid="{{$bounty_task->id}}">Join</a>
+                                                @if(in_array($bounty_task->id, $bountyPerformeByUser))
+                                                    <button type="button" class="btn btn-secondary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn" disabled>You joined</button>
+                                                @else
+                                                    <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn"
+                                                       href="#join-modal" data-toggle="modal"
+                                                       data-bountytaskid="{{$bounty_task->id}}">Join</a>
+                                                @endif
                                             @else
                                                 <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                   href="#information" data-toggle="modal">Apply</a>
+                                                   href="#information-join" data-toggle="modal">Apply</a>
                                             @endauth
                                         </div>
+                                    </div>
+                                    <div class="col-4">
+                                        @if($bounty_task->video_link)
+                                            <h5 class="text-blue-darker font-weight-bold">Video</h5>
+                                            <div class="embed-responsive service-item-embed embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item"
+                                                        src="https://www.youtube.com/embed/{{$bounty_task->video_link}}?rel=0"
+                                                        allowfullscreen></iframe>
+                                            </div>
+                                        @endif
+                                        @if($bounty_task->images)
+                                            <h5 class="text-blue-darker font-weight-bold">Images</h5>
+                                            <div class="commerce-item__image-wrap" data-module="commerce-slider">
+                                                <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
+                                                    <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
+                                                        @foreach($bounty_task->images as $image)
+                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                <img class="commerce-slider-slide-image img-fluid"
+                                                                     src="/{{$image->image}}" alt="" width="230"
+                                                                     height="230">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -2014,7 +1964,7 @@
 
 
             @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
-                <div class="tab-pane px-5 py-5_5" id="fan-tab">
+                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'fan-tab') show active @endif" id="fan-tab">
                     <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
                     <div class="list-unstyled service-list mb-0 border">
                         @foreach($player->servicesProducts as $service)
@@ -2179,7 +2129,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="tab-pane px-5 py-5_5" id="services-tab">
+                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'services-tab') show active @endif" id="services-tab">
                     <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Available services</h4>
                     <ul class="list-unstyled communication-list mb-0 shadow">
                         <li class="communication-item media position-relative align-items-stretch">
@@ -2230,7 +2180,7 @@
                     </ul>
 
                 </div>
-                <div class="tab-pane px-5 py-5_5" id="admin-tab">
+                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'admin-tab') show active @endif" id="admin-tab">
                     <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Vote Stats</h4>
                     @php
                         $vote_result = [];

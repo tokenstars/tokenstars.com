@@ -110,6 +110,7 @@
 </div>
 
 @include('service_product.order.modals')
+@include('bounty.performance.modals')
 @yield('modals')
 
 
@@ -119,6 +120,7 @@
 <script src="/assets/card/jquery.dotdotdot.js"></script>
 <script src="{{asset("js/app-e-commerce.js")}}"></script>
 <script src="{{asset("js/app-order.js")}}"></script>
+<script src="{{asset("js/app-performance.js")}}"></script>
 <!--<script type="text/javascript" src="/js/oc.js"></script>-->
 <script type="text/javascript" charset="utf-8">
     class DotDotDot {
