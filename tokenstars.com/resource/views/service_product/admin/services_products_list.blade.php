@@ -50,7 +50,6 @@
             <li><a href="{{route('service_product.admin.orders')}}">Orders</a></li>
             <li><a href="{{route('bounty.admin.bounty_tasks')}}">Bounty tasks</a></li>
             <li><a href="{{route('bounty.admin.task_performers')}}">Task performers</a></li>
-            <li><a href="{{route('admin.news.index')}}">News</a></li>
         </ul>
         <div class="tab-pane px-5 py-5_5" id="bio-tab">
             <div class="text-right">
@@ -72,10 +71,11 @@
                     @foreach($services_products as $s_p)
                         <tr>
                             <td>
-                                <div id="av">
-                                    <img src="{{$s_p->prev_image1}}" width="150">
-                                </div>
-
+                                @if($s_p->type == 2)
+                                    <div id="av">
+                                        <img src="{{$s_p->main_image}}" width="150">
+                                    </div>
+                                @endif
                                 <div>{{$s_p->name}} [{{$s_p->id}}] @if($s_p->type == 2)
                                         (Product)
                                     @else
@@ -89,13 +89,12 @@
                                 @endif
                             </td>
                             <td>
-                                @if($s_p->cost_main_token == 1)
-                                    <p>{{number_format($s_p->cost_ACE,0,'',' ')}} ACE</p>
-                                @elseif($s_p->cost_main_token == 2)
-                                    <p>{{number_format($s_p->cost_TEAM,0,'',' ')}} TEAM</p>
+                                <div>${{$s_p->cost_usd}}</div>
+                                @if($s_p->token_ACE)
+                                    <div>ACE</div>
                                 @endif
-                                @if($s_p->cost_usd)
-                                    <p>approx. ${{$s_p->cost_usd}}</p>
+                                @if($s_p->token_TEAM)
+                                    <div>TEAM</div>
                                 @endif
                             </td>
                             <td>{{$s_p->quantity}}</td>

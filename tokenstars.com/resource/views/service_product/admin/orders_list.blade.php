@@ -50,7 +50,6 @@
             <li class="active"><a href="{{route('service_product.admin.orders')}}">Orders</a></li>
             <li><a href="{{route('bounty.admin.bounty_tasks')}}">Bounty tasks</a></li>
             <li><a href="{{route('bounty.admin.task_performers')}}">Task performers</a></li>
-            <li><a href="{{route('admin.news.index')}}">News</a></li>
         </ul>
         <div class="tab-pane px-5 py-5_5" id="bio-tab">
             <!--<div class="text-right">
