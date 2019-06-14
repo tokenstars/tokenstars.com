@@ -433,6 +433,9 @@
                         <a class="dropdown-item" href="/voting">Voting</a>
                         <a class="dropdown-item" href="/predictions">Predictions</a>
                         <a class="dropdown-item" href="/scouting">Scouting</a>
+                        <a class="dropdown-item" href="/players">Players</a>
+                        <a class="dropdown-item" href="/brand">Brand relations</a>
+                        <a class="dropdown-item" href="/bounty">Bounty</a>
                     </div>
                 </li>
                 <script>
