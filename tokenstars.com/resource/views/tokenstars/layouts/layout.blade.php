@@ -362,7 +362,7 @@
                             <a class="dropdown-item" href="/scouting">Scouting</a>
                             <a class="dropdown-item" href="/players">Players</a>
                             <a class="dropdown-item" href="/brand">Brand relations</a>
-                            <a class="dropdown-item" href="/bounty">Bounty</a>
+                            <a class="dropdown-item" href="/bounty">Bounty fan club</a>
                         </div>
                     </li>
                     <script>
