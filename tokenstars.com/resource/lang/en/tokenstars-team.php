@@ -3,7 +3,7 @@
 return [
     "main" => [
         //"title_work_with_platform" => "18 Celebrities already work, advise and participate in the activities on TokenStar platform",
-        "title_work_with_platform" => "Talent management advistory board + pro athletes, who joined activities on the platform",
+        "title_work_with_platform" => "Talent management advisory board + pro athletes, who joined activities on the platform",
         "title" => "The first celebrity management platform on&nbsp;blockchain",
         "subtitle1" => "TEAM by TokenStars connects rising talents and successful PROs in sports and entertainment with fans and advertisers.",
         "text1" => "12 modules of the TokenStars platform are a one-stop-shop and a toolkit for celebrities to manage their fans and brands relations.",

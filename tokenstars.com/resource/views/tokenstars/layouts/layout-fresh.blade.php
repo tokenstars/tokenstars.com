@@ -338,6 +338,7 @@
     <link href="/build/lib.css?5" rel="stylesheet" />
     <link href="/build/fresh.css?5" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,500,700&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app-achievements.css">
 
     <style>
         .header-nav__list a:hover{
@@ -797,6 +798,7 @@
     );
 
 </script>
+<script src="/js/app-achievements.js"></script>
 @include('tokenstars.partial.analitics')
 
 </body>

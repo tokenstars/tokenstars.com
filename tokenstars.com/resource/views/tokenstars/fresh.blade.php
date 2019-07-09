@@ -95,7 +95,7 @@
         {{--<div class="main-scroll">@lang('fresh.header.scroll')</div>--}}
     </section>
 
-    <section class="section">
+    <!--<section class="section">
         <div class="wrap">
             <div class="row main-link-row">
                 <div class="col-lg-3 col-xs-6">
@@ -119,6 +119,15 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </section>-->
+
+    <section class="achievements">
+        @include('achievements.intro')
+    </section>
+    <section class="section">
+        <div class="wrap align-center">
+            <a class="btn btn-blue btn-big white-text" href="{{route('achievements.index')}}" target="_blank">+ more</a>
         </div>
     </section>
 
@@ -366,7 +375,7 @@
                               'pioline', 'soderling', 'anter', 'lingham', 'ver', 'fedorov', 'redfoo', 'datsyuk', 'hingis', 'boe'];
 
 		    $stars = ['mattheus', 'haas', 'kucherov', 'zambrotta', /*'myskina', 'karpin', 'torres',*/ 'kurilova',
-			    'pioline', /*'soderling',*/ 'anter', 'lingham', 'ver', 'fedorov', /*'redfoo',*/ 'datsyuk', 'hingis', 'demekhine'/*,'kudermetova','makarova','marius','kostova'*/];
+			    'pioline', /*'soderling',*/ /*'anter',*/ 'lingham', 'ver', 'fedorov', /*'redfoo',*/ 'datsyuk', 'hingis', 'demekhine'/*,'kudermetova','makarova','marius','kostova'*/];
                 @endphp
 
                 @foreach($stars as $star)
