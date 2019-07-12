@@ -393,7 +393,7 @@
                         <a href="/logout" onclick="ga('send', 'event', 'Click', 'logout_clk', 'navig');">@lang('messages.menu.logout')</a>
                     @endauth
                 </li>
-                <li class="header-nav__listitem">
+                <!--<li class="header-nav__listitem">
                     <div class="header-nav__lang">
                         <i class="header-nav__flag flag-{{ $lang }}"></i>
                         <select class="header-nav__lang_selector j-lang-selector">
@@ -404,7 +404,7 @@
                             <option {{ $lang == 'en' ? 'selected' : '' }} value="/en/team">日本語</option>
                         </select>
                     </div>
-                </li>
+                </li>-->
 
             </ul>
         </nav>
