@@ -462,13 +462,27 @@
             @endif
 
             <h4 class="text-uppercase font-family-alt text-blue-darker mt-5 mb-4">Token Sale Details</h4>
-            <button id="collapse-token-button-show" class="btn btn-outline-primary font-family-alt text-uppercase font-weight-semibold collapsed user-card-show-details-btn" data-toggle="collapse" data-target="#collapse-token" aria-expanded="false" aria-controls="collapse-token">
-                <span class="typo-lg">Show Token Sale Details</span>
-            </button>
-
-            <button id="collapse-token-button-hide" class="btn btn-outline-primary font-family-alt text-uppercase font-weight-semibold user-card-show-details-btn">
-                <span class="typo-lg">Hide Token Sale Details</span>
-            </button>
+            <div class="row">
+                <div class="col-6">
+                    <button id="collapse-token-button-show" class="btn btn-outline-primary font-family-alt text-uppercase font-weight-semibold collapsed user-card-show-details-btn" data-toggle="collapse" data-target="#collapse-token" aria-expanded="false" aria-controls="collapse-token">
+                        <span class="typo-lg">Show Token Sale Details</span>
+                    </button>
+                </div>
+                <div class="col-6">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button id="collapse-token-button-hide" class="btn btn-outline-primary font-family-alt text-uppercase font-weight-semibold user-card-show-details-btn">
+                        <span class="typo-lg">Hide Token Sale Details</span>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <a id="collapse-how-token-button-hide" class="btn btn-outline-primary font-family-alt text-uppercase font-weight-semibold user-card-show-details-btn" href="/pdfs/Withdrawal_Instructions_for_ICO.pdf" target="_blank">
+                        <span class="typo-lg">How to get your tokens</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="collapse" id="collapse-token">
                 <div class="row">
@@ -499,7 +513,7 @@
 
                     @endif
                     @if(count($isoCoinsCount) > 0)
-                        <h6 class="h6_5 font-family-alt text-uppercase font-weight-normal text-blue-darker pt-1">Coins count:</h6>
+                        <h6 class="h6_5 font-family-alt text-uppercase font-weight-normal text-blue-darker pt-1">Coins balance:</h6>
                         @foreach($isoCoinsCount as $isoCoin=>$isoBalance)
                             <span class="d-inline-block h3 font-family-alt text-uppercase font-weight-normal mr-4">
 						        <span class="text-success font-weight-semibold">{{$isoBalance}}</span>

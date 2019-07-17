@@ -95,7 +95,7 @@
         {{--<div class="main-scroll">@lang('fresh.header.scroll')</div>--}}
     </section>
 
-    <!--<section class="section">
+    <section class="section">
         <div class="wrap">
             <div class="row main-link-row">
                 <div class="col-lg-3 col-xs-6">
@@ -120,15 +120,10 @@
                 </div>
             </div>
         </div>
-    </section>-->
+    </section>
 
     <section class="achievements">
-        @include('achievements.intro')
-    </section>
-    <section class="section">
-        <div class="wrap align-center">
-            <a class="btn btn-blue btn-big white-text" href="{{route('achievements.index')}}" target="_blank">+ more</a>
-        </div>
+        @include('achievements.on_main_intro')
     </section>
 
     <section class="section modules-section" id="platform">
@@ -523,7 +518,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3">
+                    <!--<div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
                             <img src="/upload/images/zak.jpg" alt="" class="team-ambassador-card-image">
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.zak.title')</div>
@@ -531,6 +526,13 @@
                             <a href="@lang('tokenstars-messages.team.members.zak.social.in')">
                                 <img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
+                        </div>
+                    </div>-->
+                    <div class="col-lg-3 col-md-3">
+                        <div class="team-ambassador-card team-card">
+                            <img style="" src="/images/team/pylaev.png" alt="" class="team-ambassador-card-image">
+                            <div class="team-ambassador-job small-margin-before">Sports / BizDev analyst</div>
+                            <div class="bold-font small-margin-before">Vlad Pylaev</div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">
@@ -589,7 +591,18 @@
                             </a>-->
                         </div>
                     </div>
-                    <div style="clear: both"></div>
+
+                    <div class="col-lg-3 col-md-3">
+                        <div class="team-ambassador-card team-card">
+                            <img style="" src="/images/team/potapneva.png" alt="" class="team-ambassador-card-image">
+                            <div class="team-ambassador-job small-margin-before">PR & Communications</div>
+                            <div class="bold-font small-margin-before">Maria Potapneva</div>
+                        <a href="https://www.facebook.com/profile.php?id=100013877918880">
+                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                            </a>
+                        </div>
+                    </div>
+                    <!--<div style="clear: both"></div>-->
                     @foreach($team1 as $name)
                         <div class="col-lg-3 col-md-3">
                             <div class="team-ambassador-card team-card">
