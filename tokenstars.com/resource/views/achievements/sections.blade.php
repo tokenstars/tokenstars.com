@@ -15,7 +15,7 @@
                                 @endif
                                 <div class="media-body">
                                     <h4 class="mb-3 case-item-title"><a class="fill-area-link"
-                                                                        href="{{$achievement->link}}" rel="noreferer, ,noopener" target="_blank">{{$achievement->name}}</a></h4>
+                                                                        href="{{$achievement->link}}" target="_blank">{{$achievement->name}}</a></h4>
                                     <ul class="list-unstyled list-base mb-0 case-item-list list-base-shift">
                                         @for ($i = 1; $i < 11; $i++)
                                             @php $item = 'item_'.$i; @endphp

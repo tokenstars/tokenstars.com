@@ -1,7 +1,5 @@
 <div class="jumbotron jumbotron-intro jumbotron-fluid text-center text-white bg-blue-darker position-relative jumbotron-achievements d-flex align-items-center">
     <div class="jumbotron-image bg-achievements container"></div>
-    <div class="jumbotron-image bg-achievements container"></div>
-    <div class="jumbotron-image bg-achievements container"></div>
     <div class="container jumbotron-container">
         <h1 class="text-uppercase jumbotron-title">
             <small class="jumbotron-sup-title text-pink d-block font-weight-bold">Tokenstars</small>
@@ -20,7 +18,7 @@
                             @endif
                         </div>
                         <h4 class="mb-2 feature-item-title">{{$intro->name}}</h4>
-                        <p class="mb-0 feature-item-descr">{{$intro->description}}</p>
+                        <p class="mb-0 feature-item-descr">{!!$intro->description!!}</p>
                     </div>
                 </div>
                 @endif
