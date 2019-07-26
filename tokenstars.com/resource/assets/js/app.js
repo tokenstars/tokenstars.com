@@ -168,11 +168,35 @@ $(function () {
     const Token = require('./../artifacts/TokenMock.json')
     const Auction = require('./../artifacts/TokenStarsAuction.json')
 
+    $('.btn-withdraw').on('click', function() {
+        const $button = $(this)
+        console.log($button)
+        const ethWallet = $button.data('item-address')
+        //const tokenAddress = $button.data('token-address')
+        var value = $('input', $button.parent()).val()
+        console.log(value)
+
+        if (typeof web3 === 'undefined') {
+            return alert('You need to install MetaMask to use this feature.  https://metamask.io')
+        }
+        if (ethWallet) {
+            //const tokenContract = web3.eth.contract(Token.abi).at(tokenAddress)
+            //console.log(tokenContract)
+            const auctionContract = web3.eth.contract(Auction.abi).at(ethWallet)
+            console.log(auctionContract)
+            const tx2 = auctionContract.withdraw((bidResult) => {
+                console.log(bidResult)
+            })
+        }
+    });
+
     $('.js-metamask-tip').on('click', function() {
         const $button = $(this)
+        console.log($button)
         const ethWallet = $button.data('eth-wallet')
         const tokenAddress = $button.data('token-address')
         var value = $('input', $button.parent()).val()
+        console.log(value)
 
         if (typeof web3 === 'undefined') {
             return alert('You need to install MetaMask to use this feature.  https://metamask.io')
@@ -182,7 +206,9 @@ $(function () {
                 value = Math.floor(10000 * parseFloat(value))
             }
             const tokenContract = web3.eth.contract(Token.abi).at(tokenAddress)
+            console.log(tokenContract)
             const auctionContract = web3.eth.contract(Auction.abi).at(ethWallet)
+            console.log(auctionContract)
 
             const tx1 = tokenContract.approve(ethWallet, value, (result) => {
                 console.log(result)
