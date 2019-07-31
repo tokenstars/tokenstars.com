@@ -126,6 +126,7 @@
                         <a class="dropdown-item" href="/players">Players</a>
                         <a class="dropdown-item" href="/brand">Brand relations</a>
                         <a class="dropdown-item" href="/bounty">Bounty fan club</a>
+                        <a class="dropdown-item" href="/achievements">Achievements</a>
                     </div>
                 </li>
                 <script>
@@ -167,7 +168,7 @@
 <footer class="section section-footer align-center">
     <div class="wrap">
         <div class="row">
-            <div class="footer-social-holder">
+            <div class="footer-social-holder col-12">
                 <a href="https://www.facebook.com/TokenStars/" target="_blank" class="footer-social-link" onclick="ga('send', 'event', 'click', 'facebook', 'footer');"><img title="Facebook" alt="Facebook" src="/images/ace/facebook.png"></a>
                 <a href="https://twitter.com/TokenStars" target="_blank" class="footer-social-link" onclick="ga('send', 'event', 'click', 'twitter', 'footer');"><img title="Twitter" alt="Twitter" src="/images/ace/twitter.png"></a>
                 <a href="https://medium.com/@tokenstars" target="_blank" class="footer-social-link" onclick="ga('send', 'event', 'click', 'medium', 'footer');"><img title="Medium" alt="Medium" src="/images/ace/medium.png"></a>
@@ -175,20 +176,20 @@
                 <a href="https://bitcointalk.org/index.php?topic=2043613.0" target="_blank" class="footer-social-link" onclick="ga('send', 'event', 'click', 'bitcointalk', 'footer');"><img title="BitCoinTalk" alt="BitCoinTalk" src="/images/ace/bitcointalk.png"></a>
                 <a href="https://github.com/tokenstars" target="_blank" class="footer-social-link" onclick="ga('send', 'event', 'click', 'github', 'footer');"><img title="GitHub" alt="GitHub" src="/images/ace/github.png"></a>
             </div>
-            <div class="medium-margin-before">
+            <div class="medium-margin-before col-12">
                 <nav class="footer-nav">
                     <a href="#platform" onclick="ga('send', 'event', 'menu', 'platform_v2', 'footer');">Platform</a>
                     <a href="#ambassadors" onclick="ga('send', 'event', 'menu', 'ambassadors', 'footer');">Ambassadors</a>
                     <!-- <a href="/team/#team" onclick="ga('send', 'event', 'menu', 'team', 'footer');">Team</a> -->
                 </nav>
             </div>
-            <div class="huge-margin-before">
+            <div class="huge-margin-before col-12">
                 <a href="/pdfs/Privacy_Policy.pdf" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'privacy_policy', 'footer');">Privacy Policy</a>
                 <a href="/pdfs/Terms_of_Use.pdf" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'terms_of_use', 'footer');">Terms of Use</a>
                 <a href="/ace" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'ace_token_sale', 'footer');">ACE token</a>
                 <a href="/team" target="_blank" class="footer-terms" onclick="ga('send', 'event', 'click', 'team_token_sale', 'footer');">TEAM token</a>
             </div>
-            <div class="medium-margin-before">
+            <div class="medium-margin-before col-12">
                 <a href="mailto:ask@tokenstars.com" class="footer-mail">ask@tokenstars.com</a>
                 <br>
                 <br>
