@@ -37,7 +37,8 @@ return [
             "button" => "Try voting yourself&nbsp;&nbsp;►",
             "text" => "The platform hold votes among token holders on the significant decisions (approving new players, renewing the Head of Scouting contract)."
         ],
-        "platform_description" => "Platform Description"
+        "platform_description" => "Platform Description",
+        "hide_description" => "Hide Description"
 
     ],
 
@@ -118,6 +119,46 @@ return [
         "button" => "Read the post",
 
         'items' => [
+            [
+                "title" => "March Monthly Report: 7 Spring Wonders of TokenStars",
+                "text" => "The arrival of spring turned out to be intense and interesting for TokenStars and here are key news of March for you.",
+                "img" => "march-monthly-report_600x350.jpg",
+                "medium_url" => "https://medium.com/@TokenStars/march-monthly-report-7-spring-wonders-of-tokenstars-790195c156d8",
+                "post_date" => "09 april, 2019",
+            ],
+
+            [
+                "title" => "TokenStars Partners with PATRON",
+                "text" => "A new partnership to reach new markets and connect sports influencers with fans.",
+                "img" => "partners-patron_600x350.jpg",
+                "medium_url" => "https://medium.com/@TokenStars/tokenstars-partners-with-patron-to-reach-new-markets-and-connect-sports-influencers-with-fans-6d600e75003",
+                "post_date" => "04 april, 2019",
+            ],
+
+            [
+                "title" => "TOKENSTARS SIGNS CONTRACTS WITH PROFESSIONAL FOOTBALL PLAYERS",
+                "text" => "João Klaus and Otávio Monteiro joined TokenStars platform to create exclusive activities with fans and grow their influencing potential.",
+                "img" => "sign-contract_600x350.jpg",
+                "medium_url" => "https://medium.com/@TokenStars/tokenstars-expands-its-client-portfolio-a93d687c2da9",
+                "post_date" => "03 april, 2019",
+            ],
+
+            [
+                "title" => "8 News from TokenStars in Winter’19 Update:",
+                "text" => "2019 was started with a significant business growth. We were focused on attracting new players, active development of scouting, and releasing tech updates on the platform. Happy to share the results with you.",
+                "img" => "winter-update-2019_600x350.jpg",
+                "medium_url" => "https://medium.com/@TokenStars/winter-2019-update-c0b64122eaa",
+                "post_date" => "13 march, 2019",
+            ],
+
+            [
+                "title" => "2018 in Review: TokenStars Key Results, Milestones, and Future Plans.",
+                "text" => "2018 was pretty challenging for the crypto world and TokenStars. As market conditions in 2018 were very highly volatile, our principal tasks were concentrated on business operations and platform development",
+                "img" => "results-2018_600x350.jpg",
+                "medium_url" => "https://medium.com/@TokenStars/2018-in-review-tokenstars-key-results-milestones-and-future-plans-b4628b3db626",
+                "post_date" => "12 march, 2019",
+            ],
+
             [
                 "title" => "Breaking News: TokenStars Announces the Launch of the Scouting Module.",
                 "text" => "TokenStars, announces the launch of Scouting module - the core part of its platform. The first applications of junior tennis players (ranked among Top-250 ITF) are submitted and available for the review!",

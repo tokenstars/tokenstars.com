@@ -8400,3 +8400,17 @@ a.text-dark:focus, a.text-dark:hover {
     display: table;
     content: normal;
 }
+
+/*-- begin -- Description block styles --*/
+.platform-item--time,
+.platform-item--income{
+    display:none;
+}
+.platform-item--crowd{
+    width: 100%;
+}
+.platform-item--crowd:after{
+    width: 0;
+}
+
+/*-- end -- Description block styles --*/

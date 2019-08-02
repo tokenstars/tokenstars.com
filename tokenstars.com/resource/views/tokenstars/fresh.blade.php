@@ -199,7 +199,8 @@
 
             </div>
             <div class="huge-margin-before align-center">
-                <a onclick="document.getElementById('platform-wrapper').style.display='block'; return false"  class="btn btn-blue btn-big white-text">@lang('fresh.platform_modules.platform_description')</a>
+                <div id="show-platform-description" class="btn btn-blue btn-big white-text">@lang('fresh.platform_modules.platform_description')</div>
+                <div id="hide-platform-description" class="btn btn-blue btn-big white-text" style="display: none">@lang('fresh.platform_modules.hide_description')</div>
 
             </div>
         </div>
@@ -224,7 +225,7 @@
                                 <div class="platform-token j-platform-token" data-type="ace">
                                     <b>ACE</b> <br />@lang('fresh.platform.token')
                                 </div>
-                                <div class="platform-token j-platform-token">
+                                <div class="platform-token j-platform-token" data-type="team">
                                     <b>TEAM</b> <br />@lang('fresh.platform.token')
                                 </div>
                             </div>
@@ -245,20 +246,20 @@
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section2')</p>
                         <div class="platform-items-row clearfix">
-                            <a class="platform-item platform-item--search highlighted j-platform-item">@lang('fresh.platform.items.item4')</a>
-                            <a href="#voting-module" class="platform-item platform-item--vote highlighted j-platform-item">@lang('fresh.platform.items.item5')</a>
-                            <a href="#prediction-module" class="platform-item platform-item--bet highlighted j-platform-item" style="min-height: 84px;">Predictions</a>
+                            <a href="{{route('scouting.index')}}" class="platform-item platform-item--search highlighted j-platform-item">@lang('fresh.platform.items.item4')</a>
+                            <a href="{{route('scouting.voting')}}" class="platform-item platform-item--vote highlighted j-platform-item">@lang('fresh.platform.items.item5')</a>
+                            <a href="/predictions" class="platform-item platform-item--bet highlighted j-platform-item" style="min-height: 84px;">Predictions</a>
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section3')</p>
                         <div class="platform-items-row clearfix">
-                            <a class="platform-item platform-item--check highlighted j-platform-item">@lang('fresh.platform.items.item7')</a>
+                            <a href="{{route('bounty.index')}}" class="platform-item platform-item--check highlighted j-platform-item">@lang('fresh.platform.items.item7')</a>
                             <a class="platform-item platform-item--video j-platform-item">@lang('fresh.platform.items.item8')</a>
-                            <a class="platform-item platform-item--cup highlighted j-platform-item">@lang('fresh.platform.items.item9')</a>
+                            <a href="/charity" class="platform-item platform-item--cup highlighted j-platform-item">@lang('fresh.platform.items.item9')</a>
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section4')</p>
                         <div class="platform-items-row clearfix">
                             <a class="platform-item platform-item--percent j-platform-item">@lang('fresh.platform.items.item10')</a>
-                            <a class="platform-item platform-item--promotion highlighted j-platform-item">@lang('fresh.platform.items.item11')</a>
+                            <a href="//brand" class="platform-item platform-item--promotion highlighted j-platform-item">@lang('fresh.platform.items.item11')</a>
                             <a class="platform-item platform-item--merch j-platform-item">@lang('fresh.platform.items.item12')</a>
                         </div>
                     </div>
@@ -676,11 +677,6 @@
             </div>
         </div>
     </section>
-
-@endsection
-
-
-
     <script type="text/javascript">
 
         window.prices = {
@@ -696,5 +692,25 @@
             }
         };
 
+        jQuery(document).ready(function(){
+            $('#show-platform-description').on('click', function(){
+                $('#hide-platform-description').show();
+                $('#platform-wrapper').show();
+                $('#show-platform-description').hide();
+            });
+
+            $('#hide-platform-description').on('click', function(){
+                $('#hide-platform-description').hide();
+                $('#platform-wrapper').hide();
+                $('#show-platform-description').show();
+            });
+        });
+
     </script>
+
+@endsection
+
+
+
+
 
