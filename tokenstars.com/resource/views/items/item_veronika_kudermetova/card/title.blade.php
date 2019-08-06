@@ -1,0 +1,1 @@
+<a href="https://bfkh.ru" class="uppercase bold-font big-font-size" onclick="ga('send', 'event', 'out_charity', 'charity', 'Khabensky Charitable Foundation');" rel="noreferer, ,noopener" target="_blank">Khabensky Charitable Foundation</a>
