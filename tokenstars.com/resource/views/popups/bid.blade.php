@@ -92,7 +92,7 @@ padding-bottom: 0px; padding-top: 0px;">
                 </div>
 
                 @auth
-                <span>Please note that you can use no more than 500 ACE<br>while bidding for this lot (see auction rules for details).</span>
+                <!--<span>Please note that you can use no more than 500 ACE<br>while bidding for this lot (see auction rules for details).</span>-->
                 <div class="bid-wallet">
                     <span class="bid-wallet__title">Placing a bid in tokens requires two transactions. First transaction approves the auction address for your tokens. Second transaction calls the Bid function on the Auction smart-contract. You can find the Auction smart-contract address below. If you use Metamask you can initiate both transactions with one click on the button below.</span>
                     <span class="bid-wallet__address js-item-eth-wallet"></span>
@@ -118,7 +118,7 @@ padding-bottom: 0px; padding-top: 0px;">
                </div>
 
                @auth
-               <span>Please note that you can use no more than 500 TEAM<br>while bidding for this lot (see auction rules for details).</span>
+               <!--<span>Please note that you can use no more than 500 TEAM<br>while bidding for this lot (see auction rules for details).</span>-->
                <div class="bid-wallet">
                    <span class="bid-wallet__title">Placing a bid in tokens requires two transactions. First transaction approves the auction address for your tokens. Second transaction calls the Bid function on the Auction smart-contract. You can find the Auction smart-contract address below. If you use Metamask you can initiate both transactions with one click on the button below.</span>
                    <span class="bid-wallet__address js-item-eth-wallet"></span>
@@ -141,14 +141,29 @@ padding-bottom: 0px; padding-top: 0px;">
         </div>
 
         <div class="bid-footer">
-            <span class="bid-footer__title">By bidding you accept the following terms:</span>
+            <div class="row">
+                <div class="col-12">
+                    <span class="bid-footer__title">By bidding you accept the following terms:</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
 
-            <span class="bid-footer__item"><a href="/pdfs/Privacy_Policy.pdf" target="_blank" class="footer-terms"
-                                              onclick="ga('send', 'event', 'click', 'privacy_policy', 'footer');">@lang('messages.footer.privacy')</a>(PDF, 1 mb)</span>
-            <span class="bid-footer__item"><a href="/pdfs/Terms_of_Use.pdf" target="_blank" class="footer-terms"
-                                              onclick="ga('send', 'event', 'click', 'terms_use', 'footer');">@lang('messages.footer.terms')</a>(PDF, 1 mb)</span>
-            <span class="bid-footer__item"><a href="{{ url("/rules") }}" target="_blank" class="footer-terms"
-                                              onclick="ga('send', 'event', 'Click', 'auction_rules', 'footer');">Auction rules</a></span>
+
+                    <span class="bid-footer__item"><a href="/pdfs/Privacy_Policy.pdf" rel="noreferer, ,noopener" target="_blank" class="footer-terms"
+                                                      onclick="ga('send', 'event', 'click', 'privacy_policy', 'footer');">@lang('messages.footer.privacy')</a>(PDF, 1 mb)</span><br>
+                    <span class="bid-footer__item"><a href="/pdfs/Terms_of_Use.pdf" rel="noreferer, ,noopener" target="_blank" class="footer-terms"
+                                                      onclick="ga('send', 'event', 'click', 'terms_use', 'footer');">@lang('messages.footer.terms')</a>(PDF, 1 mb)</span><br>
+                    <span class="bid-footer__item"><a href="/pdfs/TokenStars_Auctions_Guide.pdf" rel="noreferer, ,noopener" target="_blank" class="footer-terms"
+                                                      onclick="ga('send', 'event', 'Click', 'auction_rules', 'footer');">Auction rules</a>(PDF, 1 mb)</span>
+                </div>
+                <div class="col-6">
+                    <span class="bid-footer__item"> 1 ETH = ${{ $eth_usd }}</span><br>
+                    <span class="bid-footer__item"> $1 = {{ $usd_ace }} ACE</span><br>
+                    <span class="bid-footer__item"> $1 = {{ $usd_team }} TEAM</span>
+                </div>
+            </div>
+
         </div>
 
     </div>
