@@ -279,7 +279,7 @@
                         <p class="module-item__date">{{$item['post_date']}}</p>
                         <p class="module-item__title">{{$item['title']}}</p>
                         <p class="module-item__text">{{$item['text']}}</p>
-                        <a style="position: fixed; bottom:1; margin-bottom: 25px;" onclick="ga('send', 'event', 'news', 'post{{$loop->iteration}}', 'main');" href="{{$item['medium_url']}}" class="btn btn-blue btn-regular">@lang('fresh.project_news.button')</a>
+                        <a style="position: fixed; bottom:1; margin-bottom: 25px;" onclick="ga('send', 'event', 'news', 'post{{$loop->iteration}}', 'main');" href="{{$item['medium_url']}}" class="btn btn-blue btn-regular" target="_blank">@lang('fresh.project_news.button')</a>
                         </div>
                     </li>
                 @endforeach
