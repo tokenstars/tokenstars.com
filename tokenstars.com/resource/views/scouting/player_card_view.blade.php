@@ -388,12 +388,20 @@
                 <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'promotion-tab') active @endif" data-toggle="pill"
                    href="#promotion-tab">Bounty&Promo</a>
             @endif
-            <a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill"
-               href="#fan-tab">Fan Club<br/>(Soon)</a>
+
+            @php
+                $countServicesProducts = 0;
+            @endphp
+            <!--<a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#fan-tab">Fan Club<br/>(Soon)</a>-->
+            @if(\App\Models\ServiceProduct\ServicesProducts::where('player_tennis_id', $player->id)->where('status', 1)->count() > 0)
+                @php
+                    $countServicesProducts = 1;
+                @endphp
+                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'fan-tab') active @endif" data-toggle="pill" href="#fan-tab">Fan Club</a>
+            @endif
+
             @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
 
-                <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'fan-tab') active @endif" data-toggle="pill" href="#fan-tab">Fan
-                    Club</a>
                 <a class="nav-item nav-link text-uppercase text-truncate rounded-0 @if($activeTab == 'admin-tab') active @endif" data-toggle="pill"
                    href="#admin-tab">Admin</a>
             @endif
@@ -1962,224 +1970,218 @@
 
             </div>
 
-
-            @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
+            @if($countServicesProducts > 0)
                 <div class="tab-pane px-5 py-5_5 @if($activeTab == 'fan-tab') show active @endif" id="fan-tab">
-                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
-                    <div class="list-unstyled service-list mb-0 border">
-                        @foreach($player->servicesProducts as $service)
-                            @if($service->status == 1)
-                                @if($service->type == 1)
-                                    <div class="service-item media align-items-stretch position-relative">
-                                        <div class="service-item-icon-wrapper position-relative">
-                                            <div class="icon icon-{{$kinds_service[$service->kind]}} service-item-icon position-absolute m-auto text-blue-darker">
-                                                <svg viewBox="0 0 1 1">
+                    @php
+                        $firstServices = 0;
+                    @endphp
+                    @foreach($player->servicesProducts as $service)
+                        @if($service->status == 1)
+                            @if($service->type == 1)
+                                @if(!$firstServices)
+                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
+                                    <div class="list-unstyled service-list mb-0 border">
+                                        @endif
+
+                                        <div class="service-item media align-items-stretch position-relative">
+                                            <div class="service-item-icon-wrapper position-relative">
+                                                <div class="icon icon-{{$kinds_service[$service->kind]}} service-item-icon position-absolute m-auto text-blue-darker">
+                                                <!--<svg viewBox="0 0 1 1">
                                                     <use xlink:href='/images/icons.svg#{{$kinds_service[$service->kind]}}'></use>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="media-body service-item-body py-4">
-                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
-                                                {{$service->name}}
-                                            </h4>
-                                            <p class="service-item-descr mb-0 text-blue-darker">
-                                                {{$service->description}}
-                                            </p>
-                                        </div>
-                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
-                                            <div class="mx-4 service-item-secondary-token text-right">
-                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
-                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
-                                                    @if($service->token_ACE)
-                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
-                                                            <span class="text-ace">ACE</span></li>
-                                                    @endif
-                                                    @if($service->token_TEAM)
-                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
-                                                            <span class="text-team">TEAM</span></li>
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
-                                                    data-toggle="collapse"
-                                                    data-target="#collapse-item-{{$service->id}}">Join
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="collapse service-item-collapse py-4_5 px-5"
-                                         id="collapse-item-{{$service->id}}">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                                <p class="mb-0 text-blue-darker">{{$service->description_full}}</p>
-                                                <div class="mt-4">
-                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                    @auth
-                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                           href="#buy-modal" data-toggle="modal"
-                                                           data-productid="{{$service->id}}">Join</a>
-                                                    @else
-                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                           href="#information" data-toggle="modal">Join</a>
-                                                    @endauth
+                                                </svg>-->
+                                                    <img src="{{$service->prev_image2}}" alt="" height="56px">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
-                                                <h5 class="text-blue-darker font-weight-bold">Video</h5>
-                                                @if($service->video_link)
-                                                    <div class="embed-responsive service-item-embed embed-responsive-16by9">
-                                                        <iframe class="embed-responsive-item"
-                                                                src="https://www.youtube.com/embed/{{$service->video_link}}?rel=0"
-                                                                allowfullscreen></iframe>
+                                            <div class="media-body service-item-body py-4">
+                                                <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                    {{$service->name}}
+                                                </h4>
+                                                <p class="service-item-descr mb-0 text-blue-darker">
+                                                    {!! $service->description !!}
+                                                </p>
+                                            </div>
+                                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                                <div class="mx-4 service-item-secondary-token text-right">
+                                                    <div class="h5 text-pink mb-0">
+                                                        @if($service->cost_main_token == 1)
+                                                            {{number_format($service->cost_ACE,0,'',' ').' ACE'}}
+                                                        @else
+                                                            {{number_format($service->cost_TEAM,0,'',' ').' TEAM'}}
+                                                        @endif
+                                                    </div>
+                                                    <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                        @if($service->cost_usd)
+                                                            <li class="list-inline-item text-nowrap">approx. ${{$service->cost_usd }}</li>
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                        data-toggle="collapse"
+                                                        data-target="#collapse-item-{{$service->id}}">Join
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="collapse service-item-collapse py-4_5 px-5"
+                                             id="collapse-item-{{$service->id}}">
+                                            <div class="row">
+                                                <div class="col-@if($service->video_link || $service->images){{8}}@else{{12}}@endif">
+                                                    <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                    <p class="mb-0 text-blue-darker">{!!$service->description_full !!}</p>
+                                                    <div class="mt-4">
+                                                        <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                        @auth
+                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                               href="#buy-modal" data-toggle="modal"
+                                                               data-productid="{{$service->id}}">Join</a>
+                                                        @else
+                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                               href="#information" data-toggle="modal">Join</a>
+                                                        @endauth
+                                                    </div>
+                                                </div>
+                                                @if($service->video_link || ($service->images && count($service->images) > 0))
+                                                    <div class="col-4">
+                                                        @if($service->video_link)
+                                                            <h5 class="text-blue-darker font-weight-bold">Video</h5>
+                                                            <div class="embed-responsive service-item-embed embed-responsive-16by9">
+                                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$service->video_link}}?rel=0" allowfullscreen></iframe>
+                                                            </div>
+                                                        @endif
+                                                        @if($service->images && count($service->images) > 0)
+                                                            <h5 class="text-blue-darker font-weight-bold">Images</h5>
+                                                            <div class="commerce-item__image-wrap" data-module="commerce-slider">
+                                                                <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
+                                                                    <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
+                                                                        @foreach($service->images as $image)
+                                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                                <img class="commerce-slider-slide-image img-fluid"
+                                                                                     src="/{{$image->image}}" alt="" width="230"
+                                                                                     height="230">
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </div>
+                                                                <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 @endif
+
                                             </div>
                                         </div>
+
+                                        @if(!$firstServices)
                                     </div>
+                                    @php
+                                        $firstServices = 1;
+                                    @endphp
                                 @endif
                             @endif
-                        @endforeach
-                    </div>
-                    <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
-                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available goods</h4>
-                    <div class="list-unstyled service-list mb-0 border">
-                        @foreach($player->servicesProducts as $service)
-                            @if($service->status == 1)
-                                @if($service->type == 2)
-                                    <div class="service-item media align-items-stretch position-relative">
-                                        <div class="service-item-icon-wrapper position-relative">
-                                            <div class="icon service-item-icon position-absolute m-auto text-blue-darker">
-                                                <img class="commerce-slider-slide-image img-fluid"
-                                                     src="{{$service->main_image}}" width="74">
-                                            </div>
-                                        </div>
-                                        <div class="media-body service-item-body py-4">
-                                            <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
-                                                {{$service->name}}
-                                            </h4>
-                                            <p class="service-item-descr mb-0 text-blue-darker">
-                                                {{str_limit($service->description, $limit= 150, $end = '...')}}
-                                            </p>
-                                        </div>
-                                        <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
-                                            <div class="mx-4 service-item-secondary-token text-right">
-                                                <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
-                                                <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
-                                                    @if($service->token_ACE)
-                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
-                                                            <span class="text-ace">ACE</span></li>
-                                                    @endif
-                                                    @if($service->token_TEAM)
-                                                        <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
-                                                            <span class="text-team">TEAM</span></li>
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
-                                                    data-toggle="collapse"
-                                                    data-target="#collapse-item-{{$service->id}}">Buy
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="collapse service-item-collapse py-4_5 px-5"
-                                         id="collapse-item-{{$service->id}}">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <h5 class="text-blue-darker font-weight-bold">Description</h5>
-                                                <p class="mb-0 text-blue-darker">{{$service->description}}</p>
-                                                <div class="mt-4">
-                                                    <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                    @auth
-                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                           href="#buy-modal" data-toggle="modal"
-                                                           data-productid="{{$service->id}}">Buy</a>
-                                                    @else
-                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                           href="#information" data-toggle="modal">Join</a>
-                                                    @endauth
+                        @endif
+                    @endforeach
+
+                    @php
+                        $firstSProducts = 0;
+                    @endphp
+                    @foreach($player->servicesProducts as $service)
+                        @if($service->status == 1)
+                            @if($service->type == 2)
+                                @if(!$firstSProducts)
+                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
+                                    <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available goods</h4>
+                                    <div class="list-unstyled service-list mb-0 border">
+                                        @endif
+                                        <div class="service-item media align-items-stretch position-relative">
+                                            <div class="service-item-icon-wrapper position-relative">
+                                                <div class="icon service-item-icon position-absolute m-auto text-blue-darker">
+                                                    <img class="commerce-slider-slide-image img-fluid"
+                                                         src="{{$service->main_image}}" width="74">
                                                 </div>
                                             </div>
-                                            <div class="col-4 commerce-item-col-slider">
-                                                <h5 class="text-blue-darker font-weight-bold">Images</h5>
-                                                <div class="commerce-item__image-wrap" data-module="commerce-slider">
-                                                    <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
-                                                        <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
-                                                            <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
-                                                                <img class="commerce-slider-slide-image img-fluid"
-                                                                     src="{{$service->main_image}}" width="230"
-                                                                     height="230">
-                                                            </div>
-
-                                                            @foreach($service->images as $image)
+                                            <div class="media-body service-item-body py-4">
+                                                <h4 class="service-item-title mb-1 text-blue-darker font-weight-bold">
+                                                    {{$service->name}}
+                                                </h4>
+                                                <p class="service-item-descr mb-0 text-blue-darker">
+                                                    {{str_limit($service->description, $limit= 150, $end = '...')}}
+                                                </p>
+                                            </div>
+                                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center service-item-secondary">
+                                                <div class="mx-4 service-item-secondary-token text-right">
+                                                    <div class="h5 text-pink mb-0">${{$service->cost_usd}}</div>
+                                                    <ul class="list-inline mb-0 text-blue-darker font-weight-semibold list-inline-sep justify-content-end">
+                                                        @if($service->token_ACE)
+                                                            <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_ACE), 0, ',', '  ') }}
+                                                                <span class="text-ace">ACE</span></li>
+                                                        @endif
+                                                        @if($service->token_TEAM)
+                                                            <li class="list-inline-item text-nowrap">{{ number_format(($service->cost_usd * $rate->usd_TEAM), 0, ',', '  ') }}
+                                                                <span class="text-team">TEAM</span></li>
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                        data-toggle="collapse"
+                                                        data-target="#collapse-item-{{$service->id}}">Buy
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="collapse service-item-collapse py-4_5 px-5"
+                                             id="collapse-item-{{$service->id}}">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h5 class="text-blue-darker font-weight-bold">Description</h5>
+                                                    <p class="mb-0 text-blue-darker">{{$service->description}}</p>
+                                                    <div class="mt-4">
+                                                        <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
+                                                        @auth
+                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                               href="#buy-modal" data-toggle="modal"
+                                                               data-productid="{{$service->id}}">Buy</a>
+                                                        @else
+                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                               href="#information" data-toggle="modal">Join</a>
+                                                        @endauth
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 commerce-item-col-slider">
+                                                    <h5 class="text-blue-darker font-weight-bold">Images</h5>
+                                                    <div class="commerce-item__image-wrap" data-module="commerce-slider">
+                                                        <div class="swiper-container commerce-slider-container js-swiper-container bg-white shadow">
+                                                            <div class="swiper-wrapper commerce-slider-wrapper align-items-center">
                                                                 <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
                                                                     <img class="commerce-slider-slide-image img-fluid"
-                                                                         src="/{{$image->image}}" alt="" width="230"
+                                                                         src="{{$service->main_image}}" width="230"
                                                                          height="230">
                                                                 </div>
-                                                            @endforeach
+
+                                                                @foreach($service->images as $image)
+                                                                    <div class="swiper-slide commerce-slider-slide d-flex align-items-center justify-content-center p-2">
+                                                                        <img class="commerce-slider-slide-image img-fluid"
+                                                                             src="/{{$image->image}}" alt="" width="230"
+                                                                             height="230">
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
                                                         </div>
+                                                        <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
                                                     </div>
-                                                    <div class="swiper-pagination commerce-slider-pagination js-swiper-pagination text-center position-relative"></div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(!$firstSProducts)
                                     </div>
+                                    @php
+                                        $firstSProducts = 1;
+                                    @endphp
                                 @endif
                             @endif
-                        @endforeach
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
-                <div class="tab-pane px-5 py-5_5 @if($activeTab == 'services-tab') show active @endif" id="services-tab">
-                    <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Available services</h4>
-                    <ul class="list-unstyled communication-list mb-0 shadow">
-                        <li class="communication-item media position-relative align-items-stretch">
-                            <div class="communication-item-icon-wrapper position-relative mr-3">
-                                <div class="icon icon-training communication-item-icon position-absolute m-auto">
-                                    <svg viewBox="0 0 1 1">
-                                        <use xlink:href='/images/icons.svg#training'></use>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="media-body communication-item-body py-4">
-                                <h4 class="communication-item-title  mb-1">
-                                    Service 1
-                                </h4>
-                                <p class="communication-item-descr mb-0">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                </p>
-                            </div>
-                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
-                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 20 TEAM</div>
-                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold fill-area-link btn-width-120px"
-                                   href="">Buy</a>
-                            </div>
-                        </li>
-                        <li class="communication-item media position-relative align-items-stretch">
-                            <div class="communication-item-icon-wrapper position-relative mr-3">
-                                <div class="icon icon-qna communication-item-icon position-absolute m-auto">
-                                    <svg viewBox="0 0 1 1">
-                                        <use xlink:href='/images/icons.svg#qna'></use>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="media-body communication-item-body py-4">
-                                <h4 class="communication-item-title mb-1">
-                                    Service 2
-                                </h4>
-                                <p class="communication-item-descr mb-0">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
-                            <div class="mx-5 align-self-center py-4 d-flex flex-nowrap align-items-center">
-                                <div class="h5 font-weight-semibold text-pink mr-2 mb-0"> 120 TEAM</div>
-                                <a class="btn btn-primary px-4 text-uppercase fill-area-link font-weight-bold btn-width-120px"
-                                   href="">Buy</a>
-                            </div>
-                        </li>
-                    </ul>
+            @endif
 
-                </div>
+            @if(!empty(Auth::user()->id) && Auth::user()->role == 'admin')
                 <div class="tab-pane px-5 py-5_5 @if($activeTab == 'admin-tab') show active @endif" id="admin-tab">
                     <h4 class="text-uppercase mb-4 font-weight-semibold text-blue-darker">Vote Stats</h4>
                     @php
