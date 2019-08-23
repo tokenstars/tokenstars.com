@@ -393,7 +393,7 @@
                 $countServicesProducts = 0;
             @endphp
             <!--<a class="nav-item nav-link text-uppercase text-truncate rounded-0 disabled" data-toggle="pill" href="#fan-tab">Fan Club<br/>(Soon)</a>-->
-            @if(\App\Models\ServiceProduct\ServicesProducts::where('player_tennis_id', $player->id)->where('status', 1)->count() > 0)
+            @if(\App\Models\ServiceProduct\ServicesProducts::where('player_tennis_id', $player->id)->where(function ($query) {$query->where('status', 1)->orWhere('status',2);})->count() > 0)
                 @php
                     $countServicesProducts = 1;
                 @endphp
@@ -1976,7 +1976,7 @@
                         $firstServices = 0;
                     @endphp
                     @foreach($player->servicesProducts as $service)
-                        @if($service->status == 1)
+                        @if($service->status == 1 or $service->status == 2)
                             @if($service->type == 1)
                                 @if(!$firstServices)
                                     <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available services</h4>
@@ -2017,7 +2017,7 @@
                                                 </div>
                                                 <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
                                                         data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">Join
+                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Join @else Archive @endif
                                                 </button>
                                             </div>
                                         </div>
@@ -2029,14 +2029,16 @@
                                                     <p class="mb-0 text-blue-darker">{!!$service->description_full !!}</p>
                                                     <div class="mt-4">
                                                         <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                        @auth
-                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                               href="#buy-modal" data-toggle="modal"
-                                                               data-productid="{{$service->id}}">Join</a>
-                                                        @else
-                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                               href="#information" data-toggle="modal">Join</a>
-                                                        @endauth
+                                                        @if($service->status == 1)
+                                                            @auth
+                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                                   href="#buy-modal" data-toggle="modal"
+                                                                   data-productid="{{$service->id}}">Join</a>
+                                                            @else
+                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                                   href="#information" data-toggle="modal">Join</a>
+                                                            @endauth
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 @if($service->video_link || ($service->images && count($service->images) > 0))
@@ -2084,7 +2086,7 @@
                         $firstSProducts = 0;
                     @endphp
                     @foreach($player->servicesProducts as $service)
-                        @if($service->status == 1)
+                        @if($service->status == 1 or $service->status == 2)
                             @if($service->type == 2)
                                 @if(!$firstSProducts)
                                     <h4 class="h4 text-uppercase mb-3 text-blue-darker"></h4>
@@ -2122,7 +2124,7 @@
                                                 </div>
                                                 <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
                                                         data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">Buy
+                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Buy @else Archive @endif
                                                 </button>
                                             </div>
                                         </div>
@@ -2134,14 +2136,16 @@
                                                     <p class="mb-0 text-blue-darker">{{$service->description}}</p>
                                                     <div class="mt-4">
                                                         <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                                        @auth
-                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
-                                                               href="#buy-modal" data-toggle="modal"
-                                                               data-productid="{{$service->id}}">Buy</a>
-                                                        @else
-                                                            <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                               href="#information" data-toggle="modal">Join</a>
-                                                        @endauth
+                                                        @if($service->status == 1)
+                                                            @auth
+                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px buy-btn"
+                                                                   href="#buy-modal" data-toggle="modal"
+                                                                   data-productid="{{$service->id}}">Buy</a>
+                                                            @else
+                                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                                   href="#information" data-toggle="modal">Join</a>
+                                                            @endauth
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-4 commerce-item-col-slider">
