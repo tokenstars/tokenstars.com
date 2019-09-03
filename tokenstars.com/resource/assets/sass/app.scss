@@ -10,3 +10,11 @@ $icon-font-path: '/fonts/';
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "login";
+
+.short_name{
+  font-size: 1rem;
+}
+
+.achievements.link-block{
+  cursor: pointer;
+}

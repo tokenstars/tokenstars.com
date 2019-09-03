@@ -122,7 +122,7 @@
         </div>
     </section>
 
-    <section class="achievements">
+    <section class="achievements link-block">
         @include('achievements.on_main_intro')
     </section>
 
@@ -703,6 +703,10 @@
                 $('#hide-platform-description').hide();
                 $('#platform-wrapper').hide();
                 $('#show-platform-description').show();
+            });
+
+            $('.achievements.link-block').on('click', function(){
+                document.location.href = "{{route('achievements.index')}}";
             });
         });
 
