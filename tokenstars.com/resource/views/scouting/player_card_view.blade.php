@@ -1852,7 +1852,7 @@
                 <h4 class="h4 text-uppercase mb-3 text-blue-darker">Available Bounty tasks</h4>
                 <div class="list-unstyled service-list mb-0 border">
                     @foreach($player->bountyTasks as $bounty_task)
-                        @if($bounty_task->status == 1)
+                        @if($bounty_task->status == 1 or $bounty_task->status == 2)
                             <div class="service-item media align-items-stretch position-relative">
                                 <div class="service-item-icon-wrapper position-relative" style="width:7.8rem">
                                     <div class="icon icon-{{$bounty_type_icons[$bounty_task->type]}} service-item-icon position-absolute m-auto text-blue-darker" style="width:5.9rem">
@@ -1903,10 +1903,10 @@
                                             @endif-->
                                         </ul>
                                     </div>
-                                    <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px fill-area-link"
+                                    <button class="btn @if($bounty_task->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px fill-area-link"
                                             data-toggle="collapse"
                                             data-target="#collapse-item-bounty-task-{{$bounty_task->id}}"
-                                            @if($activeBountyTask == $bounty_task->id) aria-expanded="true" @else aria-expanded="false" @endif>More
+                                            @if($activeBountyTask == $bounty_task->id) aria-expanded="true" @else aria-expanded="false" @endif>@if($bounty_task->status == 1)More @else Finished @endif
                                     </button>
 
 
@@ -1920,18 +1920,20 @@
                                         <p class="mb-0 text-blue-darker">{!!$bounty_task->description_full!!}</p>
                                         <div class="mt-4">
                                             <!--<button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px" data-toggle="modal" data-target="#">Join</button>-->
-                                            @auth
-                                                @if(in_array($bounty_task->id, $bountyPerformeByUser))
-                                                    <button type="button" class="btn btn-secondary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn" disabled>You joined</button>
+                                            @if($bounty_task->status == 1)
+                                                @auth
+                                                    @if(in_array($bounty_task->id, $bountyPerformeByUser))
+                                                        <button type="button" class="btn btn-secondary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn" disabled>You joined</button>
+                                                    @else
+                                                        <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn"
+                                                           href="#join-modal" data-toggle="modal"
+                                                           data-bountytaskid="{{$bounty_task->id}}">Join</a>
+                                                    @endif
                                                 @else
-                                                    <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px performe-btn"
-                                                       href="#join-modal" data-toggle="modal"
-                                                       data-bountytaskid="{{$bounty_task->id}}">Join</a>
-                                                @endif
-                                            @else
-                                                <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
-                                                   href="#information-join" data-toggle="modal">Apply</a>
-                                            @endauth
+                                                    <a class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px"
+                                                       href="#information-join" data-toggle="modal">Apply</a>
+                                                @endauth
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -2015,9 +2017,9 @@
                                                         @endif
                                                     </ul>
                                                 </div>
-                                                <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                <button class="btn @if($service->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
                                                         data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Join @else Archive @endif
+                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Join @else Finished @endif
                                                 </button>
                                             </div>
                                         </div>
@@ -2122,9 +2124,9 @@
                                                         @endif
                                                     </ul>
                                                 </div>
-                                                <button class="btn btn-primary px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
+                                                <button class="btn @if($service->status == 1) btn-primary @else btn-secondary @endif px-4 text-uppercase font-weight-bold btn-width-120px collapsed fill-area-link"
                                                         data-toggle="collapse"
-                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Buy @else Archive @endif
+                                                        data-target="#collapse-item-{{$service->id}}">@if($service->status == 1)Buy @else Finished @endif
                                                 </button>
                                             </div>
                                         </div>
@@ -2192,13 +2194,14 @@
                         $vote_result = [];
                         if(!empty($voteModel->id))
                         {
-                            $sql = "select `wallet_hash`, `start_team_balance`, `start_ace_balance`, `end_team_balance`, `end_ace_balance`, (IF(result = 0, 'NO', 'YES')) as golos from scout_voting_result left join scout_voting_wallets on scout_voting_wallets.sv_result_id = scout_voting_result.id  where scout_voting_result.svoting_id = ".$voteModel->id;
+                            $sql = "select `wallet_hash`, `start_team_balance`, `start_ace_balance`, `end_team_balance`, `end_ace_balance`, (IF(result = 0, 'NO', 'YES')) as golos, scout_voting_wallets.created_at as date_of_voting from scout_voting_result left join scout_voting_wallets on scout_voting_wallets.sv_result_id = scout_voting_result.id  where scout_voting_result.svoting_id = ".$voteModel->id;
                             $vote_result = DB::select($sql);
                         }
                     @endphp
                     <table class="table table-bordered table-stat" style="font-size: 14px;">
                         <colgroup>
                             <col width="140">
+                            <col width="120">
                             <col width="120">
                             <col width="110">
                             <col width="120">
@@ -2207,7 +2210,8 @@
                         </colgroup>
                         <thead class="thead-light">
                         <tr>
-                            <th class="font-weight-semibold text-uppercase" scope="col">Hash</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Wallet</th>
+                            <th class="font-weight-semibold text-uppercase" scope="col">Date of voting</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Team before</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Ace before</th>
                             <th class="font-weight-semibold text-uppercase" scope="col">Team after</th>
@@ -2222,6 +2226,7 @@
                             @foreach($vote_result as $vot)
                                 <tr>
                                     <td>{{$vot->wallet_hash}}</td>
+                                    <td>{{$vot->date_of_voting}}</td>
                                     <td>{{round($vot->start_team_balance)}}</td>
                                     <td>{{round($vot->start_ace_balance)}}</td>
                                     <td>{{round($vot->end_team_balance)}}</td>

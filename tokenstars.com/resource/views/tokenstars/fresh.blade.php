@@ -18,12 +18,18 @@
                     <h2 class="sub-title-font-size medium-margin-before">@lang('fresh.header.subtitle')</h2>
 
                     <div class="main-reviews">
-                        <img src="/images/team/reviews/icorating.png" alt="TokenStars TEAM Rating Review" onclick="ga('send', 'event', 'listing', 'ico_rating', 'top');" class="">
-                        <img src="/images/team/reviews/topicolist.png" alt="TokenStars Gold Level TOP ICO LIST" onclick="ga('send', 'event', 'listing', 'top_ico_gold', 'top');" class="">
-                        <img src="/images/team/reviews/icobazar.png" alt="TokenStars AA ICO Bazaar" onclick="ga('send', 'event', 'listing', 'ico_bazaar', 'top');" class="">
-                        <img src="/images/team/reviews/icobench.png" alt="TokenStars ICObench" onclick="ga('send', 'event', 'listing', 'ico_bench', 'top');" class="">
-                        <img src="/images/team/reviews/trackico.png" alt="TokenStars TrackICO" onclick="ga('send', 'event', 'listing', 'track_ico', 'top');" class="">
-                        <img src="/images/team/reviews/icoranker.png" alt="TokenStars ICORanker" onclick="ga('send', 'event', 'listing', 'ico_ranker', 'top');" class="">
+                        <img src="/images/team/reviews/icorating.png" alt="TokenStars TEAM Rating Review"
+                             onclick="ga('send', 'event', 'listing', 'ico_rating', 'top');" class="">
+                        <img src="/images/team/reviews/topicolist.png" alt="TokenStars Gold Level TOP ICO LIST"
+                             onclick="ga('send', 'event', 'listing', 'top_ico_gold', 'top');" class="">
+                        <img src="/images/team/reviews/icobazar.png" alt="TokenStars AA ICO Bazaar"
+                             onclick="ga('send', 'event', 'listing', 'ico_bazaar', 'top');" class="">
+                        <img src="/images/team/reviews/icobench.png" alt="TokenStars ICObench"
+                             onclick="ga('send', 'event', 'listing', 'ico_bench', 'top');" class="">
+                        <img src="/images/team/reviews/trackico.png" alt="TokenStars TrackICO"
+                             onclick="ga('send', 'event', 'listing', 'track_ico', 'top');" class="">
+                        <img src="/images/team/reviews/icoranker.png" alt="TokenStars ICORanker"
+                             onclick="ga('send', 'event', 'listing', 'ico_ranker', 'top');" class="">
                     </div>
 
                     <!-- <div class="main-exchange">
@@ -41,23 +47,27 @@
                         <p class="main-widget__title">@lang('fresh.header.calculator.title')</p>
                         <p class="main-widget__subtitle">@lang('fresh.header.calculator.subtitle')</p>
                         <div class="exchanges_logo">
-                            <a href="https://www.okex.com/market?product=ace_btc" target="_blank"><img src="/images/fresh/okex_logo.png" width="135"/></a>
-                            <a href="https://www.bit-z.com/exchange/team_btc" target="_blank"><img src="/images/fresh/bit-z_logo.png" width="135"/></a>
+                            <a href="https://www.okex.com/market?product=ace_btc" target="_blank"><img
+                                        src="/images/fresh/okex_logo.png" width="135"/></a>
+                            <a href="https://www.bit-z.com/exchange/team_btc" target="_blank"><img
+                                        src="/images/fresh/bit-z_logo.png" width="135"/></a>
                         </div>
 
                         <div class="main-widget__inputs j-calc-widget">
                             <div class="main-widget__input-holder">
                                 <div class="main-widget__flex">
-                                    <div  class="main-widget__select">
+                                    <div class="main-widget__select">
                                         <label>@lang('fresh.header.calculator.send')</label>
-                                        <select class="left" id="currency_token" onchange="document.getElementById('token_type').innerHTML = this.value;">
+                                        <select class="left" id="currency_token"
+                                                onchange="document.getElementById('token_type').innerHTML = this.value;">
                                             <option value="ACE" selected>ACE</optionselected>
                                             <option value="TEAM">TEAM</option>
                                         </select>
                                     </div>
                                     <div>
                                         <div class="main-widget__input">
-                                            <input type="text" name="send-value" value="0.10" class="main-widget__input-activable active send-value">
+                                            <input type="text" name="send-value" value="0.10"
+                                                   class="main-widget__input-activable active send-value">
                                             <div class="bg_input"></div>
                                             <select class="js-select-currency">
                                                 <option selected>BTC</option>
@@ -67,18 +77,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <img class="main-widget__arrow" src="/images/fresh/widget-arrow.png" >
+                            <img class="main-widget__arrow" src="/images/fresh/widget-arrow.png">
                             <div class="main-widget__input-holder">
                                 <label style="text-align: right; padding-right: 14px;">@lang('fresh.header.calculator.get')</label>
                                 <div class="main-widget__input__right">
-                                    <input type="text" name="send-value" value="18975" class="main-widget__input-activable get-value">
+                                    <input type="text" name="send-value" value="18975"
+                                           class="main-widget__input-activable get-value">
                                     <span id="token_type">ACE</span>
                                 </div>
                             </div>
                         </div>
                         <div class="main-widget__footer">
-                            <p>@lang('fresh.header.calculator.updated'): <br> {{date("d.m.Y, H:i", strtotime($exchange_rates['last_updated']))}}</p>
-                            <a href="https://www.bit-z.com/exchange/team_btc" class="btn btn-violet btn-big js-buy-tokens">Get tokens</a>
+                            <p>@lang('fresh.header.calculator.updated'):
+                                <br> {{date("d.m.Y, H:i", strtotime($exchange_rates['last_updated']))}}</p>
+                            <a href="https://www.bit-z.com/exchange/team_btc"
+                               class="btn btn-violet btn-big js-buy-tokens">Get tokens</a>
                         </div>
                     </div>
                 </div>
@@ -87,8 +100,8 @@
 
         <div class="main-video-background"></div>
         <div class="main-video">
-            <video autoplay muted loop >
-              <source src="/images/fresh/tokenstars-main.mp4" type="video/mp4">
+            <video autoplay muted loop>
+                <source src="/images/fresh/tokenstars-main.mp4" type="video/mp4">
             </video>
         </div>
 
@@ -99,22 +112,26 @@
         <div class="wrap">
             <div class="row main-link-row">
                 <div class="col-lg-3 col-xs-6">
-                    <a onclick="ga('send', 'event', 'scroll', 'about_stars', 'main');" href="#ambassadors" class="main-link">
+                    <a onclick="ga('send', 'event', 'scroll', 'about_stars', 'main');" href="#ambassadors"
+                       class="main-link">
                         <p>@lang('fresh.card_menu.read_more')</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-                    <a onclick="ga('send', 'event', 'scroll', 'platfrom_modules', 'main');" href="#platform" class="main-link main-link--2">
+                    <a onclick="ga('send', 'event', 'scroll', 'platfrom_modules', 'main');" href="#platform"
+                       class="main-link main-link--2">
                         <p>@lang('fresh.card_menu.platform_modules')</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-                    <a onclick="ga('send', 'event', 'scroll', 'project_news', 'main');" href="#news" class="main-link main-link--3">
+                    <a onclick="ga('send', 'event', 'scroll', 'project_news', 'main');" href="#news"
+                       class="main-link main-link--3">
                         <p>@lang('fresh.card_menu.news')</p>
                     </a>
                 </div>
                 <div class="col-lg-3 col-xs-6">
-                    <a onclick="ga('send', 'event', 'scroll', 'press_mentions', 'main');" href="#press" class="main-link main-link--4">
+                    <a onclick="ga('send', 'event', 'scroll', 'press_mentions', 'main');" href="#press"
+                       class="main-link main-link--4">
                         <p>@lang('fresh.card_menu.mentions')</p>
                     </a>
                 </div>
@@ -126,81 +143,131 @@
         @include('achievements.on_main_intro')
     </section>
 
-    <section class="section modules-section" id="platform">
+    <section class="">
+        <div class="wrap">
+            <div class="huge-margin-before align-center">
+                <div id="show-modules"
+                     class="btn btn-blue btn-big white-text">@lang('fresh.platform_modules.modules_description')</div>
+                <div id="hide-modules" class="btn btn-blue btn-big white-text"
+                     style="display: none">@lang('fresh.platform_modules.hide_modules')</div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section modules-section" id="platform" style="display: none">
         <div class="wrap">
             <h2 class="section-title"></h2>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="module-item" style="max-height: 450px">
-                        <p class="module-label">NEW!</p>
-                        <img class="module-item__image" src="/images/fresh/module-players-bg.jpg" />
+                        <p class="module-label">@lang('fresh.scouting_module.live')</p>
+                        <img class="module-item__image" src="/images/fresh/module-players-bg.jpg"/>
                         <p class="module-item__title">@lang('fresh.players.platform_1.title')</p>
                         <p class="module-item__text">@lang('fresh.players.platform_1.text')</p>
-                        <a onclick="ga('send', 'event', 'module', 'players', 'main');" href="/players" class="btn btn-blue btn-regular">@lang('fresh.players.platform_1.button')</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="module-item" style="max-height: 450px">
-                        <p class="module-label">NEW!</p>
-                        <img class="module-item__image" src="/images/fresh/module-brand-bg.png" />
-                        <p class="module-item__title">@lang('fresh.brand_relations.platform_1.title')</p>
-                        <p class="module-item__text" style="margin-bottom:20px;">@lang('fresh.brand_relations.platform_1.text')</p>
-                        <a onclick="ga('send', 'event', 'module', 'brand_relations', 'main');" href="/brand" class="btn btn-blue btn-regular">@lang('fresh.brand_relations.platform_1.button')</a>
+                        <a onclick="ga('send', 'event', 'module', 'players', 'main');" href="/players"
+                           class="btn btn-blue btn-regular" style="margin-top: 0;">@lang('fresh.players.platform_1.button')</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="module-item" style="max-height: 450px">
                         <p class="module-label">@lang('fresh.scouting_module.live')</p>
-                        <img class="module-item__image" src="/images/fresh/module-scouting-bg.jpg" />
+                        <img class="module-item__image" src="/images/fresh/module-scouting-bg.jpg"/>
                         <p class="module-item__title">@lang('fresh.scouting_module.platform_1.title')</p>
                         <p class="module-item__text">@lang('fresh.scouting_module.platform_1.text')</p>
-                        <a onclick="ga('send', 'event', 'module', 'scouting', 'main');" href="/scouting" class="btn btn-blue btn-regular">@lang('fresh.scouting_module.platform_1.button')</a>
+                        <a onclick="ga('send', 'event', 'module', 'scouting', 'main');" href="/scouting"
+                           class="btn btn-blue btn-regular">@lang('fresh.scouting_module.platform_1.button')</a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="module-item" style="max-height: 450px">
-                        <p class="module-label">@lang('fresh.platform_modules.live')</p>
-                        <img class="module-item__image" src="/images/fresh/module-auction-bg.jpg" />
-                        <p class="module-item__title">@lang('fresh.platform_modules.platform_1.title')</p>
-                        <p class="module-item__text">@lang('fresh.platform_modules.platform_1.text')</p>
+                <div class="row" id="prediction-module">
+                    <div class="col-lg-6" id="voting-module">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">@lang('fresh.platform_modules.live')</p>
+                            <img class="module-item__image" src="/images/fresh/module-voting-bg.jpg"/>
+                            <p class="module-item__title">@lang('fresh.platform_modules.platform_2.title')</p>
+                            <p class="module-item__text">@lang('fresh.platform_modules.platform_2.text')</p>
 
-                        <a onclick="ga('send', 'event', 'module', 'auctions', 'main');" href="/charity" class="btn btn-blue btn-regular">@lang('fresh.platform_modules.platform_1.button')</a>
+                            <a onclick="ga('send', 'event', 'voting', 'voting_fresh', 'main');" href="/voting"
+                               class="btn btn-blue btn-regular">@lang('fresh.platform_modules.platform_2.button')</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">NEW!</p>
+                            <img class="module-item__image" src="/images/fresh/module-fan-communication-bg.jpg"/>
+                            <p class="module-item__title">@lang('fresh.fan_communication.platform_1.title')</p>
+                            <p class="module-item__text">@lang('fresh.fan_communication.platform_1.text')</p>
+                            <a onclick="ga('send', 'event', 'module', 'fan_communication', 'main');"
+                               href="/fan-communications"
+                               class="btn btn-blue btn-regular">@lang('fresh.fan_communication.platform_1.button')</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">@lang('fresh.platform_modules.live')</p>
+                            <img class="module-item__image" src="/images/fresh/module-auction-bg.jpg"/>
+                            <p class="module-item__title">@lang('fresh.platform_modules.platform_1.title')</p>
+                            <p class="module-item__text">@lang('fresh.platform_modules.platform_1.text')</p>
+
+                            <a onclick="ga('send', 'event', 'module', 'auctions', 'main');" href="/charity"
+                               class="btn btn-blue btn-regular">@lang('fresh.platform_modules.platform_1.button')</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">NEW!</p>
+                            <img class="module-item__image" src="/images/fresh/module-bounty-fan-club-bg.jpg"/>
+                            <p class="module-item__title">@lang('fresh.bounty_fan_club.platform_1.title')</p>
+                            <p class="module-item__text"
+                               style="">@lang('fresh.bounty_fan_club.platform_1.text')</p>
+                            <a onclick="ga('send', 'event', 'module', 'bounty_fan_club', 'main');" href="/bounty"
+                               class="btn btn-blue btn-regular">@lang('fresh.bounty_fan_club.platform_1.button')</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">@lang('fresh.scouting_module.live')</p>
+                            <img class="module-item__image" src="/images/fresh/module-brand-bg.png"/>
+                            <p class="module-item__title">@lang('fresh.brand_relations.platform_1.title')</p>
+                            <p class="module-item__text"
+                               style="">@lang('fresh.brand_relations.platform_1.text')</p>
+                            <a onclick="ga('send', 'event', 'module', 'brand_relations', 'main');" href="/brand"
+                               class="btn btn-blue btn-regular">@lang('fresh.brand_relations.platform_1.button')</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="module-item" style="max-height: 450px">
+                            <p class="module-label">@lang('fresh.predictions_module.live')</p>
+                            <img class="module-item__image" src="/images/fresh/module-prediction-bg.jpg"/>
+                            <p class="module-item__title">@lang('fresh.predictions_module.platform_1.title')</p>
+                            <p class="module-item__text"
+                               style="margin-bottom:20px;">@lang('fresh.predictions_module.platform_1.text')</p>
+
+                            <a onclick="ga('send', 'event', 'module', 'predictions', 'main');" href="/predictions"
+                               class="btn btn-blue btn-regular">@lang('fresh.predictions_module.platform_1.button')</a>
+                        </div>
                     </div>
                 </div>
+
+                <style>
+                    .module-item {
+                        min-height: unset;
+                    }
+                </style>
+
+
 
             </div>
+        </div>
+    </section>
 
-<style>
-    .module-item {
-        min-height: unset;
-    }
-</style>
-            <div class="row" id="prediction-module">
-                <div class="col-lg-6" id="voting-module">
-                    <div class="module-item" style="max-height: 450px">
-                        <p class="module-label">@lang('fresh.platform_modules.live')</p>
-                        <img class="module-item__image" src="/images/fresh/module-voting-bg.jpg" />
-                        <p class="module-item__title">@lang('fresh.platform_modules.platform_2.title')</p>
-                        <p class="module-item__text">@lang('fresh.platform_modules.platform_2.text')</p>
-
-                        <a onclick="ga('send', 'event', 'voting', 'voting_fresh', 'main');" href="/voting" class="btn btn-blue btn-regular">@lang('fresh.platform_modules.platform_2.button')</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="module-item" style="max-height: 450px">
-                        <p class="module-label">@lang('fresh.predictions_module.live')</p>
-                        <img class="module-item__image" src="/images/fresh/module-prediction-bg.jpg" />
-                        <p class="module-item__title">@lang('fresh.predictions_module.platform_1.title')</p>
-                        <p class="module-item__text" style="margin-bottom:20px;">@lang('fresh.predictions_module.platform_1.text')</p>
-
-                        <a onclick="ga('send', 'event', 'module', 'predictions', 'main');" href="/predictions" class="btn btn-blue btn-regular">@lang('fresh.predictions_module.platform_1.button')</a>
-                    </div>
-                </div>
-
-            </div>
+    <section class="" style="margin-bottom: 30px;">
+        <div class="wrap">
             <div class="huge-margin-before align-center">
-                <div id="show-platform-description" class="btn btn-blue btn-big white-text">@lang('fresh.platform_modules.platform_description')</div>
-                <div id="hide-platform-description" class="btn btn-blue btn-big white-text" style="display: none">@lang('fresh.platform_modules.hide_description')</div>
+                <div id="show-platform-description"
+                     class="btn btn-blue btn-big white-text">@lang('fresh.platform_modules.platform_description')</div>
+                <div id="hide-platform-description" class="btn btn-blue btn-big white-text"
+                     style="display: none">@lang('fresh.platform_modules.hide_description')</div>
 
             </div>
         </div>
@@ -211,7 +278,7 @@
 
         <section class="section modules-section">
             <div class="wrap">
-                <div class="platform-holder"  id="platform-holder">
+                <div class="platform-holder" id="platform-holder">
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="platform-star-holder">
@@ -223,10 +290,10 @@
                         <div class="col-lg-5">
                             <div class="platform-tokens-block huge-margin-before">
                                 <div class="platform-token j-platform-token" data-type="ace">
-                                    <b>ACE</b> <br />@lang('fresh.platform.token')
+                                    <b>ACE</b> <br/>@lang('fresh.platform.token')
                                 </div>
                                 <div class="platform-token j-platform-token" data-type="team">
-                                    <b>TEAM</b> <br />@lang('fresh.platform.token')
+                                    <b>TEAM</b> <br/>@lang('fresh.platform.token')
                                 </div>
                             </div>
                         </div>
@@ -242,24 +309,31 @@
                         <div class="platform-items-row clearfix">
                             <a class="platform-item platform-item--crowd j-platform-item">@lang('fresh.platform.items.item1')</a>
                             <a class="platform-item platform-item--time j-platform-item" style="min-height: 84px;"></a>
-                            <a class="platform-item platform-item--income j-platform-item" style="min-height: 84px;"></a>
+                            <a class="platform-item platform-item--income j-platform-item"
+                               style="min-height: 84px;"></a>
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section2')</p>
                         <div class="platform-items-row clearfix">
-                            <a href="{{route('scouting.index')}}" class="platform-item platform-item--search highlighted j-platform-item">@lang('fresh.platform.items.item4')</a>
-                            <a href="{{route('scouting.voting')}}" class="platform-item platform-item--vote highlighted j-platform-item">@lang('fresh.platform.items.item5')</a>
-                            <a href="/predictions" class="platform-item platform-item--bet highlighted j-platform-item" style="min-height: 84px;">Predictions</a>
+                            <a href="{{route('scouting.index')}}"
+                               class="platform-item platform-item--search highlighted j-platform-item">@lang('fresh.platform.items.item4')</a>
+                            <a href="{{route('scouting.voting')}}"
+                               class="platform-item platform-item--vote highlighted j-platform-item">@lang('fresh.platform.items.item5')</a>
+                            <a href="/predictions" class="platform-item platform-item--bet highlighted j-platform-item"
+                               style="min-height: 84px;">Predictions</a>
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section3')</p>
                         <div class="platform-items-row clearfix">
-                            <a href="{{route('bounty.index')}}" class="platform-item platform-item--check highlighted j-platform-item">@lang('fresh.platform.items.item7')</a>
+                            <a href="{{route('bounty.index')}}"
+                               class="platform-item platform-item--check highlighted j-platform-item">@lang('fresh.platform.items.item7')</a>
                             <a class="platform-item platform-item--video j-platform-item">@lang('fresh.platform.items.item8')</a>
-                            <a href="/charity" class="platform-item platform-item--cup highlighted j-platform-item">@lang('fresh.platform.items.item9')</a>
+                            <a href="/charity"
+                               class="platform-item platform-item--cup highlighted j-platform-item">@lang('fresh.platform.items.item9')</a>
                         </div>
                         <p class="platform-items-row-label bold-font big-margin-before">@lang('fresh.platform.section4')</p>
                         <div class="platform-items-row clearfix">
                             <a class="platform-item platform-item--percent j-platform-item">@lang('fresh.platform.items.item10')</a>
-                            <a href="//brand" class="platform-item platform-item--promotion highlighted j-platform-item">@lang('fresh.platform.items.item11')</a>
+                            <a href="//brand"
+                               class="platform-item platform-item--promotion highlighted j-platform-item">@lang('fresh.platform.items.item11')</a>
                             <a class="platform-item platform-item--merch j-platform-item">@lang('fresh.platform.items.item12')</a>
                         </div>
                     </div>
@@ -272,16 +346,24 @@
         <div class="wrap">
             <h2 class="section-title">@lang('fresh.project_news.title')</h2>
             <ul class="lightSliderHighlights">
+                @php
+                    $timestamp_now = \Carbon\Carbon::now()->timestamp;
+                @endphp
                 @foreach(trans('fresh.project_news.items') as $item)
-                    <li>
-                        <div class="module-item module-item--highlights" style="min-height: 550px;">
-                        <img class="module-item__image" src="/images/fresh/{{$item['img']}}" />
-                        <p class="module-item__date">{{$item['post_date']}}</p>
-                        <p class="module-item__title">{{$item['title']}}</p>
-                        <p class="module-item__text">{{$item['text']}}</p>
-                        <a style="position: fixed; bottom:1; margin-bottom: 25px;" onclick="ga('send', 'event', 'news', 'post{{$loop->iteration}}', 'main');" href="{{$item['medium_url']}}" class="btn btn-blue btn-regular" target="_blank">@lang('fresh.project_news.button')</a>
-                        </div>
-                    </li>
+                    @if($item['timestamp'] > ($timestamp_now - (365*24*60*60)))
+                        <li>
+                            <div class="module-item module-item--highlights" style="min-height: 550px;">
+                                <img class="module-item__image" src="/images/fresh/{{$item['img']}}"/>
+                                <p class="module-item__date">{{$item['post_date']}}</p>
+                                <p class="module-item__title">{{$item['title']}}</p>
+                                <p class="module-item__text">{{$item['text']}}</p>
+                                <a style="position: fixed; bottom:1; margin-bottom: 25px;"
+                                   onclick="ga('send', 'event', 'news', 'post{{$loop->iteration}}', 'main');"
+                                   href="{{$item['medium_url']}}" class="btn btn-blue btn-regular"
+                                   target="_blank">@lang('fresh.project_news.button')</a>
+                            </div>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
 
@@ -301,36 +383,54 @@
                     @if(!empty($proPlayers))
                         @foreach($proPlayers as $proPlayer)
                             @if(!empty($onMainPagePlayers[$proPlayer->id]))
-                            <div class="col-lg-3 col-md-6">
-                                <div class="team-ambassador-card" style="">
-                                    <a href="/scouting/card/{{$proPlayer->id}}"><img style="border-radius: 100%;" src="/images/players/{{$onMainPagePlayers[$proPlayer->id][0]}}" alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" class="team-ambassador-card-image"> </a>
-                                    <div class="small-font-size small-margin-before">{{$sportTypes[$proPlayer->sport_type]}}</div>
-                                    <a href="/scouting/card/{{$proPlayer->id}}"><div class="big-font-size bold-font small-margin-before">{{$proPlayer->first_name}} {{$proPlayer->last_name}}</div></a>
-                                    <img style="border-radius: 100%" src="/images/flags/circle/{{$onMainPagePlayers[$proPlayer->id][1]}}" alt="" class="medium-margin-before team-ambassador-card-flag">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="team-ambassador-card" style="">
+                                        <a href="/scouting/card/{{$proPlayer->id}}"><img style="border-radius: 100%;"
+                                                                                         src="/images/players/{{$onMainPagePlayers[$proPlayer->id][0]}}"
+                                                                                         alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}"
+                                                                                         title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}"
+                                                                                         class="team-ambassador-card-image">
+                                        </a>
+                                        <div class="small-font-size small-margin-before">{{$sportTypes[$proPlayer->sport_type]}}</div>
+                                        <a href="/scouting/card/{{$proPlayer->id}}">
+                                            <div class="big-font-size bold-font small-margin-before">{{$proPlayer->first_name}} {{$proPlayer->last_name}}</div>
+                                        </a>
+                                        <img style="border-radius: 100%"
+                                             src="/images/flags/circle/{{$onMainPagePlayers[$proPlayer->id][1]}}" alt=""
+                                             class="medium-margin-before team-ambassador-card-flag">
+                                    </div>
                                 </div>
-                            </div>
                             @endif
                         @endforeach
                     @endif
 
                     @if(!empty($almostProPlayers))
                         @foreach($almostProPlayers as $almostProPlayer)
-                                @if(!empty($onMainPagePlayers[$almostProPlayer->id]))
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="team-ambassador-card" style="">
-                                            <a href="/scouting/card/{{$almostProPlayer->id}}"><img style="border-radius: 100%;" src="/images/players/{{$onMainPagePlayers[$almostProPlayer->id][0]}}" alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}" class="team-ambassador-card-image"></a>
-                                            <div class="small-font-size small-margin-before">{{$sportTypes[$almostProPlayer->sport_type]}}</div>
-                                            <a href="/scouting/card/{{$almostProPlayer->id}}"><div class="big-font-size bold-font small-margin-before">{{$almostProPlayer->first_name}} {{$almostProPlayer->last_name}}</div></a>
-                                            <img style="border-radius: 100%" src="/images/flags/circle/{{$onMainPagePlayers[$almostProPlayer->id][1]}}" alt="" class="medium-margin-before team-ambassador-card-flag">
-                                        </div>
+                            @if(!empty($onMainPagePlayers[$almostProPlayer->id]))
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="team-ambassador-card" style="">
+                                        <a href="/scouting/card/{{$almostProPlayer->id}}"><img
+                                                    style="border-radius: 100%;"
+                                                    src="/images/players/{{$onMainPagePlayers[$almostProPlayer->id][0]}}"
+                                                    alt="{{$proPlayer->first_name}} {{$proPlayer->last_name}}"
+                                                    title="{{$proPlayer->first_name}} {{$proPlayer->last_name}}"
+                                                    class="team-ambassador-card-image"></a>
+                                        <div class="small-font-size small-margin-before">{{$sportTypes[$almostProPlayer->sport_type]}}</div>
+                                        <a href="/scouting/card/{{$almostProPlayer->id}}">
+                                            <div class="big-font-size bold-font small-margin-before">{{$almostProPlayer->first_name}} {{$almostProPlayer->last_name}}</div>
+                                        </a>
+                                        <img style="border-radius: 100%"
+                                             src="/images/flags/circle/{{$onMainPagePlayers[$almostProPlayer->id][1]}}"
+                                             alt="" class="medium-margin-before team-ambassador-card-flag">
                                     </div>
-                                @endif
+                                </div>
+                            @endif
                         @endforeach
                     @endif
 
                 </div>
                 <div style="clear: both"></div>
-                <!--<div class="huge-margin-before">
+            <!--<div class="huge-margin-before">
 
                     <div class="team-small-ambassador-card align-center">
                         <img src="/upload/images/kudermetova.jpg" alt="" class="team-small-ambassador-card-image" style="border-radius: 50%;">
@@ -377,12 +477,14 @@
                 @foreach($stars as $star)
                     <div class="col-lg-3 col-md-6">
                         <div class="team-ambassador-card" style="min-height: 227px">
-                            <img style="border-radius: 100%;" src="/upload/images/amb-{{ $star }}.jpg" alt="" class="team-ambassador-card-image">
+                            <img style="border-radius: 100%;" src="/upload/images/amb-{{ $star }}.jpg" alt=""
+                                 class="team-ambassador-card-image">
                             <div class="small-font-size small-margin-before">@lang('tokenstars-team.ambassadors.' . $star . '.title')</div>
                             <div class="big-font-size bold-font small-margin-before">@lang('tokenstars-team.ambassadors.' . $star . '.name')</div>
                             @foreach(trans('tokenstars-team.ambassadors.' . $star . '.flag') as $flag)
                                 @if($flag != 'n')
-                                <img style="border-radius: 100%" src="/images/landing-stars/flags/{{$flag}}.png" alt="" class="medium-margin-before team-ambassador-card-flag">
+                                    <img style="border-radius: 100%" src="/images/landing-stars/flags/{{$flag}}.png"
+                                         alt="" class="medium-margin-before team-ambassador-card-flag">
                                 @endif
                             @endforeach
 
@@ -399,12 +501,34 @@
 
 
 
+    <!--<section class="section team-section">
+        <div class="wrap align-center">
+            <section class="team-splitter">
+                <h2 class="section-title">@lang('fresh.partners.title')</h2>
+                <div class="huge-margin-before">
+                    <img src="/images/landing-stars/partners-logos-black_new.png" alt=""
+                         class="clients-logos big-margin-before">
+                </div>
+            </section>
+        </div>
+    </section>-->
+
     <section class="section team-section">
         <div class="wrap align-center">
             <section class="team-splitter">
                 <h2 class="section-title">@lang('fresh.partners.title')</h2>
                 <div class="huge-margin-before">
-                    <img src="/images/landing-stars/partners-logos-black_new.png" alt="" class="clients-logos big-margin-before">
+                    <div class="row">
+                        @foreach(trans('fresh.partners.items') as $item)
+                            <div class="col-xs-12 col-sm-6 col-lg-4 col-md-4 partner-div">
+                                <a href="{{$item['url']}}">
+                                    <img src="/images/partners/{{$item['img']}}" alt="{{$item['title']}}"
+                                         title="{{$item['title']}}"
+                                         class="medium-margin-before team-social img-responsive">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </section>
         </div>
@@ -426,22 +550,34 @@
                                 <div class="team-ambassador-job small small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.title')</div>
                                 <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.name')</div>
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.fb')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')" target="_blank"><img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')"
+                                       target="_blank"><img src="/images/ace/tech-version/fb.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.in')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')" target="_blank"><img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')"
+                                       target="_blank"><img src="/images/ace/tech-version/in.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.ig')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')" target="_blank"><img src="/images/ace/tech-version/ig.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')"
+                                       target="_blank"><img src="/images/ace/tech-version/ig.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.url')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')" target="_blank"><img src="/images/ace/tech-version/url.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')"
+                                       target="_blank"><img src="/images/ace/tech-version/url.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.tw')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')" target="_blank"><img src="/images/ace/tech-version/tw.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')"
+                                       target="_blank"><img src="/images/ace/tech-version/tw.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.me')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')" target="_blank"><img src="/images/ace/tech-version/me.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')"
+                                       target="_blank"><img src="/images/ace/tech-version/me.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                             </div>
                         </div>
@@ -460,22 +596,34 @@
                                 <div class="team-ambassador-job small small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.title')</div>
                                 <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.name')</div>
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.fb')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')" target="_blank"><img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')"
+                                       target="_blank"><img src="/images/ace/tech-version/fb.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.in')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')" target="_blank"><img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')"
+                                       target="_blank"><img src="/images/ace/tech-version/in.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.ig')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')" target="_blank"><img src="/images/ace/tech-version/ig.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')"
+                                       target="_blank"><img src="/images/ace/tech-version/ig.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.url')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')" target="_blank"><img src="/images/ace/tech-version/url.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')"
+                                       target="_blank"><img src="/images/ace/tech-version/url.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.tw')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')" target="_blank"><img src="/images/ace/tech-version/tw.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')"
+                                       target="_blank"><img src="/images/ace/tech-version/tw.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.me')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')" target="_blank"><img src="/images/ace/tech-version/me.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')"
+                                       target="_blank"><img src="/images/ace/tech-version/me.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                             </div>
                         </div>
@@ -496,13 +644,16 @@
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.stukolov.title')</div>
                             <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.stukolov.name')</div>
                             <a href="@lang('tokenstars-messages.team.members.stukolov.social.fb')">
-                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/fb.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                             <a href="@lang('tokenstars-messages.team.members.stukolov.social.in')">
-                                <img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/in.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                             <a href="@lang('tokenstars-messages.team.members.stukolov.social.ig')">
-                                <img src="/images/ace/tech-version/ig.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/ig.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                         </div>
                     </div>
@@ -512,14 +663,16 @@
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.title')</div>
                             <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.tsagolov.name')</div>
                             <a href="@lang('tokenstars-messages.team.members.tsagolov.social.fb')">
-                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/fb.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                             <a href="@lang('tokenstars-messages.team.members.tsagolov.social.in')">
-                                <img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/in.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                         </div>
                     </div>
-                    <!--<div class="col-lg-3 col-md-3">
+                <!--<div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
                             <img src="/upload/images/zak.jpg" alt="" class="team-ambassador-card-image">
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.zak.title')</div>
@@ -542,7 +695,8 @@
                             <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.krivochurov.title')</div>
                             <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.krivochurov.name')</div>
                             <a href="@lang('tokenstars-messages.team.members.krivochurov.social.fb')">
-                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                                <img src="/images/ace/tech-version/fb.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                         </div>
                     </div>
@@ -555,7 +709,7 @@
                             <img style="" src="/upload/images/kureev2.png" alt="" class="team-ambassador-card-image">
                             <div class="team-ambassador-job small-margin-before">Project manager</div>
                             <div class="bold-font small-margin-before">Pavel Kureev</div>
-                            <!--<a href="@lang('tokenstars-messages.team.members.krivochurov.social.fb')">
+                        <!--<a href="@lang('tokenstars-messages.team.members.krivochurov.social.fb')">
                                 <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>-->
                         </div>
@@ -585,7 +739,7 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="team-ambassador-card team-card">
                             <img style="" src="/upload/images/mashovsky.png" alt="" class="team-ambassador-card-image">
-                            <div class="team-ambassador-job small-margin-before">Head of development </div>
+                            <div class="team-ambassador-job small-margin-before">Head of development</div>
                             <div class="bold-font small-margin-before">Andrey Mashkovskiy</div>
                         <!--<a href="@lang('tokenstars-messages.team.members.krivochurov.social.fb')">
                                 <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
@@ -598,8 +752,9 @@
                             <img style="" src="/images/team/potapneva.png" alt="" class="team-ambassador-card-image">
                             <div class="team-ambassador-job small-margin-before">PR & Communications</div>
                             <div class="bold-font small-margin-before">Maria Potapneva</div>
-                        <a href="https://www.facebook.com/profile.php?id=100013877918880">
-                                <img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social">
+                            <a href="https://www.facebook.com/profile.php?id=100013877918880">
+                                <img src="/images/ace/tech-version/fb.png" alt=""
+                                     class="medium-margin-before team-ambassador-card-flag team-social">
                             </a>
                         </div>
                     </div>
@@ -611,22 +766,34 @@
                                 <div class="team-ambassador-job small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.title')</div>
                                 <div class="bold-font small-margin-before">@lang('tokenstars-messages.team.members.' . $name . '.name')</div>
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.fb')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')" target="_blank"><img src="/images/ace/tech-version/fb.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.fb')"
+                                       target="_blank"><img src="/images/ace/tech-version/fb.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.in')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')" target="_blank"><img src="/images/ace/tech-version/in.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.in')"
+                                       target="_blank"><img src="/images/ace/tech-version/in.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.ig')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')" target="_blank"><img src="/images/ace/tech-version/ig.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.ig')"
+                                       target="_blank"><img src="/images/ace/tech-version/ig.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.url')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')" target="_blank"><img src="/images/ace/tech-version/url.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.url')"
+                                       target="_blank"><img src="/images/ace/tech-version/url.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.tw')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')" target="_blank"><img src="/images/ace/tech-version/tw.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.tw')"
+                                       target="_blank"><img src="/images/ace/tech-version/tw.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                                 @if(!empty(trans('tokenstars-messages.team.members.' . $name . '.social.me')))
-                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')" target="_blank"><img src="/images/ace/tech-version/me.png" alt="" class="medium-margin-before team-ambassador-card-flag team-social"></a>
+                                    <a href="@lang('tokenstars-messages.team.members.' . $name . '.social.me')"
+                                       target="_blank"><img src="/images/ace/tech-version/me.png" alt=""
+                                                            class="medium-margin-before team-ambassador-card-flag team-social"></a>
                                 @endif
                             </div>
                         </div>
@@ -682,30 +849,42 @@
         window.prices = {
 
             team: {
-                btc : {{$exchange_rates['team_btc']}},
-                eth : {{$exchange_rates['team_eth']}}
+                btc: {{$exchange_rates['team_btc']}},
+                eth: {{$exchange_rates['team_eth']}}
             },
 
-            ace :  {
-                btc : {{$exchange_rates['ace_btc']}},
-                eth : {{$exchange_rates['ace_eth']}}
+            ace: {
+                btc: {{$exchange_rates['ace_btc']}},
+                eth: {{$exchange_rates['ace_eth']}}
             }
         };
 
-        jQuery(document).ready(function(){
-            $('#show-platform-description').on('click', function(){
+        jQuery(document).ready(function () {
+            $('#show-platform-description').on('click', function () {
                 $('#hide-platform-description').show();
                 $('#platform-wrapper').show();
                 $('#show-platform-description').hide();
             });
 
-            $('#hide-platform-description').on('click', function(){
+            $('#hide-platform-description').on('click', function () {
                 $('#hide-platform-description').hide();
                 $('#platform-wrapper').hide();
                 $('#show-platform-description').show();
             });
 
-            $('.achievements.link-block').on('click', function(){
+            $('#show-modules').on('click', function () {
+                $('#hide-modules').show();
+                $('#platform').show();
+                $('#show-modules').hide();
+            });
+
+            $('#hide-modules').on('click', function () {
+                $('#hide-modules').hide();
+                $('#platform').hide();
+                $('#show-modules').show();
+            });
+
+            $('.achievements.link-block').on('click', function () {
                 document.location.href = "{{route('achievements.index')}}";
             });
         });
