@@ -27,13 +27,16 @@
     <link href="/build/lib.css?1" rel="stylesheet" />
     <link href="/build/predictions.css?1" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,500,700&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/card/app.css">
+    <script src='https://www.google.com/recaptcha/api.js?explicit&hl=en'></script>
 
     @include('tokenstars.partial.analitics-head')
 </head>
 
 
-<body>
-<header class="header">
+<body class="page-body">
+@include('layouts.cabinet.header')
+<!--<header class="header">
     <div class="wrap">
         <div class="header-logo">
             <a href="/" onclick="ga('send', 'event', 'click', 'TEAM_logo_pred')"><img class="header-logo__image" alt="" src="/images/ace/logotype_tokenstars.png" /></a>
@@ -62,8 +65,8 @@
             </ul>
         </nav>
     </div>
-</header>
-<div class="header-clear"></div>
+</header>-->
+<!--<div class="header-clear"></div>-->
 
 @yield('content')
 
