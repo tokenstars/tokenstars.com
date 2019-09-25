@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="/css/app-e-commerce.css">
+    <link rel="stylesheet" href="/css/chosen.css">
+    <link rel="stylesheet" href="/css/ImageSelect.css">
     <style>
         .card-title span.short_name_view{
             font-size: 2rem;
@@ -121,6 +123,8 @@
 <script src="{{asset("js/app-e-commerce.js")}}"></script>
 <script src="{{asset("js/app-order.js")}}"></script>
 <script src="{{asset("js/app-performance.js")}}"></script>
+<script src="/js/chosen.jquery.js" type="text/javascript"></script>
+<script src="/js/ImageSelect.jquery.js" type="text/javascript"></script>
 <!--<script type="text/javascript" src="/js/oc.js"></script>-->
 <script type="text/javascript" charset="utf-8">
     class DotDotDot {
